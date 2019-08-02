@@ -1,0 +1,46 @@
+    body {
+        background-color: lightgrey;
+    }
+    
+    label {
+        font-size: 17px;
+    }
+    
+    .input,
+    .inputd {
+        border-radius: 5px;
+        text-align: center;
+        /* text-transform: uppercase; */
+        font-size: 15px;
+        font-style: italic;
+        color: blue;
+        padding: 2px;
+    }
+    
+    #mod_code {
+        text-transform: uppercase;
+    }
+    
+    #mod_name {
+        text-transform: capitalize;
+    }
+    
+    #btn {
+        float: right;
+    }
+    
+    option {
+        border-radius: 5px;
+        font-size: 15px;
+        direction: rtl;
+    }
+    
+    #image {
+        float: right;
+    }
+    
+    #inp {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+    }

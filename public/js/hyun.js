@@ -1,5 +1,6 @@
 var vehInput;
 var vehShow;
+var inputBtn = $("#input-btn").val().trim();
 
 var data = [
     data1 = 'CAN High Voltage',
@@ -140,3 +141,11 @@ function knownGoodData(vehInput) {
         $("#myTable").append(tRow.append(tCell1, tCell2));
     }
 }
+
+$("#input-btn").on('click', function() {
+    console.log("model input clicked: " + inputBtn);
+    var myUrl = "model_input.html?brand=" + inputBtn;
+    window.open(myUrl, '_blank',
+        'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500')
+    return false;
+});
