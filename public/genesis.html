@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CAN Diagnostic Aide - Genesis</title>
+    <link rel="icon" href="favicon.ico" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!---Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+
+</head>
+
+<body>
+    <div class="page-header">
+        <h1>CAN Diagnostic Aide</h1>
+        <h4>...helpful information</h4>
+    </div>
+    <div class="container.fluid mt-1">
+        <div class="row">
+            <div class="col-lg-11 d-flex justify-content-end">
+                <form>
+                    <div class="form-check form-check-inline mt-1" style="text-align: center;">
+                        <select class="form-control form-control-sm" id="veh_sel">
+                                <option>Please Select a Vehicle</option>-->
+                            </select>
+                    </div>
+                </form>
+                <button class="btn btn-info btn-md ml-2" id="home" onclick="location.reload();location.href='index.html'"><i class="fa fa-home fa-lg"></i></button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2 mt-3">
+                <div class="card card-default" id="vehImg">
+                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                        <h4>Vehicle Selected: <span class="vehInput" id="vehSel"></span></h4>
+                    </div>
+                    <div class="card-body">
+                        <img class="selVehImg" src="images/veh_img_fill.jpg" alt="vehicle_img" id="velSelImg">
+                    </div>
+                </div>
+                <div class="card card-default mt-3" id="knownGood">
+                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                        <h4 id="known">Data: <span class="netInput" id="net_id"></span>
+                        </h4>
+                    </div>
+
+                    <div class="card-body" id="dataTable">
+                        <label class="dataPlot" for="locInput">Test Location: <span class="locInput  ml-4" id="test_loc"></span></label>
+                        <label class="dataPlot" for="pinInput">Connector Pin (H): <span class="pinInput ml-2" id="can_H_p"></span></label>
+                        <label class="dataPlot" for="pinInput">Connector Pin (L): <span class="pinInput ml-2" id="can_L_p"></span></label>
+
+                        <table class="table table-sm">
+                            <thead id="tableHead">
+                                <th>Measurement </th>
+                                <th>Good</th>
+                            </thead>
+                            <tbody id="myTable">
+                                <tr>
+                                    <td class="title">CAN High Voltage</td>
+                                    <td class="goodValue">v</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">CAN Low Voltage</td>
+                                    <td class="goodValue">v</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Total &Omega;</td>
+                                    <td class="goodValue">&Omega;</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Split &Omega; (M)</td>
+                                    <td class="goodValue">&Omega;</td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Split &Omega; (F)</td>
+                                    <td class="goodValue">&Omega;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size: 10px;">***all readings shown are approximate***</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="card card-default" id="vehData">
+                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                        <h3>Selected Vehicle's Known Good Data</h3>
+                    </div>
+                    <div class="card-body" id="mainDataCard">
+                        <div class="row mt-1">
+                            <div class="col-lg-6">
+                                <div class="card card-default" id="connImg">
+                                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                        <h4>Test Connector Location</h4>
+                                    </div>
+                                    <div class="card-body" style="text-align: center;">
+                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" src="images/conn_fill.jpg" alt="test_location_img" id="connLocate"></a>
+                                        <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card card-default" id="canImgCont">
+                                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                        <h4>Network: <span class="netInput" id="net_id"></span></h4>
+                                    </div>
+                                    <div class="card-body mt-5" style="text-align: center;">
+                                        <a id="canLayoutHref" target="_blank" href="" title="Click To Enlarge"><img class="canLayImg" src="images/layout_fill.jpg" alt="Network_img" id="canLayout"></a>
+                                        <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-lg-12">
+                                <div class="card card-default">
+                                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                        <h4>Title</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>...data...</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Javascript -->
+<script src="js/hyun.js"></script>
+
+</html>
