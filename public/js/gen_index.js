@@ -34,10 +34,8 @@ var API = {
                     // debugging
                     // console.log(dataIn);
                     // dataOut.push(dataIn);
-                populate(dataOut);
+                dataPopulate(dataOut);
             }
-
-
         })
     },
     deleteExample: function(id) {
@@ -120,15 +118,8 @@ var veh = [{
     }
 ];
 
-//vehicle dropdown selection
-// for (i = 0; i < veh.length; i++) {
-//     var option = $("<option>")
-//     option.attr("value", veh[i].id);
-//     option.text(veh[i].name);
-//     $("#veh_sel").append(option);
-// }
 
-function populate(dataOut) {
+function dataPopulate(dataOut) {
     // debugging
     // console.log(dataOut);
 
