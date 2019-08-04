@@ -21,7 +21,7 @@ var API = {
 
             success: function(data66) {
                 //debugging
-                // console.log("orig data: " + data66);
+
                 // dataOut.push.apply(dataOut, data66)
 
                 var array1Length = data66.length;
@@ -29,11 +29,13 @@ var API = {
 
                 data66.forEach((elem, index) => {
                         dataOut.push(elem);
-                        if (dataOut.length === array1Length) data66.length = 0
+                        if (dataOut.length === array1Length)
+                            data66.length = 0
                     })
                     // debugging
                     // console.log(dataIn);
-                    // dataOut.push(dataIn);
+                    // dataOut.push(dataIn); 
+                console.log("%o", dataOut);
                 dataPopulate(dataOut);
             }
         })
@@ -139,10 +141,11 @@ function dataPopulate(dataOut) {
 
         vehSel = $("#veh_sel").val().trim();
         vehShow = parseInt(vehSel);
+
         // debugging 
-        // console.log(dataOut);
-        // console.log(vehShow);
-        // console.log(vehSel);
+        console.log(dataOut);
+        console.log(vehSel);
+        console.log(vehShow);
 
         for (l = 0; l < dataOut.length; l++) {
 

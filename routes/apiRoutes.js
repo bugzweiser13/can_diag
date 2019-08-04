@@ -7,18 +7,90 @@ module.exports = function(app) {
     //     // Here we add an "include" property to our options in our findAll query
     //     // We set the value to an array of the models we want to include in a left outer join
     //     // In this case, just db.Post
-    //     db.Genvehlist.findAll({
-    //         include: [db.Gencanres]
-    //     }).then(function(dbGencanres) {
-    //         res.json(dbGencanres);
+
+
+    //     db.genvehlist.findAll({
+    //         include: [{
+    //             model: db.gencanres,
+    //             as: "model_num"
+    //         }]
+
+
+    //     }).then(function(dbgencanres) {
+    //         res.json(dbgencanres);
+    //         // console.log("%o", dbgencanres);
     //     });
     // });
 
-    app.get("/api/genvehlists", function(req, res) {
-        db.genvehlist.findAll({}).then(function(dbgenvehlist) {
-            res.json(dbgenvehlist);
+
+    app.get('/api/genvehlists', (req, res) => {
+
+        db.genvehlist.findAll({
+            include: [{ model: db.gencanres }, { model: db.gencanvolts }, { model: db.genmedia }]
+
+        }).then(genvehlist => {
+            // console.log("%o", genvehlist);
+            // console.log(JSON.stringify(genvehlist));
+            const resObj = genvehlist.map(vehicle => {
+
+                //vehicle data
+                return Object.assign({}, {
+                    id: vehicle.id,
+                    model: vehicle.model,
+                    model_num: vehicle.model_num,
+                    model_name: vehicle.model_name,
+
+                    resData: vehicle.gencanres.map(omega => {
+                        //can res data
+                        return Object.assign({}, {
+                            model_name: omega.model,
+                            model_num: omega.model_num,
+                            start_year: omega.start_year,
+                            end_year: omega.end_year,
+                            net_id: omega.net_id,
+                            test_loc: omega.test_loc,
+                            pin_h: omega.pin_h_loc,
+                            pin_l: omega.pin_l_loc,
+                            res_val_m: omega.res_val_m,
+                            res_val_f: omega.res_val_f,
+                            term_m: omega.term_m,
+                            term_f: omega.term_f,
+                            can_total: omega.tot_res,
+
+                            canVolts: vehicle.gencanvolts.map(volts => {
+
+                                // can voltage
+                                return Object.assign({}, {
+                                    model_num: volts.model_num,
+                                    model_name: volts.model,
+
+                                    media: vehicle.genmedia.map(media => {
+
+                                        // can media
+                                        return Object.assign({}, {
+                                            model_num: media.model_num,
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+
+            });
+            res.json(resObj)
+
         });
     });
+
+
+    // app.get("/api/genvehlists", function(req, res) {
+    //     db.genvehlist.findAll({}).then(function(dbgenvehlist) {
+    //         res.json(dbgenvehlist);
+    //         console.log("%o", dbgenvehlist);
+
+    //     });
+    // });
 
     // // Create a new example
     // app.post("/api/examples", function(req, res) {

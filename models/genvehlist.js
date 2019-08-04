@@ -1,24 +1,25 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('genvehlist', {
+    var genvehlist = sequelize.define('genvehlist', {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
-            primaryKey: true,
+
             autoIncrement: true
         },
         model: {
             type: DataTypes.STRING(30),
-            allowNull: false
+            allowNull: false,
         },
         model_num: {
             type: DataTypes.INTEGER(3),
-            allowNull: false
+            allowNull: false,
+            primaryKey: true,
         },
         model_name: {
             type: DataTypes.STRING(30),
-            allowNull: false
+            allowNull: false,
         },
         sub_model: {
             type: DataTypes.STRING(30),
@@ -37,7 +38,25 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         }
+
     }, {
         tableName: 'genvehlist'
     });
+
+    genvehlist.associate = function(models) {
+        // Associating Author with Posts
+        // When an Author is deleted, also delete any associated Posts
+        genvehlist.hasMany(models.gencanres, {
+            foreignKey: "model_num",
+        });
+        genvehlist.hasMany(models.gencanvolts, {
+            foreignKey: "model_num"
+        });
+        genvehlist.hasMany(models.genmedia, {
+            foreignKey: "model_num"
+        });
+    };
+
+    return genvehlist;
+
 };

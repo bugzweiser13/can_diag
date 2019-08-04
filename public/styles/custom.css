@@ -33,8 +33,13 @@ body {
 #genesis-btn,
 #input-btn,
 #veh_sel,
+#net_sel,
 #home {
     box-shadow: 0px 5px 5px black;
+}
+
+#veh_sel {
+    width: 200px;
 }
 
 #hyun_logo,
