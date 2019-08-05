@@ -40,22 +40,24 @@ module.exports = function(app) {
                     model_num: vehicle.model_num,
                     model_name: vehicle.model_name,
 
-                    resData: vehicle.gencanres.map(omega => {
+                    canData: vehicle.gencanres.map(omega => {
+
                         //can res data
                         return Object.assign({}, {
+                            id: omega.id,
                             model_name: omega.model,
                             model_num: omega.model_num,
                             start_year: omega.start_year,
                             end_year: omega.end_year,
                             net_id: omega.net_id,
                             test_loc: omega.test_loc,
-                            pin_h: omega.pin_h_loc,
-                            pin_l: omega.pin_l_loc,
+                            pin_h: omega.pin_h,
+                            pin_l: omega.pin_l,
                             res_val_m: omega.res_val_m,
                             res_val_f: omega.res_val_f,
                             term_m: omega.term_m,
                             term_f: omega.term_f,
-                            can_total: omega.tot_res,
+                            total_res: omega.tot_res,
 
                             canVolts: vehicle.gencanvolts.map(volts => {
 
@@ -63,12 +65,20 @@ module.exports = function(app) {
                                 return Object.assign({}, {
                                     model_num: volts.model_num,
                                     model_name: volts.model,
+                                    net_id: volts.net_id,
+                                    volt_h: volts.volt_h,
+                                    volt_l: volts.volt_l,
 
-                                    media: vehicle.genmedia.map(media => {
+                                    canMedia: vehicle.genmedia.map(media => {
 
                                         // can media
                                         return Object.assign({}, {
                                             model_num: media.model_num,
+                                            vehicle: media.model_img,
+                                            c_can: media.c_can_img,
+                                            p_can1: media.p_can_img1,
+                                            p_can2: media.p_can_img2,
+                                            test_loc: media.test_loc_img
                                         })
                                     })
                                 })

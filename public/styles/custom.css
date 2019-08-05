@@ -38,8 +38,12 @@ body {
     box-shadow: 0px 5px 5px black;
 }
 
+#net_sel {
+    width: 135px;
+}
+
 #veh_sel {
-    width: 200px;
+    width: 185px;
 }
 
 #hyun_logo,
@@ -55,6 +59,7 @@ body {
 
 .vehInput,
 .netInput,
+.netInput2,
 .locInput,
 .pinInput {
     font-size: 23px;
@@ -94,6 +99,7 @@ body {
 }
 
 @media only screen and (min-width: 1006px) and (max-width: 1800px) {
+    #veh,
     #known,
     #net_id {
         font-size: 18px;
