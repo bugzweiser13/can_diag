@@ -2,7 +2,6 @@
 var vehInput;
 var vehShow;
 
-
 var API = {
     saveExample: function(example) {
         return $.ajax({
@@ -93,6 +92,7 @@ function dataPopulate(dataOut) {
         $("#net_sel").empty();
         $("#myTable").empty();
         tablePop(data);
+        $("#connBtn").attr('style', 'opacity: 0');
         $("#connLocate").attr('src', clearConn);
         $("#canLayout").attr('src', clearLay);
         $("#net_sel").html("<option>Network</option>");
@@ -141,8 +141,11 @@ function dataPopulate(dataOut) {
                 testLoc = dataOut[vehInput].canData[netID].test_loc
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
+                trM = dataOut[vehInput].canData[netID].term_m
+                trF = dataOut[vehInput].canData[netID].term_f
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].c_can
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
+                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
             if (netSel === 'P-CAN') {
                 netID = 1
@@ -150,8 +153,11 @@ function dataPopulate(dataOut) {
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
+                trM = dataOut[vehInput].canData[netID].term_m
+                trF = dataOut[vehInput].canData[netID].term_f
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
+                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
 
             // g80 year seperation
@@ -161,8 +167,11 @@ function dataPopulate(dataOut) {
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
+                trM = dataOut[vehInput].canData[netID].term_m
+                trF = dataOut[vehInput].canData[netID].term_f
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].p_can2
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].test_loc
+                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
             }
 
             if (netSel === 'P-CAN (2018~)') {
@@ -171,30 +180,26 @@ function dataPopulate(dataOut) {
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
+                trM = dataOut[vehInput].canData[netID].term_m
+                trF = dataOut[vehInput].canData[netID].term_f
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
+                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
 
-            console.log(vehInput);
-            console.log("netId = " + netID);
+            // console.log(vehInput);
+            // console.log("netId = " + netID);
+
+            var testBtn = $("#connBtn");
+            testBtn.attr('style', 'display:block; float:right;');
+            testBtn.attr('class', 'btn btn-info btn-sm mb-2');
+            testBtn.text('Connector View');
+            var changeImg = $("#connLocate");
+            changeImg.attr('style', 'width: 81%;');
+            $("#connLocate").append(changeImg);
 
 
-
-            // // alternate can data if needed
-            // if (vehInput === 1 && netID === 2) {
-            //     var secondPagePop = $("#pageBtn");
-            //     secondPagePop.attr('style', 'display:block; float:right;');
-            //     secondPagePop.attr('class', 'btn btn-info btn-sm mb-1');
-            //     secondPagePop.attr('value', 'page2');
-            //     secondPagePop.attr('title', 'Click to Change Page');
-            //     secondPagePop.text('Change Page');
-            //     $("#pageBtn").append(secondPagePop);
-            //     var changeMarg = $("#netLay");
-            //     changeMarg.attr('class', 'card-body mt-3')
-            //     $("#netLay").append(changeMarg);
-            // }
-
-            // second etm page population if needed
+            // second etm page selection population if needed
             // will need to change if statement for future use as more are added
             if (vehInput === 2 && netID === 1) {
                 var secondPagePop = $("#pageBtn");
@@ -227,6 +232,16 @@ function dataPopulate(dataOut) {
                 }
             })
 
+            // connector view popUp
+            $("#connBtn").on('click', function() {
+                // console.log("Connector: " + connView); 
+                var connUrl = connView;
+                console.log(connUrl);
+                window.open(connUrl, '_blank',
+                    'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=600')
+                return false;
+            });
+
             // debugging
             // console.log(dataOut);
             // console.log(vehSel);
@@ -241,7 +256,7 @@ function dataPopulate(dataOut) {
 
             netParse = netSel;
             var netSel2 = netParse.substring(0, 5);
-            console.log(netSel2);
+            // console.log(netSel2);
 
             $("#connLocate").attr('src', locationImg);
             $("#connLocate").attr('alt', locationImg);
@@ -255,11 +270,14 @@ function dataPopulate(dataOut) {
             $("#test_loc").text(testLoc);
             $("#can_H_p").text(canPinH);
             $("#can_L_p").text(canPinL);
+            $("#trM").text(trM);
+            $("#trF").text(trF);
 
             knownGoodData(vehInput);
 
         });
     });
+
 
 
     //  
@@ -305,6 +323,7 @@ function dataPopulate(dataOut) {
 }
 
 // new model input page open
+// inputBtn value loads genesis / hyundai
 var inputBtn = $("#input-btn").val().trim();
 
 $("#input-btn").on('click', function() {

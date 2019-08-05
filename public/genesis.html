@@ -110,8 +110,9 @@
                                     <div class="card-header" style="font-weight: bolder; text-align: center;">
                                         <h4>Test Connector Location</h4>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
-                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" src="images/conn_fill.jpg" alt="test_location_img" id="connLocate"></a>
+                                    <div class="card-body" style="text-align: center;" id="connLay">
+                                        <button type="submit" id="connBtn" style="display: none;"></button>
+                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" style="width: 90%;" src="images/conn_fill.jpg" alt="test_location_img" id="connLocate"></a>
                                         <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
                                     </div>
                                 </div>
@@ -131,7 +132,25 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <div class="card card-default">
+                                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                        <h4>Terminating Resistor Locations</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p id="trMp">TR.1 (Split Male): <span id="trM"></span></p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p id="trFp">TR.2 (Split Female): <span id="trF"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="card card-default">
                                     <div class="card-header" style="font-weight: bolder; text-align: center;">
                                         <h4>Future Development</h4>

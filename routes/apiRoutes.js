@@ -78,7 +78,9 @@ module.exports = function(app) {
                                             c_can: media.c_can_img,
                                             p_can1: media.p_can_img1,
                                             p_can2: media.p_can_img2,
-                                            test_loc: media.test_loc_img
+                                            test_loc: media.test_loc_img,
+                                            conn_view1: media.conn_view1,
+                                            conn_view2: media.conn_view2
                                         })
                                     })
                                 })
