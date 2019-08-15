@@ -1,6 +1,7 @@
 // globals
 var vehInput;
 var vehShow;
+var connView;
 
 var API = {
     saveExample: function(example) {
@@ -189,6 +190,7 @@ function dataPopulate(dataOut) {
 
             // console.log(vehInput);
             // console.log("netId = " + netID);
+            // connPopUp(connView);
 
             var testBtn = $("#connBtn");
             testBtn.attr('style', 'display:block; float:right;');
@@ -198,6 +200,7 @@ function dataPopulate(dataOut) {
             changeImg.attr('style', 'width: 81%;');
             $("#connLocate").append(changeImg);
 
+            console.log("Vehicle: " + vehInput + " Network: " + netID);
 
             // second etm page selection population if needed
             // will need to change if statement for future use as more are added
@@ -212,7 +215,16 @@ function dataPopulate(dataOut) {
                 var changeMarg = $("#netLay");
                 changeMarg.attr('class', 'card-body mt-3')
                 $("#netLay").append(changeMarg);
+            } else {
+                var secondPagePop = $("#pageBtn");
+                secondPagePop.attr('style', 'display:none;');
+                $("#pageBtn").append(secondPagePop);
+                var changeMarg = $("#netLay");
+                changeMarg.attr('class', 'card-body mt-5')
+                $("#netLay").append(changeMarg);
             }
+
+            //network layout view page selection operation if multiple pages
             var click = 0;
 
             $("#pageBtn").on('click', function() {
@@ -232,22 +244,12 @@ function dataPopulate(dataOut) {
                 }
             })
 
-            // connector view popUp
-            $("#connBtn").on('click', function() {
-                // console.log("Connector: " + connView); 
-                var connUrl = connView;
-                console.log(connUrl);
-                window.open(connUrl, '_blank',
-                    'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=600')
-                return false;
-            });
-
             // debugging
             // console.log(dataOut);
             // console.log(vehSel);
             // console.log(vehShow);
             // console.log("What is my Number? " + vehInput);
-            // // console.log(dataOut[vehInput].model_name);
+            // console.log(dataOut[vehInput].model_name);
             // console.log("vehInput= " + vehInput);
             // console.log("netID = " + netID);
             // console.log("testLoc = " + testLoc);
@@ -272,15 +274,25 @@ function dataPopulate(dataOut) {
             $("#can_L_p").text(canPinL);
             $("#trM").text(trM);
             $("#trF").text(trF);
-
             knownGoodData(vehInput);
 
         });
     });
 
+    // connector view popUp
+    // debugging
+    // console.log(connView);
+    $("#connBtn").on('click', function() {
+        // debugging
+        // console.log("Connector: " + connView); 
+        var connUrl = connView;
+        console.log(connUrl);
+        window.open(connUrl, '_blank',
+            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=600')
+        return false;
+    });
 
-
-    //  
+    // known good data table population (blank / static)
     function tablePop(data) {
         for (let i = 0; i < data.length; i++) {
             tRow = $('<tr>');
@@ -293,7 +305,7 @@ function dataPopulate(dataOut) {
         }
     }
 
-    //known good data population
+    //known good data population (within table)
     function knownGoodData(vehInput) {
         $("#myTable").empty();
 
