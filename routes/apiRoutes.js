@@ -39,7 +39,6 @@ module.exports = function(app) {
                     model: vehicle.model,
                     model_num: vehicle.model_num,
                     model_name: vehicle.model_name,
-
                     canData: vehicle.gencanres.map(omega => {
 
                         //can res data
@@ -56,7 +55,10 @@ module.exports = function(app) {
                             res_val_m: omega.res_val_m,
                             res_val_f: omega.res_val_f,
                             term_m: omega.term_m,
+                            term_M_view: omega.trM_view,
                             term_f: omega.term_f,
+                            term_F_view: omega.trF_view,
+                            term_F_view2: omega.trF_view2,
                             total_res: omega.tot_res,
 
                             canVolts: vehicle.gencanvolts.map(volts => {

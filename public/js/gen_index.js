@@ -1,7 +1,7 @@
 // globals
 var vehInput;
 var vehShow;
-var connView;
+var splitConnView;
 
 var API = {
     saveExample: function(example) {
@@ -92,11 +92,30 @@ function dataPopulate(dataOut) {
         // clear data images when vehicle changed
         $("#net_sel").empty();
         $("#myTable").empty();
+        $("#trM").empty();
+        $("#trF").empty();
+        $(".netInput").empty();
+        $(".netInput2").empty();
+
+        var trMbtn = $("#tr1btn");
+        trMbtn.attr('style', 'display:none;');
+        $("#tr1btn").append(trMbtn);
+        var trMbtn2 = $("#tr1btn2");
+        trMbtn2.attr('style', 'display:none;');
+        $("#trMbtn2").append(trMbtn2);
+        var trFbtn = $("#tr2btn");
+        trFbtn.attr('style', 'display:none;');
+        $("#tr2btn").append(trFbtn);
+        var trFbtn2 = $("#tr2btn2");
+        trFbtn2.attr('style', 'display:none;');
+        $("#trFbtn2").append(trFbtn2);
+
+
         tablePop(data);
         $("#connBtn").attr('style', 'opacity: 0');
         $("#connLocate").attr('src', clearConn);
         $("#canLayout").attr('src', clearLay);
-        $("#net_sel").html("<option>Network</option>");
+        $("#net_sel").html("<option style='display:none;' selected>Network</option>");
 
         vehSel = $("#veh_sel").val().trim();
         vehShow = parseInt(vehSel);
@@ -111,14 +130,11 @@ function dataPopulate(dataOut) {
         }
         // console.log("vehicle input = " + vehInput);
 
-        // if (vehInput === 2 && netSel === 1) {
-        //     $("#pageBtn").attr('style', 'display:block;');
-        // }
-
         // vehicle image / text population
         $("#velSelImg").attr('src', dataOut[vehInput].canData[0].canVolts[0].canMedia[0].vehicle);
         $("#velSelImg").attr('alt', dataOut[vehInput].canData[0].canVolts[0].canMedia[0].vehicle);
         $("#vehSel").text(dataOut[vehInput].model_name);
+
         // network dropdown population
         for (j = 0; j < dataOut[vehInput].canData.length; j++) {
 
@@ -143,10 +159,12 @@ function dataPopulate(dataOut) {
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 trM = dataOut[vehInput].canData[netID].term_m
+                trMview = dataOut[vehInput].canData[netID].term_M_view
                 trF = dataOut[vehInput].canData[netID].term_f
+                trFview = dataOut[vehInput].canData[netID].term_F_view
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].c_can
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
             if (netSel === 'P-CAN') {
                 netID = 1
@@ -155,24 +173,30 @@ function dataPopulate(dataOut) {
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
                 trM = dataOut[vehInput].canData[netID].term_m
+                trMview = dataOut[vehInput].canData[netID].term_M_view
                 trF = dataOut[vehInput].canData[netID].term_f
+                trFview = dataOut[vehInput].canData[netID].term_F_view
+                trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
 
             // g80 year seperation
             if (netSel === 'P-CAN (~2018)') {
                 netID = 2
-                netSUB = 1
+                netSub = 1
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
                 trM = dataOut[vehInput].canData[netID].term_m
+                trMview = dataOut[vehInput].canData[netID].term_M_view
                 trF = dataOut[vehInput].canData[netID].term_f
+                trFview = dataOut[vehInput].canData[netID].term_F_view
+                trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].p_can2
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].test_loc
-                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
+                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
             }
 
             if (netSel === 'P-CAN (2018~)') {
@@ -182,49 +206,55 @@ function dataPopulate(dataOut) {
                 canPinL = dataOut[vehInput].canData[netID].pin_l
                 testLoc = dataOut[vehInput].canData[netID].test_loc
                 trM = dataOut[vehInput].canData[netID].term_m
+                trMview = dataOut[vehInput].canData[netID].term_M_view
                 trF = dataOut[vehInput].canData[netID].term_f
+                trFview = dataOut[vehInput].canData[netID].term_F_view
+                trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                connView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
+
+            console.log(netSub);
 
             // console.log(vehInput);
             // console.log("netId = " + netID);
-            // connPopUp(connView);
+            // connPopUp(splitConnView);
 
             var testBtn = $("#connBtn");
             testBtn.attr('style', 'display:block; float:right;');
             testBtn.attr('class', 'btn btn-info btn-sm mb-2');
+            testBtn.attr('title', 'Click for Connector View');
             testBtn.text('Connector View');
             var changeImg = $("#connLocate");
-            changeImg.attr('style', 'width: 81%;');
+            changeImg.attr('style', 'width: 79%;');
             $("#connLocate").append(changeImg);
 
             console.log("Vehicle: " + vehInput + " Network: " + netID);
 
-            // second etm page selection population if needed
-            // will need to change if statement for future use as more are added
+            // network layout page selection button population
+            // will need to change "if" statement for future use as more are added
             if (vehInput === 2 && netID === 1) {
                 var secondPagePop = $("#pageBtn");
                 secondPagePop.attr('style', 'display:block; float:right;');
-                secondPagePop.attr('class', 'btn btn-info btn-sm mb-1');
+                secondPagePop.attr('class', 'btn btn-info btn-sm mb-2');
                 secondPagePop.attr('value', 'page2');
                 secondPagePop.attr('title', 'Click to Change Page');
                 secondPagePop.text('Change Page');
                 $("#pageBtn").append(secondPagePop);
                 var changeMarg = $("#netLay");
-                changeMarg.attr('class', 'card-body mt-3')
+                changeMarg.attr('class', 'card-body mt-2');
                 $("#netLay").append(changeMarg);
             } else {
                 var secondPagePop = $("#pageBtn");
                 secondPagePop.attr('style', 'display:none;');
                 $("#pageBtn").append(secondPagePop);
                 var changeMarg = $("#netLay");
-                changeMarg.attr('class', 'card-body mt-5')
+                changeMarg.attr('class', 'card-body mt-5');
                 $("#netLay").append(changeMarg);
             }
 
-            //network layout view page selection operation if multiple pages
+            //network layout page selection button operation if there are multiple pages
             var click = 0;
 
             $("#pageBtn").on('click', function() {
@@ -260,6 +290,7 @@ function dataPopulate(dataOut) {
             var netSel2 = netParse.substring(0, 5);
             // console.log(netSel2);
 
+            // data population on page based on vehicle selection
             $("#connLocate").attr('src', locationImg);
             $("#connLocate").attr('alt', locationImg);
             $("#canLayout").attr('src', layoutImg);
@@ -276,21 +307,130 @@ function dataPopulate(dataOut) {
             $("#trF").text(trF);
             knownGoodData(vehInput);
 
+
+            // tr connector view link button population
+            // tr (male) connector view popUp button population
+            if (netSel === "C-CAN" && trM === "IGPM" && vehInput === 1) {
+
+                var trMbtn = $("#tr1btn");
+                trMbtn.attr('style', 'display:block; float: right;');
+                trMbtn.attr('class', 'btn btn-info btn-sm ml-1');
+                trMbtn.attr('value', 'tr1a');
+                trMbtn.attr('title', 'Click to View ' + trM + ' Connector');
+                trMbtn.text('2018~');
+                $("#tr1btn").append(trMbtn);
+
+                var trMbtn2 = $("#tr1btn2");
+                trMbtn2.attr('style', 'display:block; float: right;');
+                trMbtn2.attr('class', 'btn btn-info btn-sm  ml-.75');
+                trMbtn2.attr('value', 'tr1b');
+                trMbtn2.attr('title', 'Click to View ' + trM + ' Connector');
+                trMbtn2.text('~2018');
+                $("#tr1btn2").append(trMbtn2);
+
+            } else {
+
+                var trMbtn = $("#tr1btn");
+                trMbtn.attr('style', 'display:block; float:right;');
+                trMbtn.attr('class', 'btn btn-info btn-sm mr-4');
+                trMbtn.attr('value', 'tr1a');
+                trMbtn.attr('title', 'Click to View ' + trM + ' Connector');
+                trMbtn.text('Connector');
+                $("#tr1btn").append(trMbtn);
+
+                var trMbtn2 = $("#tr1btn2");
+                trMbtn2.attr('style', 'display:none;');
+                $("#tr1btn2").append(trMbtn2);
+            }
+
+            // tr (female) connector view popUp button population
+            if (trF === 'ECM') {
+                var trFbtn = $("#tr2btn");
+                trFbtn.attr('style', 'display:block; float:right;');
+                trFbtn.attr('class', 'btn btn-info btn-sm mr-7');
+                trMbtn.attr('value', 'tr2a');
+                if (vehInput === 0) {
+                    trFbtn.text('4cyl');
+                    trFbtn.attr('title', 'Click to View 4cyl ' + trF + ' Connector');
+                } else {
+                    trFbtn.text('V6');
+                    trFbtn.attr('title', 'Click to View V6 ' + trF + ' Connector');
+                }
+                $("#tr2btn").append(trFbtn);
+
+                var trFbtn2 = $("#tr2btn2");
+                trFbtn2.attr('style', 'display:block; float:right;');
+                trFbtn2.attr('class', 'btn btn-info btn-sm mr-3');
+                trFbtn2.attr('value', 'tr2b');
+                if (vehInput === 0) {
+                    trFbtn2.text('V6');
+                    trFbtn2.attr('title', 'Click to View V6 ' + trF + ' Connector');
+                } else {
+                    trFbtn2.text('V8');
+                    trFbtn2.attr('title', 'Click to View V8 ' + trF + ' Connector');
+                }
+                $("#tr2btn2").append(trFbtn2);
+            } else {
+                var trFbtn = $("#tr2btn");
+                trFbtn.attr('style', 'display:block; float:right;');
+                trFbtn.attr('class', 'btn btn-info btn-sm mr-4');
+                trMbtn.attr('value', 'tr2a');
+                trFbtn.attr('title', 'Click to View ' + trF + ' Connector');
+                trFbtn.text('Connector');
+                $("#tr2btn").append(trFbtn);
+
+                var trFbtn2 = $("#tr2btn2");
+                trFbtn2.attr('style', 'display:none;');
+                $("#tr2btn2").append(trFbtn2);
+            }
         });
     });
 
-    // connector view popUp
+    //popUp button operations
+
+    // tr1 connector view
+    $("#tr1btn").on('click', function() {
+        // debugging
+        // console.log("Connector: " + splitConnView); 
+        var url = trMview;
+        console.log(url);
+        windowOpen(url)
+    });
+
+    // tr2 connector view
+    $("#tr2btn").on('click', function() {
+        // debugging
+        // console.log("Connector: " + splitConnView); 
+        var url = trFview;
+        console.log(url);
+        windowOpen(url)
+    });
+
+    $("#tr2btn2").on('click', function() {
+        // debugging
+        // console.log("Connector: " + splitConnView); 
+        var url = trFview2;
+        console.log(url);
+        windowOpen(url)
+    });
+
+    // split connector view
     // debugging
-    // console.log(connView);
+    // console.log(splitConnView);
     $("#connBtn").on('click', function() {
         // debugging
-        // console.log("Connector: " + connView); 
-        var connUrl = connView;
-        console.log(connUrl);
-        window.open(connUrl, '_blank',
+        // console.log("Connector: " + splitConnView); 
+        var url = splitConnView;
+        console.log(url);
+        windowOpen(url)
+    });
+
+    //window popUp function
+    function windowOpen(url) {
+        window.open(url, '_blank',
             'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=600')
         return false;
-    });
+    }
 
     // known good data table population (blank / static)
     function tablePop(data) {

@@ -33,10 +33,10 @@
                 <form>
                     <div class="form-check form-check-inline mt-1" style="text-align: center;">
                         <select class="form-control form-control-sm" id="veh_sel" title="Please Select a Vehicle">
-                                <option>Please Select a Vehicle</option>
+                                <option style="display:none;" selected>Please Select a Vehicle</option>
                             </select>
                         <select class="form-control form-control-sm ml-3" id="net_sel" title="Please Select a Network">
-                                    <option>Network</option>
+                                    <option style="display:none;" selected>Network</option>
                                 </select>
                     </div>
                 </form>
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="card-body" style="text-align: center;" id="connLay">
                                         <button type="submit" id="connBtn" style="display: none;"></button>
-                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" style="width: 90%;" src="images/conn_fill.jpg" alt="test_location_img" id="connLocate"></a>
+                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" id="connLocate" src="images/conn_fill.jpg" alt="test_location_img"></a>
                                         <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
                                     </div>
                                 </div>
@@ -140,10 +140,16 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <p id="trMp">TR.1 (Split Male): <span id="trM"></span></p>
+                                                <p id="trMp">TR #1 (Male): <span id="trM"></span>
+                                                    <button type="submit" id="tr1btn" style="display: none;"></button>
+                                                    <button type="submit" id="tr1btn2" style="display: none;"></button>
+                                                </p>
                                             </div>
                                             <div class="col-lg-6">
-                                                <p id="trFp">TR.2 (Split Female): <span id="trF"></span></p>
+                                                <p id="trFp">TR #2 (Female): <span id="trF"></span>
+                                                    <button type="submit" id="tr2btn" style="display: none;"></button>
+                                                    <button type="submit" id="tr2btn2" style="display: none;"></button>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -157,7 +163,7 @@
                                     </div>
                                     <div class="card-body">
                                         <form>
-                                            <button type="button" class="btn btn-info" style="float: right;" id="input-btn" value="genesis" title="Click to Enter a New Model">New Model Input</button>
+                                            <button type="button" class="btn btn-info btn-sm mt-3" style="float: right;" id="input-btn" value="genesis" title="Click to Enter a New Model">New Model Input</button>
                                         </form>
                                     </div>
                                 </div>

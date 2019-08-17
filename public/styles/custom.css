@@ -70,13 +70,8 @@ body {
     width: 100%;
 }
 
-
-/* .connLocImg {
-    width: 90%;
-} */
-
 .canLayImg {
-    width: 100%;
+    width: 98%;
 }
 
 #vehImg,
@@ -99,10 +94,25 @@ body {
     color: green;
 }
 
+#trMp,
+#trFp {
+    font-size: 14px;
+}
+
+#trM,
+#trF {
+    color: red;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: -1px;
+}
+
 @media only screen and (min-width: 1006px) and (max-width: 1800px) {
     #veh,
     #known,
-    #net_id {
+    #net_id,
+    #trM,
+    #trF {
         font-size: 18px;
     }
     .pinInput,
