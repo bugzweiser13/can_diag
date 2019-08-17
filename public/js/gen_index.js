@@ -2,6 +2,7 @@
 var vehInput;
 var vehShow;
 var splitConnView;
+var dataOut
 
 var API = {
     saveExample: function(example) {
@@ -97,6 +98,7 @@ function dataPopulate(dataOut) {
         $(".netInput").empty();
         $(".netInput2").empty();
 
+        //term res connector view button clear
         var trMbtn = $("#tr1btn");
         trMbtn.attr('style', 'display:none;');
         $("#tr1btn").append(trMbtn);
@@ -110,13 +112,16 @@ function dataPopulate(dataOut) {
         trFbtn2.attr('style', 'display:none;');
         $("#trFbtn2").append(trFbtn2);
 
-
+        //table reset
         tablePop(data);
-        $("#connBtn").attr('style', 'opacity: 0');
+
+        // split connector section clear
+        $("#connBtn").attr('style', 'display: none;');
         $("#connLocate").attr('src', clearConn);
         $("#canLayout").attr('src', clearLay);
-        $("#net_sel").html("<option style='display:none;' selected>Network</option>");
 
+
+        //vehicle selection value
         vehSel = $("#veh_sel").val().trim();
         vehShow = parseInt(vehSel);
 
@@ -136,6 +141,7 @@ function dataPopulate(dataOut) {
         $("#vehSel").text(dataOut[vehInput].model_name);
 
         // network dropdown population
+        $("#net_sel").html("<option style='display:none;' selected>Select Network</option>");
         for (j = 0; j < dataOut[vehInput].canData.length; j++) {
 
             var netOption = $("<option>")
@@ -196,7 +202,7 @@ function dataPopulate(dataOut) {
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].p_can2
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].test_loc
-                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
+                    // splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
             }
 
             if (netSel === 'P-CAN (2018~)') {
@@ -212,8 +218,18 @@ function dataPopulate(dataOut) {
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+                    // splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
+
+            if (vehInput === 1) {
+                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+                splitConnView2 = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
+            }
+            if (vehInput === 1 && netSel === 'C-CAN') {
+                trMview = dataOut[vehInput].canData[1].term_M_view
+                trMview2 = dataOut[vehInput].canData[2].term_M_view
+            }
+
 
             console.log(netSub);
 
@@ -221,13 +237,40 @@ function dataPopulate(dataOut) {
             // console.log("netId = " + netID);
             // connPopUp(splitConnView);
 
-            var testBtn = $("#connBtn");
-            testBtn.attr('style', 'display:block; float:right;');
-            testBtn.attr('class', 'btn btn-info btn-sm mb-2');
-            testBtn.attr('title', 'Click for Connector View');
-            testBtn.text('Connector View');
+            // var connBtn = $("#connBtn");
+            // connBtn.attr('style', 'display:block; float:right;');
+            // connBtn.attr('class', 'btn btn-info btn-sm mb-2');
+            // connBtn.attr('title', 'Click for Connector View');
+            // connBtn.text('Connector View');
+
+
+            //secondary connector view button population if needed
+            if (vehInput === 1) {
+                var connBtn = $("#connBtn");
+                connBtn.attr('style', 'display:block; float:right;');
+                connBtn.attr('class', 'btn btn-info btn-sm ml-2 mb-2');
+                connBtn.attr('title', 'Click for Connector View');
+                connBtn.text('2018~ Connector View');
+
+                var connBtn2 = $("#connBtn2");
+                connBtn2.attr('style', 'display:block; float:right;');
+                connBtn2.attr('class', 'btn btn-info btn-sm mb-2');
+                connBtn2.attr('title', 'Click for Connector View');
+                connBtn2.text('~2018 Connector View');
+            } else {
+                var connBtn = $("#connBtn");
+                connBtn.attr('style', 'display:block; float:right;');
+                connBtn.attr('class', 'btn btn-info btn-sm mb-2');
+                connBtn.attr('title', 'Click for Connector View');
+                connBtn.text('Connector View');
+
+                var connBtn2 = $("#connBtn2");
+                connBtn2.attr('style', 'display:none');
+                connBtn2.text('Connector View');
+            }
+
             var changeImg = $("#connLocate");
-            changeImg.attr('style', 'width: 79%;');
+            changeImg.attr('style', 'width: 78%;');
             $("#connLocate").append(changeImg);
 
             console.log("Vehicle: " + vehInput + " Network: " + netID);
@@ -306,6 +349,7 @@ function dataPopulate(dataOut) {
             $("#trM").text(trM);
             $("#trF").text(trF);
             knownGoodData(vehInput);
+            dataCheck(dataOut, vehInput, netID);
 
 
             // tr connector view link button population
@@ -394,7 +438,16 @@ function dataPopulate(dataOut) {
         // console.log("Connector: " + splitConnView); 
         var url = trMview;
         console.log(url);
-        windowOpen(url)
+        windowOpen(url);
+    });
+
+    $("#tr1btn2").on('click', function() {
+        // debugging
+        // console.log("Connector: " + splitConnView); 
+        console.log("I'm clicked");
+        var url = trMview2;
+        console.log(url);
+        windowOpen(url);
     });
 
     // tr2 connector view
@@ -403,7 +456,7 @@ function dataPopulate(dataOut) {
         // console.log("Connector: " + splitConnView); 
         var url = trFview;
         console.log(url);
-        windowOpen(url)
+        windowOpen(url);
     });
 
     $("#tr2btn2").on('click', function() {
@@ -411,7 +464,7 @@ function dataPopulate(dataOut) {
         // console.log("Connector: " + splitConnView); 
         var url = trFview2;
         console.log(url);
-        windowOpen(url)
+        windowOpen(url);
     });
 
     // split connector view
@@ -421,6 +474,15 @@ function dataPopulate(dataOut) {
         // debugging
         // console.log("Connector: " + splitConnView); 
         var url = splitConnView;
+        console.log(url);
+        windowOpen(url)
+    });
+
+    //split connector alt view if needed
+    $("#connBtn2").on('click', function() {
+        // debugging
+        // console.log("Connector: " + splitConnView); 
+        var url = splitConnView2;
         console.log(url);
         windowOpen(url)
     });
@@ -472,6 +534,31 @@ function dataPopulate(dataOut) {
         }
     }
 
+}
+
+function dataCheck(dataOut, vehInput, netID) {
+
+    console.log("vehicle is " + vehInput);
+
+    var totResXfer = dataOut[vehInput].canData[netID].total_res
+    var splitMXfer = dataOut[vehInput].canData[netID].res_val_m
+    var splitFXfer = dataOut[vehInput].canData[netID].res_val_f
+    var canVhighXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_h
+    var canVlowXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_l
+    var model = dataOut[vehInput].model
+
+    $("#dataCheck").on('click', function() {
+        var myUrl = "dataCheck.html?totRes=" +
+            totResXfer + "&splitM=" +
+            splitMXfer + "&splitF=" +
+            splitFXfer + "&canVh=" +
+            canVhighXfer + "&canVl=" +
+            canVlowXfer + "&model=" +
+            model;
+        window.open(myUrl, '_blank',
+            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500')
+        return false;
+    });
 }
 
 // new model input page open

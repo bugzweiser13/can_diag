@@ -27,12 +27,14 @@
     <div class="container.fluid mt-1 ml-2">
         <div class="row">
             <div class="col-lg-11 d-flex justify-content-end">
-                <!-- <img class="ml-2" src="images/hyun_logo2.jpg" alt="hyun_logo.jpg" style="width: 100%; float:right;"> -->
                 <form>
                     <div class="form-check form-check-inline mt-1" style="text-align: center;">
-                        <select class="form-control form-control-sm ml-3" id="veh_sel">
-                                <option>Please Select a Vehicle</option>-->
-                            </select>
+                        <select class="form-control form-control-sm" id="veh_sel" title="Please Select a Vehicle">
+                                        <option style="display:none;" selected>Please Select a Vehicle</option>
+                                    </select>
+                        <select class="form-control form-control-sm ml-3" id="net_sel" title="Please Select a Network">
+                                            <option style="display:none;" selected>Network</option>
+                                        </select>
                     </div>
                 </form>
                 <button class="btn btn-info btn-md ml-2" id="home" onclick="location.reload();location.href='index.html'"><i class="fa fa-home fa-lg"></i></button>
@@ -96,7 +98,7 @@
             <div class="col-lg-8">
                 <div class="card card-default" id="vehData">
                     <div class="card-header" style="font-weight: bolder; text-align: center;">
-                        <h3>Selected Vehicle's Testing Information</h3>
+                        <h3>Selected Vehicle's Known Good Data</h3>
                     </div>
                     <div class="card-body" id="mainDataCard">
                         <div class="row mt-1">
@@ -105,8 +107,9 @@
                                     <div class="card-header" style="font-weight: bolder; text-align: center;">
                                         <h4>Test Connector Location</h4>
                                     </div>
-                                    <div class="card-body" style="text-align: center;">
-                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" src="images/conn_fill.jpg" alt="test_location_img" id="connLocate"></a>
+                                    <div class="card-body" style="text-align: center;" id="connLay">
+                                        <button type="submit" id="connBtn" style="display: none;"></button>
+                                        <a id="connLocationHref" target="_blank" href="" title="Click To Enlarge"><img class="connLocImg" id="connLocate" src="images/conn_fill.jpg" alt="test_location_img"></a>
                                         <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
                                     </div>
                                 </div>
@@ -116,21 +119,49 @@
                                     <div class="card-header" style="font-weight: bolder; text-align: center;">
                                         <h4>Network: <span class="netInput" id="net_id"></span></h4>
                                     </div>
-                                    <div class="card-body mt-5" style="text-align: center;">
+                                    <div class="card-body mt-5" style="text-align: center;" id="netLay">
+                                        <button type="submit" id="pageBtn" style="display: none;"></button>
                                         <a id="canLayoutHref" target="_blank" href="" title="Click To Enlarge"><img class="canLayImg" src="images/layout_fill.jpg" alt="Network_img" id="canLayout"></a>
                                         <p style="font-size: 12px;">***please refer to Service Manual / ETM for more information***</p>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
+                                <div class="card card-default">
+                                    <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                        <h4>Terminating Resistor Locations</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p id="trMp">TR #1 (Male): <span id="trM"></span>
+                                                    <button type="submit" id="tr1btn" style="display: none;"></button>
+                                                    <button type="submit" id="tr1btn2" style="display: none;"></button>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p id="trFp">TR #2 (Female): <span id="trF"></span>
+                                                    <button type="submit" id="tr2btn" style="display: none;"></button>
+                                                    <button type="submit" id="tr2btn2" style="display: none;"></button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="card card-default">
                                     <div class="card-header" style="font-weight: bolder; text-align: center;">
                                         <h4>Future Development</h4>
                                     </div>
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-info" style="float: right;" id="input-btn" value="hyundai" title="Click to Enter a New Model">New Model Input</button>
+                                        <form>
+                                            <button type="button" class="btn btn-info btn-sm mt-3" style="float: right;" id="input-btn" value="genesis" title="Click to Enter a New Model">New Model Input</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
