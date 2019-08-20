@@ -44,3 +44,20 @@
         border-radius: 5px;
         padding: 10px;
     }
+    
+    #known {
+        float: left;
+        border: 1px solid black;
+    }
+    
+    #model {
+        color: red;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    
+    .canInput {
+        border-radius: 5px;
+        text-align: center;
+        width: 190px;
+    }

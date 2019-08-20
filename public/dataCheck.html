@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>New Model Input</title>
+    <title>Measurement Check</title>
     <link rel="icon" href="favicon.ico" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,24 +23,50 @@
     <div class="container mt-1">
         <h2 style="text-align: center;">
             <image src="images/hyun_logo1.jpg" alt="image.jpg" style="width: 25%;"></image>
-            Data Input / Check
+            Measurement Check
             <image src="images/gen_logo1.jpg" alt="image.jpg" style="width: 25%;"></image>
         </h2>
-        <div class="row">
-            <div class="col-lg-12 mt-1" id="inp">
-                <form id="data" action="/data.html">
-                    <image class="mt-3" src="images/js_n.jpg" alt="image.jpg" style="width: 55%; float:right;border-radius: 5px;"></image>
-                    <input class="input" type="hidden" name="brand" id="brand" autocomplete="off" required>
-                    <label for="mod_name">Model Name: <span id="model"></span> </label>
+        <div class="row" id="inp">
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <label for="model">Model Selected: </label>
+                    <span class="ml-2" id="model"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-start">
+                    <form>
+                        <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image>
 
+                        <label for="totResIn">Total Resistance: </label>
+                        <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="3" autocomplete="off" placeholder="Enter Total Resistance" required><br>
+                        <!--<span class="known" id="totRes"></span></label>-->
+                        <label for="splitMin">Split CAN &Omega; (Male):  </label>
+                        <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="4" autocomplete="off" placeholder="Enter Male Split Ω" required><br>
+                        <!-- <span class="known" id="splitM"></span> </label> -->
+                        <label for="splitFin">Split CAN &Omega; (Female):  </label>
+                        <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="4" autocomplete="off" placeholder="Enter Female Split Ω" required><br>
+                        <!-- <span class="known" id="splitF"></span> </label> -->
+                        <label for="canHvIn">CAN Voltage (High):  </label>
+                        <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN High Voltage" required><br>
+                        <!-- <span class="known" id="canH"></span> </label> -->
+                        <label for="canLvIn">CAN Voltage (Low):  </label>
+                        <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN Low Voltage" required><br>
+                        <label for="canLvIn">CAN &Omega; to Ground:  </label>
+                        <input type="text" class="canInput" name="canGround" id="canGround" maxlength="5" autocomplete="off" placeholder="Enter CAN Ω to Ground" required><br>
+
+                        <!-- <span class="known" id="canL"></span> </label> -->
+                </div>
             </div>
         </div>
-        <div class="row mt-3" id="btn">
+        <div class="row mt-2" id="btn">
             <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
             <input class="btn btn-info btn-sm ml-2" type="submit" id="submit">
         </div>
         </form>
 
+    </div>
     </div>
 </body>
 <script src="js/dataCheck.js"></script>

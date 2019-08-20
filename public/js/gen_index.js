@@ -2,7 +2,7 @@
 var vehInput;
 var vehShow;
 var splitConnView;
-var dataOut
+var dataOut;
 
 var API = {
     saveExample: function(example) {
@@ -25,12 +25,12 @@ var API = {
 
                 // dataOut.push.apply(dataOut, data66)
 
-                var array1Length = data66.length;
+                var arrayLength = data66.length;
                 var dataOut = [];
 
                 data66.forEach((elem, index) => {
                         dataOut.push(elem);
-                        if (dataOut.length === array1Length)
+                        if (dataOut.length === arrayLength)
                             data66.length = 0
                     })
                     // debugging
@@ -170,14 +170,13 @@ function dataPopulate(dataOut) {
                 trFview = dataOut[vehInput].canData[netID].term_F_view
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].c_can
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
             if (netSel === 'P-CAN') {
                 netID = 1
                 netSub = 1
+                testLoc = dataOut[vehInput].canData[netID].test_loc
                 canPinH = dataOut[vehInput].canData[netID].pin_h
                 canPinL = dataOut[vehInput].canData[netID].pin_l
-                testLoc = dataOut[vehInput].canData[netID].test_loc
                 trM = dataOut[vehInput].canData[netID].term_m
                 trMview = dataOut[vehInput].canData[netID].term_M_view
                 trF = dataOut[vehInput].canData[netID].term_f
@@ -185,7 +184,6 @@ function dataPopulate(dataOut) {
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
 
             // g80 year seperation
@@ -201,8 +199,6 @@ function dataPopulate(dataOut) {
                 trFview = dataOut[vehInput].canData[netID].term_F_view
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].p_can2
-                locationImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].test_loc
-                    // splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view2
             }
 
             if (netSel === 'P-CAN (2018~)') {
@@ -218,8 +214,22 @@ function dataPopulate(dataOut) {
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].p_can1
                 locationImg = dataOut[vehInput].canData[netID].canVolts[netID].canMedia[0].test_loc
-                    // splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
             }
+
+            splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
+            totResXfer = dataOut[vehInput].canData[netID].total_res
+            splitMXfer = dataOut[vehInput].canData[netID].res_val_m
+            splitFXfer = dataOut[vehInput].canData[netID].res_val_f
+            canVhighXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_h
+            canVlowXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_l
+            trMxfer = dataOut[vehInput].canData[netID].term_m
+            trFxfer = dataOut[vehInput].canData[netID].term_f
+            testLocXfer = dataOut[vehInput].canData[netID].test_loc
+            model = dataOut[vehInput].model_name
+            modelImg = dataOut[vehInput].canData[0].canVolts[0].canMedia[0].vehicle
+
+            console.log(modelImg);
+
 
             if (vehInput === 1) {
                 splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
@@ -231,12 +241,10 @@ function dataPopulate(dataOut) {
             }
 
 
-            console.log(netSub);
-
             // console.log(vehInput);
             // console.log("netId = " + netID);
             // connPopUp(splitConnView);
-
+            // console.log(netSub);
             // var connBtn = $("#connBtn");
             // connBtn.attr('style', 'display:block; float:right;');
             // connBtn.attr('class', 'btn btn-info btn-sm mb-2');
@@ -273,7 +281,7 @@ function dataPopulate(dataOut) {
             changeImg.attr('style', 'width: 78%;');
             $("#connLocate").append(changeImg);
 
-            console.log("Vehicle: " + vehInput + " Network: " + netID);
+            // console.log("Vehicle: " + vehInput + " Network: " + netID);
 
             // network layout page selection button population
             // will need to change "if" statement for future use as more are added
@@ -349,7 +357,7 @@ function dataPopulate(dataOut) {
             $("#trM").text(trM);
             $("#trF").text(trF);
             knownGoodData(vehInput);
-            dataCheck(dataOut, vehInput, netID);
+            // dataCheck(dataOut, vehInput, netID);
 
 
             // tr connector view link button population
@@ -427,11 +435,33 @@ function dataPopulate(dataOut) {
                 trFbtn2.attr('style', 'display:none;');
                 $("#tr2btn2").append(trFbtn2);
             }
+
+            // vehicleXfer(dataOut, vehInput, netID);
         });
     });
 
-    //popUp button operations
+    $("#dataCheck").on('click', function() {
 
+        console.log(modelImg);
+
+        var myUrl = "dataCheck.html?totRes=" +
+            totResXfer + "&splitM=" +
+            splitMXfer + "&splitF=" +
+            splitFXfer + "&canVh=" +
+            canVhighXfer + "&canVl=" +
+            canVlowXfer + "&model=" +
+            model + "&modelImg=" +
+            modelImg + "&trMale=" +
+            trMxfer + "&trFemale=" +
+            trFxfer + "&testLoc=" +
+            testLocXfer;
+
+        window.open(myUrl, '_blank',
+            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=825,height=575')
+        return false;
+    });
+
+    //popUp button operations
     // tr1 connector view
     $("#tr1btn").on('click', function() {
         // debugging
@@ -536,30 +566,30 @@ function dataPopulate(dataOut) {
 
 }
 
-function dataCheck(dataOut, vehInput, netID) {
+// console.log("vehicle is " + vehInput);
+// console.log("network is: " + netID);
+// $("#dataCheck").on('click', function() {
 
-    console.log("vehicle is " + vehInput);
+//     var totResXfer = dataOut[vehInput].canData[netID].total_res
+//     var splitMXfer = dataOut[vehInput].canData[netID].res_val_m
+//     var splitFXfer = dataOut[vehInput].canData[netID].res_val_f
+//     var canVhighXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_h
+//     var canVlowXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_l
+//     var model = dataOut[vehInput].model
 
-    var totResXfer = dataOut[vehInput].canData[netID].total_res
-    var splitMXfer = dataOut[vehInput].canData[netID].res_val_m
-    var splitFXfer = dataOut[vehInput].canData[netID].res_val_f
-    var canVhighXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_h
-    var canVlowXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_l
-    var model = dataOut[vehInput].model
 
-    $("#dataCheck").on('click', function() {
-        var myUrl = "dataCheck.html?totRes=" +
-            totResXfer + "&splitM=" +
-            splitMXfer + "&splitF=" +
-            splitFXfer + "&canVh=" +
-            canVhighXfer + "&canVl=" +
-            canVlowXfer + "&model=" +
-            model;
-        window.open(myUrl, '_blank',
-            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500')
-        return false;
-    });
-}
+//     var myUrl = "dataCheck.html?totRes=" +
+//         totResXfer + "&splitM=" +
+//         splitMXfer + "&splitF=" +
+//         splitFXfer + "&canVh=" +
+//         canVhighXfer + "&canVl=" +
+//         canVlowXfer + "&model=" +
+//         model;
+//     window.open(myUrl, '_blank',
+//         'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500')
+//     return false;
+// });
+
 
 // new model input page open
 // inputBtn value loads genesis / hyundai

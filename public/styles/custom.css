@@ -129,8 +129,10 @@ body {
     #tr1btn,
     #tr1btn2,
     #tr2btn,
-    #tr2btn2 {
-        font-size: 10px;
+    #tr2btn2,
+    #dataCheck,
+    #input-btn {
+        font-size: 9px;
     }
     .pinInput,
     .locInput {
