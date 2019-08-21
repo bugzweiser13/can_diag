@@ -117,6 +117,7 @@ function dataPopulate(dataOut) {
 
         // split connector section clear
         $("#connBtn").attr('style', 'display: none;');
+        $("#connBtn2").attr('style', 'display: none;');
         $("#connLocate").attr('src', clearConn);
         $("#canLayout").attr('src', clearLay);
 
@@ -228,8 +229,6 @@ function dataPopulate(dataOut) {
             model = dataOut[vehInput].model_name
             modelImg = dataOut[vehInput].canData[0].canVolts[0].canMedia[0].vehicle
 
-            console.log(modelImg);
-
 
             if (vehInput === 1) {
                 splitConnView = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].conn_view1
@@ -257,19 +256,19 @@ function dataPopulate(dataOut) {
                 var connBtn = $("#connBtn");
                 connBtn.attr('style', 'display:block; float:right;');
                 connBtn.attr('class', 'btn btn-info btn-sm ml-2 mb-2');
-                connBtn.attr('title', 'Click for Connector View');
+                connBtn.attr('title', 'Click for Connector ' + testLoc + ' View');
                 connBtn.text('2018~ Connector View');
 
                 var connBtn2 = $("#connBtn2");
                 connBtn2.attr('style', 'display:block; float:right;');
                 connBtn2.attr('class', 'btn btn-info btn-sm mb-2');
-                connBtn2.attr('title', 'Click for Connector View');
+                connBtn2.attr('title', 'Click for Connector ' + testLoc + ' View');
                 connBtn2.text('~2018 Connector View');
             } else {
                 var connBtn = $("#connBtn");
                 connBtn.attr('style', 'display:block; float:right;');
                 connBtn.attr('class', 'btn btn-info btn-sm mb-2');
-                connBtn.attr('title', 'Click for Connector View');
+                connBtn.attr('title', 'Click for Connector ' + testLoc + ' View');
                 connBtn.text('Connector View');
 
                 var connBtn2 = $("#connBtn2");
@@ -356,6 +355,11 @@ function dataPopulate(dataOut) {
             $("#can_L_p").text(canPinL);
             $("#trM").text(trM);
             $("#trF").text(trF);
+            var dataBtn = $("#dataCheck");
+            dataBtn.attr('style', 'display:block;');
+            dataBtn.attr('class', 'btn btn-info btn-sm')
+            dataBtn.attr('title', 'Click Here to Check Measurements');
+            $("#dataCheck").append(dataBtn);
             knownGoodData(vehInput);
             // dataCheck(dataOut, vehInput, netID);
 
@@ -457,7 +461,7 @@ function dataPopulate(dataOut) {
             testLocXfer;
 
         window.open(myUrl, '_blank',
-            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=825,height=575')
+            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=900,height=580')
         return false;
     });
 

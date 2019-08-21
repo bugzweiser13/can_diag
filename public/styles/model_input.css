@@ -61,3 +61,18 @@
         text-align: center;
         width: 190px;
     }
+    
+    #testSwap {
+        text-align: center;
+        width: 495px;
+        height: 400px;
+        background: white;
+        border-radius: 5px;
+    }
+    /* #data {
+        text-align: center;
+        width: 461px;
+        height: 340px;
+        background: white;
+        border-radius: 5px;
+    } */

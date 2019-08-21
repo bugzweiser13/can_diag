@@ -34,7 +34,7 @@ var modelImg = params['modelImg'];
 // console.log("Known CAN High Voltage: " + canVh);
 // console.log("Known CAN Low Voltage: " + canVl);
 // console.log(modelImg);
-console.log(trMale);
+// console.log(trMale);
 
 
 // change strings to int as needed
@@ -54,7 +54,6 @@ var canVoltLowRangeMax = 2.3;
 var canVoltHighRangeMin = 2.7;
 var canVoltHighRangeMax = 2.9;
 var canGroundRange = 700;
-
 
 // image load
 var modelShow = $("#modelImg");
@@ -94,7 +93,7 @@ $("#submit").on('click', function() {
     var canGroundIn = $('#canGround').val().trim();
 
     // inputted value correction
-    totResCorrected = Number(totResIn).toFixed(2);
+    totResCorrected = Number(totResIn).toFixed(1);
     splitMinCorrected = Number(splitMin).toFixed(2);
     splitFinCorrected = Number(splitFin).toFixed(2);
     canHvInCorrected = Number(canHvIn).toFixed(2);
@@ -185,29 +184,44 @@ $("#submit").on('click', function() {
         canGroundAnswer = "Good Value"
             // console.log("value is more");
     }
-    alert("Total Resistance: " + totResAnswer + "\n" +
-        "Split Resistance (Male): " + splitMAnswer + "\n" +
-        "Split Resistance (Female): " + splitFAnswer + "\n" +
-        "CAN High Voltage: " + canHighAnswer + "\n" +
-        "CAN Low Voltage: " + canLowAnswer + "\n" +
-        "CAN Resistance to Ground: " + canGroundAnswer);
-    self.close();
+
+    var imageHide = $("#modelImg");
+    imageHide.attr('style', 'display:none;');
+    $("#modelImg").append(imageHide);
+
+    var heading = $('<h1>').html('Results <hr>');
+    heading.attr('class', 'mb-4');
+    var dataInput = $("<p>").html('Total Resistance: ' + totResAnswer);
+    var dataInput2 = $("<p>").html('Split Resistance (M): ' + splitMAnswer);
+    var dataInput3 = $("<p>").html('Split Resistance (F): ' + splitFAnswer);
+    var dataInput4 = $("<p>").html('CAN High Voltage: ' + canHighAnswer);
+    var dataInput5 = $("<p>").html('CAN Low Voltage: ' + canLowAnswer);
+    var dataInput6 = $("<p>").html('CAN Resistance to Ground: ' + canGroundAnswer);
+    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6);
+
+    // alert("Total Resistance: " + totResAnswer + "\n" +
+    //     "Split Resistance (Male): " + splitMAnswer + "\n" +
+    //     "Split Resistance (Female): " + splitFAnswer + "\n" +
+    //     "CAN High Voltage: " + canHighAnswer + "\n" +
+    //     "CAN Low Voltage: " + canLowAnswer + "\n" +
+    //     "CAN Resistance to Ground: " + canGroundAnswer);
+    // self.close();
 
 });
 
 //adding decimals to needed inputs
 $("#canHvIn").blur(function() {
-    this.value = parseInt(this.value) * .01.toFixed(2);
+    this.value = ((parseInt(this.value) * .01).toFixed(2));
 });
 $("#canLvIn").blur(function() {
-    this.value = parseFloat(this.value) * .01.toFixed(2);
+    this.value = ((parseFloat(this.value) * .01).toFixed(2));
 });
 $("#totResIn").blur(function() {
-    this.value = parseFloat(this.value) * .10.toFixed(2);
+    this.value = ((parseFloat(this.value) * .10).toFixed(1));
 });
 $("#splitMin").blur(function() {
-    this.value = parseFloat(this.value) * .10.toFixed(2);
+    this.value = ((parseFloat(this.value) * .10).toFixed(1));
 });
 $("#splitFin").blur(function() {
-    this.value = parseFloat(this.value) * .10.toFixed(2);
+    this.value = ((parseFloat(this.value) * .10).toFixed(1));
 });

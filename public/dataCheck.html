@@ -28,43 +28,47 @@
         </h2>
         <div class="row" id="inp">
             <div class="row">
-                <div class="col-lg-6"></div>
-                <div class="col-lg-6">
+                <div class="col-12">
                     <label for="model">Model Selected: </label>
-                    <span class="ml-2" id="model"></span>
+                    <span id="model"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 d-flex justify-content-start">
-                    <form>
-                        <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image>
 
-                        <label for="totResIn">Total Resistance: </label>
+            <div class="row">
+                <div class="col-4">
+                    <form>
+                        <!-- <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image> -->
+                        <label for="totResIn">Total Resistance: </label><br>
                         <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="3" autocomplete="off" placeholder="Enter Total Resistance" required><br>
                         <!--<span class="known" id="totRes"></span></label>-->
-                        <label for="splitMin">Split CAN &Omega; (Male):  </label>
+                        <label for="splitMin">Split CAN &Omega; (Male):  </label><br>
                         <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="4" autocomplete="off" placeholder="Enter Male Split Ω" required><br>
                         <!-- <span class="known" id="splitM"></span> </label> -->
-                        <label for="splitFin">Split CAN &Omega; (Female):  </label>
+                        <label for="splitFin">Split CAN &Omega; (Female):  </label><br>
                         <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="4" autocomplete="off" placeholder="Enter Female Split Ω" required><br>
                         <!-- <span class="known" id="splitF"></span> </label> -->
-                        <label for="canHvIn">CAN Voltage (High):  </label>
+                        <label for="canHvIn">CAN Voltage (High):  </label><br>
                         <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN High Voltage" required><br>
                         <!-- <span class="known" id="canH"></span> </label> -->
-                        <label for="canLvIn">CAN Voltage (Low):  </label>
+                        <label for="canLvIn">CAN Voltage (Low):  </label><br>
                         <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN Low Voltage" required><br>
-                        <label for="canLvIn">CAN &Omega; to Ground:  </label>
+                        <label for="canLvIn">CAN &Omega; to Ground:  </label><br>
                         <input type="text" class="canInput" name="canGround" id="canGround" maxlength="5" autocomplete="off" placeholder="Enter CAN Ω to Ground" required><br>
-
                         <!-- <span class="known" id="canL"></span> </label> -->
+                    </form>
+                </div>
+                <div class="col-8" id="testSwap">
+                    <image class="mt-5" id="modelImg" style="width: 100%; border-radius: 5px;"></image>
                 </div>
             </div>
         </div>
+
         <div class="row mt-2" id="btn">
             <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
             <input class="btn btn-info btn-sm ml-2" type="submit" id="submit">
+
         </div>
-        </form>
+
 
     </div>
     </div>

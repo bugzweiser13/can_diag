@@ -84,8 +84,8 @@ body {
 }
 
 #knownGood {
-    height: 475px;
-    max-height: 475px;
+    height: 500px;
+    max-height: 500px;
     overflow: auto;
     text-align: center;
     font-size: 14px;
@@ -107,6 +107,10 @@ body {
     font-weight: bold;
     font-size: 22px;
     letter-spacing: -1px;
+}
+
+#future {
+    height: 155px;
 }
 
 @media only screen and (min-width: 1006px) and (max-width: 1800px) {
@@ -139,9 +143,12 @@ body {
         font-size: 15px;
     }
     #knownGood {
-        height: 425px;
-        max-height: 425px;
+        height: 450px;
+        max-height: 450px;
         font-size: calc(.4em + .4vw)
+    }
+    #future {
+        height: 140px;
     }
     .title {
         font-size: 9px;
