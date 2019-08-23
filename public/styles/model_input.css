@@ -64,7 +64,7 @@
     
     #testSwap {
         text-align: center;
-        width: 495px;
+        width: 480px;
         height: 400px;
         background: white;
         border-radius: 5px;
@@ -85,5 +85,9 @@
     .good {
         color: green;
         font-style: italic;
+        font-weight: bolder;
+    }
+    
+    .calcOutput {
         font-weight: bolder;
     }

@@ -127,123 +127,130 @@ $("#submit").on('click', function() {
     console.log('Inputed: ' + totResCorrected);
     console.log('Calculation: ' + result);
 
-    var test = totResCorrected - result;
+    var calcDiff = totResCorrected - result;
 
-    console.log('value: ' + test);
+    console.log('value: ' + calcDiff);
 
     //
     // data comparison
 
     // total resistance validation
-    if (test < goNoGo) {
-        totResClass = "bad"
-        totResAnswer = "Invalid Value"
-        console.log('less');
+    if (calcDiff < goNoGo) {
+        totResClass = "bad";
+        totResAnswer = "Invalid Value Inputed";
+        splitMclass = "bad";
+        splitMAnswer = "Invalid Value Inputed";
+        splitFclass = "bad";
+        splitFAnswer = "Invalid Value Inputed";
+        // console.log('less');
 
     }
-    if (test > goNoGo) {
-        totResClass = "bad"
-        totResAnswer = "Invalid Value"
-        console.log('more');
+    if (calcDiff > goNoGo) {
+        totResClass = "bad";
+        totResAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        splitMclass = "bad";
+        splitMAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        splitFclass = "bad";
+        splitFAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        // console.log('more');
 
     }
-    if (test >= goNoGoRangeMin && test <= goNoGoRangeMax) {
+    if (calcDiff >= goNoGoRangeMin && calcDiff <= goNoGoRangeMax) {
 
         if (totResCorrected < totalCanRangeMin) {
-            totResClass = "bad"
-            totResAnswer = "Value is less"
+            totResClass = "bad";
+            totResAnswer = "Value is less";
         }
         if (totResCorrected > totalCanRangeMax) {
             // totResAnswer = "Value is more"
-            totResClass = "bad"
-            totResAnswer = "Tested value is high, inspect split"
-                // console.log("value is more");
+            totResClass = "bad";
+            totResAnswer = "Tested value is high, inspect split";
+            // console.log("value is more");
         }
         if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
-            totResClass = "good"
-            totResAnswer = "Good Value"
-                // console.log("good value");
-                // alert("Good Value")
+            totResClass = "good";
+            totResAnswer = "Good Value";
+            // console.log("good value");
+            // alert("Good Value")
+        }
+
+        if (splitMinCorrected < splitCanRangeMin) {
+            splitMclass = "bad";
+            splitMAnswer = "Value is less";
+            // console.log("value is less");
+        }
+        if (splitMinCorrected > splitCanRangeMax) {
+            // splitMAnswer = "Value is more"
+            splitMclass = "bad";
+            splitMAnswer = "High Resistance between " + testLoc + " and " + trMale;
+            // console.log("value is more");
+        }
+        if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
+            splitMclass = "good";
+            splitMAnswer = "Good Value";
+            // console.log("good value");
+            // alert("Good Value")
+        }
+        if (splitFinCorrected < splitCanRangeMin) {
+            splitFclass = "bad";
+            splitFAnswer = "Value is less";
+            // console.log("value is less");
+        }
+        if (splitFinCorrected > splitCanRangeMax) {
+            // splitFAnswer = "Value is more"
+            splitFclass = "bad";
+            splitFAnswer = "High Resistance between " + testLoc + " and " + trFemale;
+            // console.log("value is more");
+        }
+        if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
+            splitFclass = "good";
+            splitFAnswer = "Good Value";
+            // console.log("good value");
+            // alert("Good Value")
         }
     }
-    if (splitMinCorrected < splitCanRangeMin) {
-        splitMclass = "bad"
-        splitMAnswer = "Value is less"
-            // console.log("value is less");
-    }
-    if (splitMinCorrected > splitCanRangeMax) {
-        // splitMAnswer = "Value is more"
-        splitMclass = "bad"
-        splitMAnswer = "High Resistance between " + testLoc + " and " + trMale
-            // console.log("value is more");
-    }
-    if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
-        splitMclass = "good"
-        splitMAnswer = "Good Value"
-            // console.log("good value");
-            // alert("Good Value")
-    }
-    if (splitFinCorrected < splitCanRangeMin) {
-        splitFclass = "bad"
-        splitFAnswer = "Value is less"
-            // console.log("value is less");
-    }
-    if (splitFinCorrected > splitCanRangeMax) {
-        // splitFAnswer = "Value is more"
-        splitFclass = "bad"
-        splitFAnswer = "High Resistance between " + testLoc + " and " + trFemale
-            // console.log("value is more");
-    }
-    if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
-        splitFclass = "good"
-        splitFAnswer = "Good Value"
-            // console.log("good value");
-            // alert("Good Value")
-    }
     if (canHvInCorrected < canVoltHighRangeMin) {
-        canHighClass = "bad"
-        canHighAnswer = "Value is less"
-            // console.log("value is less");
+        canHighClass = "bad";
+        canHighAnswer = "Value is less";
+        // console.log("value is less");
     }
     if (canHvInCorrected > canVoltHighRangeMax) {
-        canHighClass = "bad"
-        canHighAnswer = "Value is more"
-            // console.log("value is more");
+        canHighClass = "bad";
+        canHighAnswer = "Value is more";
+        // console.log("value is more");
     }
     if (canHvInCorrected >= canVoltHighRangeMin && canHvInCorrected <= canVoltHighRangeMax) {
-        canHighClass = "good"
-        canHighAnswer = "Good Value"
-            // console.log("good value");
-            // alert("Good Value")
+        canHighClass = "good";
+        canHighAnswer = "Good Value";
+        // console.log("good value");
+        // alert("Good Value")
     }
     if (canLvInCorrected < canVoltLowRangeMin) {
-        canLowClass = "bad"
-        canLowAnswer = "Value is less"
-            // console.log("value is less");
+        canLowClass = "bad";
+        canLowAnswer = "Value is less";
+        // console.log("value is less");
     }
     if (canLvInCorrected > canVoltLowRangeMax) {
-        canLowClass = "bad"
-        canLowAnswer = "Value is more"
-            // console.log("value is more");
+        canLowClass = "bad";
+        canLowAnswer = "Value is more";
+        // console.log("value is more");
     }
     if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
-        canLowClass = "good"
-        canLowAnswer = "Good Value"
-            // console.log("good value");
-            // alert("Good Value")
+        canLowClass = "good";
+        canLowAnswer = "Good Value";
+        // console.log("good value");
+        // alert("Good Value")
     }
     if (canGroundCorrected < canGroundRange) {
-        canGroundClass = "bad"
-        canGroundAnswer = "Inspect for a short to Ground"
-            // console.log("value is less");
+        canGroundClass = "bad";
+        canGroundAnswer = "Inspect for a short to Ground";
+        // console.log("value is less");
     }
     if (canGroundCorrected >= canGroundRange) {
-        canGroundClass = "good"
-        canGroundAnswer = "Good Value"
-            // console.log("value is more");
+        canGroundClass = "good";
+        canGroundAnswer = "Good Value";
+        // console.log("value is more");
     }
-
-
 
     var heading = $('<h1>').html('Results <hr>');
     heading.attr('class', 'mb-4');
@@ -253,9 +260,10 @@ $("#submit").on('click', function() {
     var dataInput4 = $("<p>").html("CAN High Voltage:  <span class=" + canHighClass + ">" + canHighAnswer + "</span>");
     var dataInput5 = $("<p>").html("CAN Low Voltage: <span class=" + canLowClass + ">" + canLowAnswer + "</span>");
     var dataInput6 = $("<p>").html("CAN Resistance to Ground: <span class=" + canGroundClass + ">" + canGroundAnswer + "</span>");
+    var dataInput7 = $("<p>").html("CAN Total Resistance Calculated from Split Input: <span class='calcOutput'>" + result + "</span>");
 
+    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6, dataInput7);
 
-    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6);
     // alert("Total Resistance: " + totResAnswer + "\n" +
     //     "Split Resistance (Male): " + splitMAnswer + "\n" +
     //     "Split Resistance (Female): " + splitFAnswer + "\n" +
