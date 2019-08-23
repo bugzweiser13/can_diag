@@ -76,3 +76,14 @@
         background: white;
         border-radius: 5px;
     } */
+    
+    .bad {
+        color: red;
+        font-style: italic;
+    }
+    
+    .good {
+        color: green;
+        font-style: italic;
+        font-weight: bolder;
+    }

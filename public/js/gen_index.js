@@ -200,6 +200,7 @@ function dataPopulate(dataOut) {
                 trFview = dataOut[vehInput].canData[netID].term_F_view
                 trFview2 = dataOut[vehInput].canData[netID].term_F_view2
                 layoutImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].p_can2
+                locationImg = dataOut[vehInput].canData[netID].canVolts[netSub].canMedia[0].test_loc
             }
 
             if (netSel === 'P-CAN (2018~)') {

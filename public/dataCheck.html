@@ -28,32 +28,32 @@
         </h2>
         <div class="row" id="inp">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" id="modelInp">
                     <label for="model">Model Selected: </label>
                     <span id="model"></span>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-4" id="inputForm">
                     <form>
                         <!-- <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image> -->
-                        <label for="totResIn">Total Resistance: </label><br>
-                        <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="3" autocomplete="off" placeholder="Enter Total Resistance" required><br>
+                        <label for="totResIn">Total Resistance: *</label><br>
+                        <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="3" autocomplete="off" placeholder="enter xxx" required><br>
                         <!--<span class="known" id="totRes"></span></label>-->
-                        <label for="splitMin">Split CAN &Omega; (Male):  </label><br>
-                        <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="4" autocomplete="off" placeholder="Enter Male Split Ω" required><br>
+                        <label for="splitMin">Split CAN &Omega; (Male):  *</label><br>
+                        <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="4" autocomplete="off" placeholder="enter xxxx" required><br>
                         <!-- <span class="known" id="splitM"></span> </label> -->
-                        <label for="splitFin">Split CAN &Omega; (Female):  </label><br>
-                        <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="4" autocomplete="off" placeholder="Enter Female Split Ω" required><br>
+                        <label for="splitFin">Split CAN &Omega; (Female):  *</label><br>
+                        <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="4" autocomplete="off" placeholder="enter xxxx" required><br>
                         <!-- <span class="known" id="splitF"></span> </label> -->
-                        <label for="canHvIn">CAN Voltage (High):  </label><br>
-                        <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN High Voltage" required><br>
+                        <label for="canHvIn">CAN Voltage (High):  *</label><br>
+                        <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="3" autocomplete="off" placeholder="enter xxx" required><br>
                         <!-- <span class="known" id="canH"></span> </label> -->
-                        <label for="canLvIn">CAN Voltage (Low):  </label><br>
-                        <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="3" autocomplete="off" placeholder="Enter CAN Low Voltage" required><br>
+                        <label for="canLvIn">CAN Voltage (Low):  *</label><br>
+                        <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="3" autocomplete="off" placeholder="enter xxx" required><br>
                         <label for="canLvIn">CAN &Omega; to Ground:  </label><br>
-                        <input type="text" class="canInput" name="canGround" id="canGround" maxlength="5" autocomplete="off" placeholder="Enter CAN Ω to Ground" required><br>
+                        <input type="text" class="canInput" name="canGround" id="canGround" maxlength="5" autocomplete="off" placeholder="enter xxxxx" required><br>
                         <!-- <span class="known" id="canL"></span> </label> -->
                     </form>
                 </div>
@@ -62,10 +62,11 @@
                 </div>
             </div>
         </div>
-
+        <p class="ml-3" style="font-size: 10px; float: left; font-style: italic;">*Decimals will self populate</p>
         <div class="row mt-2" id="btn">
             <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
             <input class="btn btn-info btn-sm ml-2" type="submit" id="submit">
+            <button class="btn btn-info btn-sm ml-2" style="display:none;" id="reload" onclick="location.reload()">Enter New Values</button>
 
         </div>
 

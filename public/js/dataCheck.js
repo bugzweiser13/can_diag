@@ -84,6 +84,10 @@ $('.canInput').on('click focusin', function() {
 // measurement comparison upon submit
 $("#submit").on('click', function() {
 
+    $("#submit").attr('style', 'display: none;');
+    $("#inputForm :input").prop("disabled", true);
+    $("#reload").attr("style", "display:block;");
+
     // user input values
     var totResIn = $('#totResIn').val().trim();
     var splitMin = $('#splitMin').val().trim();
@@ -94,8 +98,8 @@ $("#submit").on('click', function() {
 
     // inputted value correction
     totResCorrected = Number(totResIn).toFixed(1);
-    splitMinCorrected = Number(splitMin).toFixed(2);
-    splitFinCorrected = Number(splitFin).toFixed(2);
+    splitMinCorrected = parseInt(splitMin).toFixed(2);
+    splitFinCorrected = parseInt(splitFin).toFixed(2);
     canHvInCorrected = Number(canHvIn).toFixed(2);
     canLvInCorrected = Number(canLvIn).toFixed(2);
     canGroundCorrected = Number(canGroundIn).toFixed(2);
@@ -107,98 +111,151 @@ $("#submit").on('click', function() {
     //     " can v H:  " + canHvIn +
     //     " can v L:  " + canLvIn);
 
-    //data comparrison
-    if (totResCorrected < totalCanRangeMin) {
-        totResAnswer = "Value is less"
-            // console.log("value is less");
+    var imageHide = $("#modelImg");
+    imageHide.attr('style', 'display:none;');
+    $("#modelImg").append(imageHide);
+
+    // Parallel Resistance Calculator
+    var resMult = splitMinCorrected * splitFinCorrected;
+    var resAdd = parseInt(splitMinCorrected) + parseInt(splitFinCorrected);
+    var result = (resMult / resAdd).toFixed(2)
+
+    var goNoGo = 1;
+    var goNoGoRangeMin = -1;
+    var goNoGoRangeMax = 1;
+
+    console.log('Inputed: ' + totResCorrected);
+    console.log('Calculation: ' + result);
+
+    var test = totResCorrected - result;
+
+    console.log('value: ' + test);
+
+    //
+    // data comparison
+
+    // total resistance validation
+    if (test < goNoGo) {
+        totResClass = "bad"
+        totResAnswer = "Invalid Value"
+        console.log('less');
+
     }
-    if (totResCorrected > totalCanRangeMax) {
-        // totResAnswer = "Value is more"
-        totResAnswer = "Tested Value is high, inspect Split"
-            // console.log("value is more");
+    if (test > goNoGo) {
+        totResClass = "bad"
+        totResAnswer = "Invalid Value"
+        console.log('more');
+
     }
-    if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
-        totResAnswer = "Good Value"
-            // console.log("good value");
-            // alert("Good Value")
+    if (test >= goNoGoRangeMin && test <= goNoGoRangeMax) {
+
+        if (totResCorrected < totalCanRangeMin) {
+            totResClass = "bad"
+            totResAnswer = "Value is less"
+        }
+        if (totResCorrected > totalCanRangeMax) {
+            // totResAnswer = "Value is more"
+            totResClass = "bad"
+            totResAnswer = "Tested value is high, inspect split"
+                // console.log("value is more");
+        }
+        if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
+            totResClass = "good"
+            totResAnswer = "Good Value"
+                // console.log("good value");
+                // alert("Good Value")
+        }
     }
     if (splitMinCorrected < splitCanRangeMin) {
+        splitMclass = "bad"
         splitMAnswer = "Value is less"
             // console.log("value is less");
     }
     if (splitMinCorrected > splitCanRangeMax) {
         // splitMAnswer = "Value is more"
+        splitMclass = "bad"
         splitMAnswer = "High Resistance between " + testLoc + " and " + trMale
             // console.log("value is more");
     }
     if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
+        splitMclass = "good"
         splitMAnswer = "Good Value"
             // console.log("good value");
             // alert("Good Value")
     }
     if (splitFinCorrected < splitCanRangeMin) {
+        splitFclass = "bad"
         splitFAnswer = "Value is less"
             // console.log("value is less");
     }
     if (splitFinCorrected > splitCanRangeMax) {
         // splitFAnswer = "Value is more"
+        splitFclass = "bad"
         splitFAnswer = "High Resistance between " + testLoc + " and " + trFemale
             // console.log("value is more");
     }
     if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
+        splitFclass = "good"
         splitFAnswer = "Good Value"
             // console.log("good value");
             // alert("Good Value")
     }
     if (canHvInCorrected < canVoltHighRangeMin) {
+        canHighClass = "bad"
         canHighAnswer = "Value is less"
             // console.log("value is less");
     }
     if (canHvInCorrected > canVoltHighRangeMax) {
+        canHighClass = "bad"
         canHighAnswer = "Value is more"
             // console.log("value is more");
     }
     if (canHvInCorrected >= canVoltHighRangeMin && canHvInCorrected <= canVoltHighRangeMax) {
+        canHighClass = "good"
         canHighAnswer = "Good Value"
             // console.log("good value");
             // alert("Good Value")
     }
     if (canLvInCorrected < canVoltLowRangeMin) {
+        canLowClass = "bad"
         canLowAnswer = "Value is less"
             // console.log("value is less");
     }
     if (canLvInCorrected > canVoltLowRangeMax) {
+        canLowClass = "bad"
         canLowAnswer = "Value is more"
             // console.log("value is more");
     }
     if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
+        canLowClass = "good"
         canLowAnswer = "Good Value"
             // console.log("good value");
             // alert("Good Value")
     }
     if (canGroundCorrected < canGroundRange) {
+        canGroundClass = "bad"
         canGroundAnswer = "Inspect for a short to Ground"
             // console.log("value is less");
     }
     if (canGroundCorrected >= canGroundRange) {
+        canGroundClass = "good"
         canGroundAnswer = "Good Value"
             // console.log("value is more");
     }
 
-    var imageHide = $("#modelImg");
-    imageHide.attr('style', 'display:none;');
-    $("#modelImg").append(imageHide);
+
 
     var heading = $('<h1>').html('Results <hr>');
     heading.attr('class', 'mb-4');
-    var dataInput = $("<p>").html('Total Resistance: ' + totResAnswer);
-    var dataInput2 = $("<p>").html('Split Resistance (M): ' + splitMAnswer);
-    var dataInput3 = $("<p>").html('Split Resistance (F): ' + splitFAnswer);
-    var dataInput4 = $("<p>").html('CAN High Voltage: ' + canHighAnswer);
-    var dataInput5 = $("<p>").html('CAN Low Voltage: ' + canLowAnswer);
-    var dataInput6 = $("<p>").html('CAN Resistance to Ground: ' + canGroundAnswer);
-    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6);
+    var dataInput = $("<p>").html("Total Resistance: <span class=" + totResClass + ">" + totResAnswer + "</span");
+    var dataInput2 = $("<p>").html("Split Resistance (M): <span class=" + splitMclass + ">" + splitMAnswer + "</span>");
+    var dataInput3 = $("<p>").html("Split Resistance (F):  <span class=" + splitFclass + ">" + splitFAnswer + "</span>");
+    var dataInput4 = $("<p>").html("CAN High Voltage:  <span class=" + canHighClass + ">" + canHighAnswer + "</span>");
+    var dataInput5 = $("<p>").html("CAN Low Voltage: <span class=" + canLowClass + ">" + canLowAnswer + "</span>");
+    var dataInput6 = $("<p>").html("CAN Resistance to Ground: <span class=" + canGroundClass + ">" + canGroundAnswer + "</span>");
 
+
+    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6);
     // alert("Total Resistance: " + totResAnswer + "\n" +
     //     "Split Resistance (Male): " + splitMAnswer + "\n" +
     //     "Split Resistance (Female): " + splitFAnswer + "\n" +
@@ -214,14 +271,14 @@ $("#canHvIn").blur(function() {
     this.value = ((parseInt(this.value) * .01).toFixed(2));
 });
 $("#canLvIn").blur(function() {
-    this.value = ((parseFloat(this.value) * .01).toFixed(2));
+    this.value = ((parseInt(this.value) * .01).toFixed(2));
 });
 $("#totResIn").blur(function() {
-    this.value = ((parseFloat(this.value) * .10).toFixed(1));
+    this.value = ((parseInt(this.value) * .10).toFixed(1));
 });
 $("#splitMin").blur(function() {
-    this.value = ((parseFloat(this.value) * .10).toFixed(1));
+    this.value = ((parseInt(this.value) * .10).toFixed(1));
 });
 $("#splitFin").blur(function() {
-    this.value = ((parseFloat(this.value) * .10).toFixed(1));
+    this.value = ((parseInt(this.value) * .10).toFixed(1));
 });
