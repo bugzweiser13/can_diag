@@ -136,20 +136,26 @@ $("#submit").on('click', function() {
 
     // total resistance validation
     if (calcDiff < goNoGo) {
+        $('#totResIn').attr('style', 'color:red; font-style: italic;');
         totResClass = "bad";
         totResAnswer = "Invalid Value Inputed";
+        $('#splitMin').attr('style', 'color:red; font-style: italic;');
         splitMclass = "bad";
         splitMAnswer = "Invalid Value Inputed";
+        $('#splitFin').attr('style', 'color:red; font-style: italic;');
         splitFclass = "bad";
         splitFAnswer = "Invalid Value Inputed";
         // console.log('less');
 
     }
     if (calcDiff > goNoGo) {
+        $('#totResIn').attr('style', 'color:red; font-style: italic;');
         totResClass = "bad";
         totResAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        $('#splitMin').attr('style', 'color:red; font-style: italic;');
         splitMclass = "bad";
         splitMAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        $('#splitFin').attr('style', 'color:red; font-style: italic;');
         splitFclass = "bad";
         splitFAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
         // console.log('more');
@@ -163,6 +169,7 @@ $("#submit").on('click', function() {
         }
         if (totResCorrected > totalCanRangeMax) {
             // totResAnswer = "Value is more"
+            $('#totResIn').attr('style', 'color:red; font-style: italic;');
             totResClass = "bad";
             totResAnswer = "Tested value is high, inspect split";
             // console.log("value is more");
@@ -175,12 +182,14 @@ $("#submit").on('click', function() {
         }
 
         if (splitMinCorrected < splitCanRangeMin) {
+            $('#splitMin').attr('style', 'color:red; font-style: italic;');
             splitMclass = "bad";
             splitMAnswer = "Value is less";
             // console.log("value is less");
         }
         if (splitMinCorrected > splitCanRangeMax) {
             // splitMAnswer = "Value is more"
+            $('#splitMin').attr('style', 'color:red; font-style: italic;');
             splitMclass = "bad";
             splitMAnswer = "High Resistance between " + testLoc + " and " + trMale;
             // console.log("value is more");
@@ -192,12 +201,14 @@ $("#submit").on('click', function() {
             // alert("Good Value")
         }
         if (splitFinCorrected < splitCanRangeMin) {
+            $('#splitFin').attr('style', 'color:red; font-style: italic;');
             splitFclass = "bad";
             splitFAnswer = "Value is less";
             // console.log("value is less");
         }
         if (splitFinCorrected > splitCanRangeMax) {
             // splitFAnswer = "Value is more"
+            $('#splitFin').attr('style', 'color:red; font-style: italic;');
             splitFclass = "bad";
             splitFAnswer = "High Resistance between " + testLoc + " and " + trFemale;
             // console.log("value is more");
@@ -210,11 +221,13 @@ $("#submit").on('click', function() {
         }
     }
     if (canHvInCorrected < canVoltHighRangeMin) {
+        $('#canHvIn').attr('style', 'color:red; font-style: italic;');
         canHighClass = "bad";
         canHighAnswer = "Value is less";
         // console.log("value is less");
     }
     if (canHvInCorrected > canVoltHighRangeMax) {
+        $('#canHvIn').attr('style', 'color:red; font-style: italic;');
         canHighClass = "bad";
         canHighAnswer = "Value is more";
         // console.log("value is more");
@@ -226,11 +239,13 @@ $("#submit").on('click', function() {
         // alert("Good Value")
     }
     if (canLvInCorrected < canVoltLowRangeMin) {
+        $('#canLvIn').attr('style', 'color:red; font-style: italic;');
         canLowClass = "bad";
         canLowAnswer = "Value is less";
         // console.log("value is less");
     }
     if (canLvInCorrected > canVoltLowRangeMax) {
+        $('#canLvIn').attr('style', 'color:red; font-style: italic;');
         canLowClass = "bad";
         canLowAnswer = "Value is more";
         // console.log("value is more");
@@ -242,6 +257,7 @@ $("#submit").on('click', function() {
         // alert("Good Value")
     }
     if (canGroundCorrected < canGroundRange) {
+        $('#canGround').attr('style', 'color:red; font-style: italic;');
         canGroundClass = "bad";
         canGroundAnswer = "Inspect for a short to Ground";
         // console.log("value is less");
