@@ -86,7 +86,7 @@ $('.canInput').on('click focusin', function() {
 // $("#canL").text(canVl);
 
 
-//disable sumbit button until all field are inputed
+//disable sumbit button until all fields are inputed
 $("input[type=submit]").attr("disabled", "disabled");
 $('#submit').attr('class', 'btn btn-secondary btn-sm ml-2');
 
@@ -116,9 +116,6 @@ $('.canInput').bind('keyup', function() {
 // measurement comparison upon submit
 $("#submit").on('click', function() {
 
-
-
-
     $("#submit").attr('style', 'display: none;');
     $("#inputForm :input").prop("disabled", true);
     $("#reload").attr("style", "display:block;");
@@ -141,13 +138,15 @@ $("#submit").on('click', function() {
     canGroundCorrectedH = Number(canGroundInH).toFixed(2);
     canGroundCorrectedL = Number(canGroundInL).toFixed(2);
 
-    //debugging
+    // debugging
     // console.log("total res in: " + totResIn +
     //     " splitM in: " + splitMin +
     //     " splitF in: " + splitFin +
     //     " can v H:  " + canHvIn +
     //     " can v L:  " + canLvIn);
 
+    // hide model display to show results upon
+    // submit button press
     var imageHide = $("#modelImg");
     imageHide.attr('style', 'display:none;');
     $("#modelImg").append(imageHide);
@@ -157,16 +156,21 @@ $("#submit").on('click', function() {
     var resAdd = parseInt(splitMinCorrected) + parseInt(splitFinCorrected);
     var result = (resMult / resAdd).toFixed(2)
 
+    // difference range between calculated 
+    // total resistance and user inputed
     var goNoGo = 1;
     var goNoGoRangeMin = -1;
     var goNoGoRangeMax = 1;
 
-    console.log('Inputed: ' + totResCorrected);
-    console.log('Calculation: ' + result);
+    //debugging
+    // console.log('Inputed: ' + totResCorrected);
+    // console.log('Calculation: ' + result);
 
+    // differential calculation
     var calcDiff = totResCorrected - result;
 
-    console.log('value: ' + calcDiff);
+    //debugging
+    // console.log('value: ' + calcDiff);
 
     //
     // data comparison
@@ -175,26 +179,26 @@ $("#submit").on('click', function() {
     if (calcDiff < goNoGo) {
         $('#totResIn').attr('style', 'color:red; font-style: italic;');
         totResClass = "bad";
-        totResAnswer = "Invalid Value Inputed";
+        totResAnswer = "Recheck Value Inputed";
         $('#splitMin').attr('style', 'color:red; font-style: italic;');
         splitMclass = "bad";
-        splitMAnswer = "Invalid Value Inputed";
+        splitMAnswer = "Recheck Value Inputed";
         $('#splitFin').attr('style', 'color:red; font-style: italic;');
         splitFclass = "bad";
-        splitFAnswer = "Invalid Value Inputed";
+        splitFAnswer = "Recheck Value Inputed";
         // console.log('less');
 
     }
     if (calcDiff > goNoGo) {
         $('#totResIn').attr('style', 'color:red; font-style: italic;');
         totResClass = "bad";
-        totResAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        totResAnswer = "Recheck Value Inputed / High Ω at " + testLoc;
         $('#splitMin').attr('style', 'color:red; font-style: italic;');
         splitMclass = "bad";
-        splitMAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        splitMAnswer = "Recheck Value Inputed"; // High Ω at " + testLoc;
         $('#splitFin').attr('style', 'color:red; font-style: italic;');
         splitFclass = "bad";
-        splitFAnswer = "Invalid Value Inputed / High Ω at " + testLoc;
+        splitFAnswer = "Recheck Value Inputed"; // High Ω at " + testLoc;
         // console.log('more');
 
     }
@@ -264,13 +268,13 @@ $("#submit").on('click', function() {
     if (canHvInCorrected < canVoltHighRangeMin) {
         $('#canHvIn').attr('style', 'color:red; font-style: italic;');
         canHighClass = "bad";
-        canHighAnswer = "Value is less";
+        canHighAnswer = "Check for Short To Ground High";
         // console.log("value is less");
     }
     if (canHvInCorrected > canVoltHighRangeMax) {
         $('#canHvIn').attr('style', 'color:red; font-style: italic;');
         canHighClass = "bad";
-        canHighAnswer = "Value is more";
+        canHighAnswer = "Check for Short To Ground Low";
         // console.log("value is more");
     }
     if (canHvInCorrected >= canVoltHighRangeMin && canHvInCorrected <= canVoltHighRangeMax) {
@@ -282,13 +286,13 @@ $("#submit").on('click', function() {
     if (canLvInCorrected < canVoltLowRangeMin) {
         $('#canLvIn').attr('style', 'color:red; font-style: italic;');
         canLowClass = "bad";
-        canLowAnswer = "Value is less";
+        canLowAnswer = "Check for Short To Ground Low";
         // console.log("value is less");
     }
     if (canLvInCorrected > canVoltLowRangeMax) {
         $('#canLvIn').attr('style', 'color:red; font-style: italic;');
         canLowClass = "bad";
-        canLowAnswer = "Value is more";
+        canLowAnswer = "Check for Short To Ground High";
         // console.log("value is more");
     }
     if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
@@ -345,9 +349,10 @@ $("#submit").on('click', function() {
         canLowAnswer = "CAN High / Low Short Together";
     }
 
+
     if (canLvInCorrected >= canVoltGroundMin && canLvInCorrected <= canVoltGroundMax &&
         canHvInCorrected >= canVoltGroundMin && canHvInCorrected <= canVoltGroundMax &&
-        canGroundHCorrected < canGroundRange && canGroundLCorrected < canGroundRange) {
+        canGroundCorrectedH < canGroundRange && canGroundCorrectedL < canGroundRange) {
         canHighClass = "bad";
         canLowClass = "bad";
         canGroundClassH = "bad"
@@ -358,11 +363,7 @@ $("#submit").on('click', function() {
         canGroundAnswerL = "Inspect for a short to Ground";
     }
 
-    console.log('can ground high: ' + canGroundAnswerH);
-    console.log('can ground low: ' + canGroundAnswerL);
-
-
-
+    //results shown
     var heading = $('<h1>').html('Results <hr>');
     heading.attr('class', 'mb-4');
     var dataInput = $("<p>").html("Total Resistance: <span class=" + totResClass + ">" + totResAnswer + "</span");
