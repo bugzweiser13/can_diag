@@ -50,6 +50,12 @@
         border: 1px solid black;
     }
     
+    #model_title {
+        margin-left: 350px;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    
     #model {
         color: red;
         font-weight: bolder;
@@ -69,13 +75,15 @@
         background: white;
         border-radius: 5px;
     }
-    /* #data {
-        text-align: center;
-        width: 461px;
-        height: 340px;
-        background: white;
-        border-radius: 5px;
-    } */
+    
+    #canGroundH,
+    #canGroundL {
+        width: 90px;
+    }
+    
+    #canGroundH {
+        float: left;
+    }
     
     .bad {
         color: red;

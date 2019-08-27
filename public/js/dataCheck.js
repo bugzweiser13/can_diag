@@ -53,6 +53,10 @@ var canVoltLowRangeMin = 2.1;
 var canVoltLowRangeMax = 2.3;
 var canVoltHighRangeMin = 2.7;
 var canVoltHighRangeMax = 2.9;
+var canVoltShortMin = 2.0;
+var canVoltShortMax = 3.0;
+var canVoltGroundMin = 0;
+var canVoltGroundMax = 1.0;
 var canGroundRange = 700;
 
 // image load
@@ -81,8 +85,39 @@ $('.canInput').on('click focusin', function() {
 // $("#canH").text(canVh);
 // $("#canL").text(canVl);
 
+
+//disable sumbit button until all field are inputed
+$("input[type=submit]").attr("disabled", "disabled");
+$('#submit').attr('class', 'btn btn-secondary btn-sm ml-2');
+
+$('.canInput').bind('keyup', function() {
+    var totResInTest = $("#totResIn");
+    var splitMinTest = $("#splitMin");
+    var splitFinTest = $("#splitFin");
+    var canHvInTest = $("#canHvIn");
+    var canLvInTest = $("#canLvIn");
+    var canGroundHTest = $("#canGroundH");
+    var canGroundLTest = $("#canGroundL")
+
+    if (totResInTest.val().length > 0 && splitMinTest.val().length > 0 &&
+        splitFinTest.val().length > 0 && canHvInTest.val().length > 0 &&
+        canLvInTest.val().length > 0 && canGroundHTest.val().length > 0 &&
+        canGroundLTest.val().length) {
+        $("input[type=submit]").removeAttr("disabled");
+        $('#submit').attr('class', 'btn btn-info btn-sm ml-2');
+    } else {
+        $("input[type=submit]").attr("disabled", "disabled");
+        $('#submit').attr('class', 'btn btn-secondary btn-sm ml-2');
+    }
+
+});
+
+
 // measurement comparison upon submit
 $("#submit").on('click', function() {
+
+
+
 
     $("#submit").attr('style', 'display: none;');
     $("#inputForm :input").prop("disabled", true);
@@ -94,7 +129,8 @@ $("#submit").on('click', function() {
     var splitFin = $('#splitFin').val().trim();
     var canHvIn = $('#canHvIn').val().trim();
     var canLvIn = $('#canLvIn').val().trim();
-    var canGroundIn = $('#canGround').val().trim();
+    var canGroundInH = $('#canGroundH').val().trim();
+    var canGroundInL = $('#canGroundL').val().trim();
 
     // inputted value correction
     totResCorrected = Number(totResIn).toFixed(1);
@@ -102,7 +138,8 @@ $("#submit").on('click', function() {
     splitFinCorrected = parseInt(splitFin).toFixed(2);
     canHvInCorrected = Number(canHvIn).toFixed(2);
     canLvInCorrected = Number(canLvIn).toFixed(2);
-    canGroundCorrected = Number(canGroundIn).toFixed(2);
+    canGroundCorrectedH = Number(canGroundInH).toFixed(2);
+    canGroundCorrectedL = Number(canGroundInL).toFixed(2);
 
     //debugging
     // console.log("total res in: " + totResIn +
@@ -165,7 +202,7 @@ $("#submit").on('click', function() {
 
         if (totResCorrected < totalCanRangeMin) {
             totResClass = "bad";
-            totResAnswer = "Value is less";
+            totResAnswer = "Check For Short Between CAN High / Low";
         }
         if (totResCorrected > totalCanRangeMax) {
             // totResAnswer = "Value is more"
@@ -175,6 +212,7 @@ $("#submit").on('click', function() {
             // console.log("value is more");
         }
         if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
+            $('#totResIn').attr('style', 'none');
             totResClass = "good";
             totResAnswer = "Good Value";
             // console.log("good value");
@@ -184,7 +222,7 @@ $("#submit").on('click', function() {
         if (splitMinCorrected < splitCanRangeMin) {
             $('#splitMin').attr('style', 'color:red; font-style: italic;');
             splitMclass = "bad";
-            splitMAnswer = "Value is less";
+            splitMAnswer = "Check For Short Between CAN High / Low";
             // console.log("value is less");
         }
         if (splitMinCorrected > splitCanRangeMax) {
@@ -195,6 +233,7 @@ $("#submit").on('click', function() {
             // console.log("value is more");
         }
         if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
+            $('#splitMin').attr('style', 'none');
             splitMclass = "good";
             splitMAnswer = "Good Value";
             // console.log("good value");
@@ -203,7 +242,7 @@ $("#submit").on('click', function() {
         if (splitFinCorrected < splitCanRangeMin) {
             $('#splitFin').attr('style', 'color:red; font-style: italic;');
             splitFclass = "bad";
-            splitFAnswer = "Value is less";
+            splitFAnswer = "Check For Short Between CAN High / Low";
             // console.log("value is less");
         }
         if (splitFinCorrected > splitCanRangeMax) {
@@ -214,12 +253,14 @@ $("#submit").on('click', function() {
             // console.log("value is more");
         }
         if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
+            $('#splitFin').attr('style', 'none');
             splitFclass = "good";
             splitFAnswer = "Good Value";
             // console.log("good value");
             // alert("Good Value")
         }
     }
+
     if (canHvInCorrected < canVoltHighRangeMin) {
         $('#canHvIn').attr('style', 'color:red; font-style: italic;');
         canHighClass = "bad";
@@ -256,17 +297,71 @@ $("#submit").on('click', function() {
         // console.log("good value");
         // alert("Good Value")
     }
-    if (canGroundCorrected < canGroundRange) {
+
+    if (canGroundCorrectedH < canGroundRange) {
         $('#canGround').attr('style', 'color:red; font-style: italic;');
-        canGroundClass = "bad";
-        canGroundAnswer = "Inspect for a short to Ground";
+        canGroundClassH = "bad";
+        canGroundAnswerH = "Inspect for a short to Ground";
         // console.log("value is less");
     }
-    if (canGroundCorrected >= canGroundRange) {
-        canGroundClass = "good";
-        canGroundAnswer = "Good Value";
+    if (canGroundCorrectedH >= canGroundRange) {
+        canGroundClassH = "good";
+        canGroundAnswerH = "Good Value";
         // console.log("value is more");
     }
+
+    if (canGroundCorrectedL < canGroundRange) {
+        $('#canGround').attr('style', 'color:red; font-style: italic;');
+        canGroundClassL = "bad";
+        canGroundAnswerL = "Inspect for a short to Ground";
+        // console.log("value is less");
+    }
+    if (canGroundCorrectedL >= canGroundRange) {
+        canGroundClassL = "good";
+        canGroundAnswerL = "Good Value";
+        // console.log("value is more");
+    }
+
+    //can shorted to gether checks
+    if (canLvInCorrected >= canVoltShortMin && canLvInCorrected <= canVoltShortMax &&
+        canHvInCorrected >= canVoltShortMin && canHvInCorrected <= canVoltShortMax &&
+        totResCorrected < totalCanRangeMin) {
+        canHighClass = "bad";
+        canLowClass = "bad";
+        canHighAnswer = "CAN High / Low Short Together";
+        canLowAnswer = "CAN High / Low Short Together";
+    }
+
+    if (canLvInCorrected === canHvInCorrected) {
+        totResClass = "bad";
+        splitMclass = "bad";
+        splitFclass = "bad";
+        canHighClass = "bad";
+        canLowClass = "bad";
+        totResAnswer = "Recheck Value Inputed";
+        splitFAnswer = "Recheck Value Inputed";
+        splitMAnswer = "Recheck Value Inputed";
+        canHighAnswer = "CAN High / Low Short Together";
+        canLowAnswer = "CAN High / Low Short Together";
+    }
+
+    if (canLvInCorrected >= canVoltGroundMin && canLvInCorrected <= canVoltGroundMax &&
+        canHvInCorrected >= canVoltGroundMin && canHvInCorrected <= canVoltGroundMax &&
+        canGroundHCorrected < canGroundRange && canGroundLCorrected < canGroundRange) {
+        canHighClass = "bad";
+        canLowClass = "bad";
+        canGroundClassH = "bad"
+        canGroundClassL = "bad"
+        canHighAnswer = "CAN Short Together / Short To Ground";
+        canLowAnswer = "CAN Short Together / Short To Ground";
+        canGroundAnswerH = "Inspect for a short to Ground";
+        canGroundAnswerL = "Inspect for a short to Ground";
+    }
+
+    console.log('can ground high: ' + canGroundAnswerH);
+    console.log('can ground low: ' + canGroundAnswerL);
+
+
 
     var heading = $('<h1>').html('Results <hr>');
     heading.attr('class', 'mb-4');
@@ -275,10 +370,11 @@ $("#submit").on('click', function() {
     var dataInput3 = $("<p>").html("Split Resistance (F):  <span class=" + splitFclass + ">" + splitFAnswer + "</span>");
     var dataInput4 = $("<p>").html("CAN High Voltage:  <span class=" + canHighClass + ">" + canHighAnswer + "</span>");
     var dataInput5 = $("<p>").html("CAN Low Voltage: <span class=" + canLowClass + ">" + canLowAnswer + "</span>");
-    var dataInput6 = $("<p>").html("CAN Resistance to Ground: <span class=" + canGroundClass + ">" + canGroundAnswer + "</span>");
-    var dataInput7 = $("<p>").html("CAN Total Resistance Calculated from Split Input: <span class='calcOutput'>" + result + "</span>");
+    var dataInput6 = $("<p>").html("CAN (H) Resistance to Ground: <span class=" + canGroundClassH + ">" + canGroundAnswerH + "</span>");
+    var dataInput7 = $("<p>").html("CAN (L) Resistance to Ground: <span class=" + canGroundClassL + ">" + canGroundAnswerL + "</span>");
+    var dataInput8 = $("<p>").html("CAN Total Resistance Calculated from Split Inputs: <span class='calcOutput'>" + result + "</span>");
 
-    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6, dataInput7);
+    $("#testSwap").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6, dataInput7, dataInput8);
 
     // alert("Total Resistance: " + totResAnswer + "\n" +
     //     "Split Resistance (Male): " + splitMAnswer + "\n" +
