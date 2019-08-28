@@ -91,6 +91,9 @@ function dataPopulate(dataOut) {
 
         // clear network dropdown on change
         // clear data images when vehicle changed
+        $("#test_loc").empty();
+        $("#can_H_p").empty();
+        $("#can_L_p").empty();
         $("#net_sel").empty();
         $("#myTable").empty();
         $("#trM").empty();
