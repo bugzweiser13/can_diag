@@ -36,7 +36,6 @@ var modelImg = params['modelImg'];
 // console.log(modelImg);
 // console.log(trMale);
 
-
 // change strings to int as needed
 totRes = Number(totResP).toFixed(2);
 splitM = Number(splitMP).toFixed(2);
@@ -46,12 +45,12 @@ canVl = Number(canVlP).toFixed(2);
 
 // specification range variables
 var totalCanRangeMin = 58;
-var totalCanRangeMax = 61;
+var totalCanRangeMax = 62;
 var splitCanRangeMin = 110;
 var splitCanRangeMax = 124;
 var canVoltLowRangeMin = 2.1;
-var canVoltLowRangeMax = 2.3;
-var canVoltHighRangeMin = 2.7;
+var canVoltLowRangeMax = 2.45;
+var canVoltHighRangeMin = 2.55;
 var canVoltHighRangeMax = 2.9;
 var canVoltShortMin = 2.0;
 var canVoltShortMax = 3.0;
@@ -111,7 +110,6 @@ $('.canInput').bind('keyup', function() {
     }
 
 });
-
 
 // measurement comparison upon submit
 $("#submit").on('click', function() {
