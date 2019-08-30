@@ -90,7 +90,7 @@ function dataPopulate(dataOut) {
         var clearLay = 'images/layout_fill.jpg'
 
         // clear network dropdown on change
-        // clear data images when vehicle changed
+        // clear data boxes / cards when vehicle changed
         $("#test_loc").empty();
         $("#can_H_p").empty();
         $("#can_L_p").empty();
@@ -144,7 +144,7 @@ function dataPopulate(dataOut) {
         $("#velSelImg").attr('alt', dataOut[vehInput].canData[0].canVolts[0].canMedia[0].vehicle);
         $("#vehSel").text(dataOut[vehInput].model_name);
 
-        // network dropdown population
+        // network select dropdown population
         $("#net_sel").html("<option style='display:none;' selected>Select Network</option>");
         for (j = 0; j < dataOut[vehInput].canData.length; j++) {
 
