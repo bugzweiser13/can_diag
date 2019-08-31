@@ -115,6 +115,7 @@ body {
 
 @media only screen and (min-width: 1006px) and (max-width: 1800px) {
     #veh,
+    #vehSel,
     #known,
     #net_id {
         font-size: 18px;

@@ -465,7 +465,7 @@ function dataPopulate(dataOut) {
             testLocXfer;
 
         window.open(myUrl, '_blank',
-            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=900,height=580')
+            'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=900,height=595')
         return false;
     });
 

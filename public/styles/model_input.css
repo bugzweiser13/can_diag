@@ -62,7 +62,12 @@
         font-size: 25px;
     }
     
-    .canInput {
+    label {
+        font-size: 13px;
+    }
+    
+    .canInput,
+    .knownVal {
         border-radius: 5px;
         text-align: center;
         width: 190px;
@@ -76,14 +81,25 @@
         border-radius: 5px;
     }
     
-    #canGroundH,
-    #canGroundL {
-        width: 90px;
+    .knownVal {
+        color: green;
+        font-weight: bolder;
+        font-style: italic;
     }
     
-    #canGroundH {
-        float: left;
+    #totResIn,
+    #splitMin,
+    #splitFin,
+    #canHvIn,
+    #canLvIn,
+    #canGroundH,
+    #canGroundL,
+    .knownVal {
+        width: 80px;
     }
+    /* #canGroundH {
+        float: left;
+    } */
     
     .bad {
         color: red;
@@ -98,4 +114,10 @@
     
     .calcOutput {
         font-weight: bolder;
+    }
+    
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }

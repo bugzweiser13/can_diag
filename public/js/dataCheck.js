@@ -43,6 +43,12 @@ splitF = Number(splitFP).toFixed(2);
 canVh = Number(canVhP).toFixed(2);
 canVl = Number(canVlP).toFixed(2);
 
+//known good html push
+$('#knownTot').attr('value', totRes);
+$('#knownSplitM').attr('value', splitM);
+$('#knownSplitF').attr('value', splitF);
+$('#knownCanH').attr('value', canVh);
+$('#knownCanL').attr('value', canVl);
 
 // specification as an object
 // var canSpecs = [
@@ -77,8 +83,6 @@ canVl = Number(canVlP).toFixed(2);
 // ];
 
 var buttonOn = false;
-var canHighState = false;
-var canLowState = false;
 
 // specification range variables
 var totalCanRangeMin = 58;
@@ -124,7 +128,6 @@ $('.canInput').on('click focusin', function() {
 
 
 //disable sumbit button until all fields are inputed
-
 $("input[type=submit]").attr("disabled", "disabled");
 $('#submit').attr('class', 'btn btn-secondary btn-sm ml-2');
 
@@ -136,8 +139,6 @@ $('.canInput').bind('keyup', function() {
     var canLvInTest = $("#canLvIn");
     var canGroundHTest = $("#canGroundH");
     var canGroundLTest = $("#canGroundL")
-
-
 
     if (totResInTest.val().length > 0 && splitMinTest.val().length > 0 &&
         splitFinTest.val().length > 0 && canHvInTest.val().length > 0 &&
@@ -152,6 +153,13 @@ $('.canInput').bind('keyup', function() {
 
 });
 
+$(".knownVal").prop("disabled", true);
+
+//limit number input decimal places to two
+// $(':input[type="number"]').change(function() {
+//     this.value = parseFloat(this.value).toFixed(2);
+// });
+
 // measurement comparison upon submit
 $("#submit").on('click', function() {
 
@@ -160,6 +168,7 @@ $("#submit").on('click', function() {
     $("#inputForm :input").prop("disabled", true);
     // $("#recheck").attr("style", "display:block;");
     $("#reload").attr("style", "display:block;");
+    $(".knownVal").prop("disabled", true);
 
     if (buttonOn === true) {
         $("#recheck").attr("style", "display:none;");
@@ -431,7 +440,7 @@ $("#submit").on('click', function() {
             }
 
             if (canGroundCorrectedH < canGroundRange) {
-                $('#canGround').attr('style', 'color:red; font-style: italic;');
+                $('#canGroundH').attr('style', 'color:red; font-style: italic;');
                 canGroundClassH = "bad";
                 canGroundAnswerH = "Inspect for a short to Ground";
                 // console.log("can H short to ground");
@@ -443,7 +452,7 @@ $("#submit").on('click', function() {
             }
 
             if (canGroundCorrectedL < canGroundRange) {
-                $('#canGround').attr('style', 'color:red; font-style: italic;');
+                $('#canGroundL').attr('style', 'color:red; font-style: italic;');
                 canGroundClassL = "bad";
                 canGroundAnswerL = "Inspect for a short to Ground";
                 // console.log("can L short to ground");
@@ -596,11 +605,11 @@ $("#submit").on('click', function() {
         // heading.attr('class', 'mb-4');
         var error = $("<h3>");
         error.attr('style', 'color:red; font-style: italic;');
-        error.html('Error in Inputs<br>a Value is Not a Number<hr>');
+        error.html('Error Within Inputs<br>a Value is Not a Number<hr>');
         var space = $('<p>');
         var value = $("<h3>");
         value.attr('style', 'color:red; font-style: italic;');
-        value.html('Press Correct Inputs');
+        value.html('Press Correct Inputs<br>To Enter Correct Values');
         $("#results").append(heading, error, space, value);
         $("#inputForm :input").attr('style', 'color:red; font-style: italic;');
         recheckButton();
@@ -615,7 +624,7 @@ $("#submit").on('click', function() {
         // heading.attr('class', 'mb-4');
         var error = $("<h3>");
         error.attr('style', 'color:red; font-style: italic;');
-        error.html('Error in Inputs<br>Inputed Total Resistance Invalid<hr>');
+        error.html('Error in Input<br>Inputed Total Resistance Invalid<hr>');
         var space = $('<p>');
         var value = $("<h3>");
         value.attr('style', 'color:red; font-style: italic;');
@@ -660,6 +669,7 @@ $("#submit").on('click', function() {
         $("#recheck").on('click', function() {
             $("#results").empty();
             $("#inputForm :input").prop("disabled", false);
+            $(".knownVal").prop("disabled", true);
             $("#recheck").attr("style", "display: none;");
             $("#reload").attr("style", "display: none;");
             $('#results').attr('style', 'display: none;')
@@ -674,18 +684,18 @@ $("#submit").on('click', function() {
 });
 
 //adding decimals to needed inputs
-$("#canHvIn").blur(function() {
-    this.value = ((parseInt(this.value) * .01).toFixed(2));
-});
-$("#canLvIn").blur(function() {
-    this.value = ((parseInt(this.value) * .01).toFixed(2));
-});
-$("#totResIn").blur(function() {
-    this.value = ((parseInt(this.value) * .10).toFixed(1));
-});
-$("#splitMin").blur(function() {
-    this.value = ((parseInt(this.value) * .10).toFixed(1));
-});
-$("#splitFin").blur(function() {
-    this.value = ((parseInt(this.value) * .10).toFixed(1));
-});
+// $("#canHvIn").blur(function() {
+//     this.value = ((parseInt(this.value) * .01).toFixed(2));
+// });
+// $("#canLvIn").blur(function() {
+//     this.value = ((parseInt(this.value) * .01).toFixed(2));
+// });
+// $("#totResIn").blur(function() {
+//     this.value = ((parseInt(this.value) * .10).toFixed(1));
+// });
+// $("#splitMin").blur(function() {
+//     this.value = ((parseInt(this.value) * .10).toFixed(1));
+// });
+// $("#splitFin").blur(function() {
+//     this.value = ((parseInt(this.value) * .10).toFixed(1));
+// });

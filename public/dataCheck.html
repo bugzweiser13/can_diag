@@ -38,25 +38,31 @@
                 <div class="col-4" id="inputForm">
                     <form>
                         <!-- <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image> -->
-                        <label for="totResIn">Total Resistance: *</label><br>
-                        <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="4" autocomplete="off" placeholder="xxxx" title="Enter Total Resistance Measument Here" required>&nbsp;&Omega;<br>
+                        <label for="totResIn">Total Resistance / Known:  </label><br>
+                        <input type="text" class="canInput" name="totResIn" id="totResIn" maxlength="5" autocomplete="off" placeholder="xxx.xx" title="Enter Total Resistance Measument Here" required>&nbsp;&Omega;
+                        <input type="number" class="knownVal ml-1" id="knownTot">&nbsp;&Omega;<br>
                         <!--<span class="known" id="totRes"></span></label>-->
-                        <label for="splitMin">Split CAN &Omega; (Male):  *</label><br>
-                        <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="6" autocomplete="off" placeholder="xxxxxx" title="Enter Split Male Resistance Measument Here" required>&nbsp;&Omega;<br>
+                        <label for="splitMin">Split CAN &Omega; (Male) / Known:  </label><br>
+                        <input type="text" class="canInput" name="splitMin" id="splitMin" maxlength="6" autocomplete="off" placeholder="xxxxxx" title="Enter Split Male Resistance Measument Here" required>&nbsp;&Omega;
+                        <input type="number" class="knownVal ml-1" id="knownSplitM">&nbsp;&Omega;<br>
                         <!-- <span class="known" id="splitM"></span> </label> -->
-                        <label for="splitFin">Split CAN &Omega; (Female):  *</label><br>
-                        <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="6" autocomplete="off" placeholder="xxxxxx" title="Enter Split Female Resistance Measument Here" required>&nbsp;&Omega;<br>
+                        <label for="splitFin">Split CAN &Omega; (Female) / Known:  </label><br>
+                        <input type="text" class="canInput" name="splitFin" id="splitFin" maxlength="6" autocomplete="off" placeholder="xxxxxx" title="Enter Split Female Resistance Measument Here" required>&nbsp;&Omega;
+                        <input type="number" class="knownVal ml-1" id="knownSplitF">&nbsp;&Omega;<br>
                         <!-- <span class="known" id="splitF"></span> </label> -->
-                        <label for="canHvIn">CAN Voltage (High):  *</label><br>
-                        <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="3" autocomplete="off" placeholder="xxx" title="Enter CAN High Voltage Measument Here" required>&nbsp;v<br>
+                        <label for="canHvIn">CAN Voltage (High) / Known:  </label><br>
+                        <input type="text" class="canInput" name="canHvIn" id="canHvIn" maxlength="4" autocomplete="off" placeholder="x.xx" title="Enter CAN High Voltage Measument Here" required>&nbsp;v
+                        <input type="number" class="knownVal ml-2" id="knownCanH">&nbsp;v<br>
                         <!-- <span class="known" id="canH"></span> </label> -->
-                        <label for="canLvIn">CAN Voltage (Low):  *</label><br>
-                        <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="3" autocomplete="off" placeholder="xxx" title="Enter CAN Low Voltage Measument Here" required>&nbsp;v<br>
+                        <label for="canLvIn">CAN Voltage (Low) Known:  </label><br>
+                        <input type="text" class="canInput" name="canLvIn" id="canLvIn" maxlength="4" autocomplete="off" placeholder="x.xx" title="Enter CAN Low Voltage Measument Here" required>&nbsp;v
+                        <input type="number" class="knownVal ml-2" id="knownCanL">&nbsp;v<br>
                         <label for="canGroundH">CAN &Omega; to Ground (H / L):  </label><br>
-                        <input type="text" class="canInput" name="canGround" id="canGroundH" maxlength="5" autocomplete="off" placeholder="xxxxx" title="Enter CAN High To Ground Measument Here" required>
-                        <input type="text" class="canInput ml-2" name="canGround" id="canGroundL" maxlength="5" autocomplete="off" placeholder="xxxxx" title="Enter CAN Low To Ground Measument Here" required>&nbsp;&Omega;<br>
+                        <input type="text" class="canInput" name="canGround" id="canGroundH" maxlength="4" autocomplete="off" placeholder="xxxxx" title="Enter CAN High To Ground Measument Here" required>&nbsp;&Omega;
+                        <input type="text" class="knownVal ml-1" value=">700">&nbsp;&Omega;<br>
+                        <input type="text" class="canInput mt-1" name="canGround" id="canGroundL" maxlength="4" autocomplete="off" placeholder="xxxxx" title="Enter CAN Low To Ground Measument Here" required>&nbsp;&Omega;<br>
+                        <p class="ml-2" style="font-size: 10px; float: left; font-style: italic;">**Enter 9999 for OL.</p>
                         <!-- <span class="known" id="canL"></span> </label> -->
-                        <br>
                     </form>
                 </div>
                 <div class="col-8" id="testSwap">
@@ -65,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <p class="ml-2" style="font-size: 12px; float: left; font-style: italic;">*Enter Whole Numbers, Decimals will self populate.</p>
+        <!-- <p class="ml-2" style="font-size: 12px; float: left; font-style: italic;">*Enter Whole Numbers, Decimals will self populate.</p> -->
         <div class="row mt-2" id="btn">
             <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
             <button class="btn btn-info btn-sm ml-2" id="recheck" style="display:none;">Correct Inputs</button>
