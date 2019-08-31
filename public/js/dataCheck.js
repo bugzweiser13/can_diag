@@ -43,7 +43,16 @@ splitF = Number(splitFP).toFixed(2);
 canVh = Number(canVhP).toFixed(2);
 canVl = Number(canVlP).toFixed(2);
 
-//known good html push
+// image load
+var modelShow = $("#modelImg");
+modelShow.attr('src', modelImg);
+modelShow.attr('alt', 'modelImg.jpg');
+$("#modelImg").append(modelShow);
+
+// selected model html push
+$("#model").text(model);
+
+//known good values html push
 $('#knownTot').attr('value', totRes);
 $('#knownSplitM').attr('value', splitM);
 $('#knownSplitF').attr('value', splitF);
@@ -100,14 +109,7 @@ var canVoltGroundMax = 1.0;
 var canGroundRange = 700;
 
 
-// image load
-var modelShow = $("#modelImg");
-modelShow.attr('src', modelImg);
-modelShow.attr('alt', 'modelImg.jpg');
-$("#modelImg").append(modelShow);
 
-// selected model html push
-$("#model").text(model);
 
 // input box width based on placeholders
 // $("input[placeholder]").each(function() {
@@ -118,14 +120,6 @@ $("#model").text(model);
 $('.canInput').on('click focusin', function() {
     this.value = '';
 });
-
-// param (known good) html push (if needed)
-// $("#totRes").text(totRes);
-// $("#splitM").text(splitM);
-// $("#splitF").text(splitF);
-// $("#canH").text(canVh);
-// $("#canL").text(canVl);
-
 
 //disable sumbit button until all fields are inputed
 $("input[type=submit]").attr("disabled", "disabled");
