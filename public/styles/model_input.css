@@ -3,7 +3,7 @@
     }
     
     label {
-        font-size: 17px;
+        font-size: 14px;
     }
     
     .input,
@@ -25,7 +25,12 @@
         text-transform: capitalize;
     }
     
+    #modelImg {
+        margin-top: 120px;
+    }
+    
     #btn {
+        margin-right: 15px;
         float: right;
     }
     
@@ -40,46 +45,44 @@
     }
     
     #inp {
+        width: 98%;
+        margin-left: 5px;
         border: 1px solid black;
         border-radius: 5px;
-        padding: 10px;
-    }
-    
-    #known {
-        float: left;
-        border: 1px solid black;
+        padding: 5px;
     }
     
     #model_title {
-        margin-left: 345px;
+        margin-left: 330px;
         font-weight: bolder;
-        font-size: 25px;
+        font-size: 22px;
     }
     
     #model {
         color: red;
         font-weight: bolder;
-        font-size: 25px;
-    }
-    
-    label {
-        font-size: 13px;
+        font-size: 22px;
     }
     
     .canInput,
     .knownVal {
         border-radius: 5px;
         text-align: center;
-        width: 190px;
+        /* width: 190px; */
     }
     
     #testSwap {
+        border: solid 1px black;
         text-align: center;
-        width: 480px;
-        height: 400px;
+        width: 600px;
+        /* height: 400px; */
         background: white;
         border-radius: 5px;
     }
+    /*     
+    #results {
+        width: 120%;
+    } */
     
     .knownVal {
         color: green;
@@ -95,7 +98,7 @@
     #canGroundH,
     #canGroundL,
     .knownVal {
-        width: 80px;
+        width: 150px;
     }
     /* #canGroundH {
         float: left;
@@ -104,6 +107,7 @@
     .bad {
         color: red;
         font-style: italic;
+        font-weight: bolder;
     }
     
     .good {
