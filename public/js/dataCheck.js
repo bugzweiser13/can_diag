@@ -74,9 +74,7 @@ var canGroundRange = 700;
 // input box manipulations
 
 // clear input box when on focus
-$('.canInput').on('click focusin', function() {
-    this.value = '';
-});
+$("input:text").focus(function() { $(this).val("") });
 
 //disable sumbit button until all user input fields are filled
 $("input[type=submit]").attr("disabled", "disabled");
@@ -149,9 +147,9 @@ $("#submit").on('click', function() {
     // test for faults found during logic / value checks
     var totalTest = totResIn > totalCanRangeMax || totResIn < totalCanRangeMin;
     var splitMtest = splitMin > splitCanRangeMax || splitMin < splitCanRangeMin;
-    var splitFtest = splitMin > splitCanRangeMax || splitMin < splitCanRangeMin;
+    var splitFtest = splitFin > splitCanRangeMax || splitFin < splitCanRangeMin;
     var canHtest = canHvIn > canVoltHighRangeMax || canHvIn < canVoltHighRangeMin;
-    var canLtest = canLvIn > canVoltLowRangeMax || canHvIn < canVoltLowRangeMin;
+    var canLtest = canLvIn > canVoltLowRangeMax || canLvIn < canVoltLowRangeMin;
     var groundHtest = canGroundInH < canGroundRange;
     var groundLtest = canGroundInL < canGroundRange;
 
@@ -165,13 +163,13 @@ $("#submit").on('click', function() {
     var groundInDiffL = canGroundInL - canGroundRange;
 
     // debugging
-    // console.log('total res test: ' + totalTest);
-    // console.log('split m diff: ' + splitMtest);
-    // console.log('split f diff: ' + splitFtest);
-    // console.log('can h diff: ' + canHtest);
-    // console.log('can l diff: ' + canLtest);
-    // console.log('ground h: ' + groundHtest);
-    // console.log('ground l: ' + groundLtest);
+    console.log('total res test: ' + totalTest);
+    console.log('split m diff: ' + splitMtest);
+    console.log('split f diff: ' + splitFtest);
+    console.log('can h diff: ' + canHtest);
+    console.log('can l diff: ' + canLtest);
+    console.log('ground h: ' + groundHtest);
+    console.log('ground l: ' + groundLtest);
 
     // console.log('total res diff: ' + totResInDiff);
     // console.log('split m diff: ' + splitMInDiff);
@@ -223,7 +221,7 @@ $("#submit").on('click', function() {
         $('#knownGroundH').attr('style', 'color: green; font-weight: bolder; font-style: italic;');
     }
     if (groundLtest === true) {
-        $('#knownGroundH').attr('style', 'color: red; font-weight: bolder; font-style: italic;');
+        $('#knownGroundL').attr('style', 'color: red; font-weight: bolder; font-style: italic;');
     } else {
         $('#knownGroundL').attr('style', 'color: green; font-weight: bolder; font-style: italic;');
     }
@@ -382,76 +380,68 @@ $("#submit").on('click', function() {
                 splitFAnswer = "Good Value";
                 // console.log("split M good value");
                 // alert("Good Value")
-            } else {
-
-                if (calcDiff > goNoGo && totResCorrected < 100) {
-                    console.log('calDiff >');
-                    splitError();
-                }
-
-                if (calcDiff < goNoGo && voltDiff > 1.0) {
-                    console.log('calcDiff less than goNoGo');
-                    error();
-                }
-
             }
 
             // can voltage check logic
             if (canHvInCorrected < canVoltHighRangeMin) {
-                $('#canHvIn').attr('style', 'color:red; font-style: italic;');
+                $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canHighClass = "bad";
                 canHighAnswer = "Check for Short To Ground High";
                 // console.log("can H v low");
             }
             if (canHvInCorrected > canVoltHighRangeMax) {
-                $('#canHvIn').attr('style', 'color:red; font-style: italic;');
+                $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canHighClass = "bad";
                 canHighAnswer = "Check for Short To Ground Low";
                 // console.log("can H v high");
             }
             if (canHvInCorrected >= canVoltHighRangeMin && canHvInCorrected <= canVoltHighRangeMax) {
+                $('#canHvIn').attr('style', 'none');
                 canHighClass = "good";
                 canHighAnswer = "Good Value";
                 // console.log("can H good value");
                 // alert("Good Value")
             }
             if (canLvInCorrected < canVoltLowRangeMin) {
-                $('#canLvIn').attr('style', 'color:red; font-style: italic;');
+                $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canLowClass = "bad";
                 canLowAnswer = "Check for Short To Ground Low";
                 // console.log("can L v low");
             }
             if (canLvInCorrected > canVoltLowRangeMax) {
-                $('#canLvIn').attr('style', 'color:red; font-style: italic;');
+                $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canLowClass = "bad";
                 canLowAnswer = "Check for Short To Ground High";
                 // console.log("can L low");
             }
             if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
+                $('#canLvIn').attr('style', 'none');
                 canLowClass = "good";
                 canLowAnswer = "Good Value";
                 // console.log("can L good value");
             }
 
             if (canGroundCorrectedH < canGroundRange) {
-                $('#canGroundH').attr('style', 'color:red; font-style: italic;');
+                $('#canGroundH').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canGroundClassH = "bad";
                 canGroundAnswerH = "Inspect for a short to Ground";
                 // console.log("can H short to ground");
             }
             if (canGroundCorrectedH >= canGroundRange) {
+                $('#canGroundH').attr('style', 'none');
                 canGroundClassH = "good";
                 canGroundAnswerH = "Good Value";
                 // console.log("can H good ground");
             }
 
             if (canGroundCorrectedL < canGroundRange) {
-                $('#canGroundL').attr('style', 'color:red; font-style: italic;');
+                $('#canGroundL').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canGroundClassL = "bad";
                 canGroundAnswerL = "Inspect for a short to Ground";
                 // console.log("can L short to ground");
             }
             if (canGroundCorrectedL >= canGroundRange) {
+                $('#canGroundL').attr('style', 'none');
                 canGroundClassL = "good";
                 canGroundAnswerL = "Good Value";
                 // console.log("can L good ground");
@@ -461,8 +451,8 @@ $("#submit").on('click', function() {
             // can circuit shorted together logic
             if (canHvInCorrected - .5 <= canLvInCorrected && canLvInCorrected <= canHvInCorrected + .5 &&
                 totResCorrected < totalCanRangeMin) {
-                $('#canHvIn').attr('style', 'color:red; font-style: italic;');
-                $('#canLvIn').attr('style', 'color:red; font-style: italic;');
+                $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 canHighClass = "bad";
                 canLowClass = "bad";
                 canHighAnswer = "CAN High / Low Short Together";
@@ -514,13 +504,13 @@ $("#submit").on('click', function() {
             // resistance calculation validation error function when total value high
             function splitError() {
                 // console.log('did this function run');
-                $('#totResIn').attr('style', 'color:red; font-style: italic;');
+                $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 totResClass = "bad";
                 totResAnswer = "Varify Value Inputed / High Ω at " + testLoc;
-                $('#splitMin').attr('style', 'color:red; font-style: italic;');
+                $('#splitMin').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 splitMclass = "bad";
                 splitMAnswer = "Varify Value Inputed"; // High Ω at " + testLoc;
-                $('#splitFin').attr('style', 'color:red; font-style: italic;');
+                $('#splitFin').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                 splitFclass = "bad";
                 splitFAnswer = "Varify Value Inputed"; // High Ω at " + testLoc;
                 return false;
@@ -537,9 +527,9 @@ $("#submit").on('click', function() {
             var dataInput5 = $("<p>").html("CAN Low Voltage: <span class=" + canLowClass + ">" + canLowAnswer + "</span>");
             var dataInput6 = $("<p>").html("CAN (H) Resistance to Ground: <span class=" + canGroundClassH + ">" + canGroundAnswerH + "</span>");
             var dataInput7 = $("<p>").html("CAN (L) Resistance to Ground: <span class=" + canGroundClassL + ">" + canGroundAnswerL + "</span>");
-            var dataInput8 = $("<p>").html("CAN Total Resistance Calculated from Split Inputs: <span class='calcOutput'>" + result + "</span>");
+            // var dataInput8 = $("<p>").html("CAN Total Resistance Calculated from Split Inputs: <span class='calcOutput'>" + result + "</span>");
 
-            $("#results").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6, dataInput7, dataInput8);
+            $("#results").append(heading, dataInput, dataInput2, dataInput3, dataInput4, dataInput5, dataInput6, dataInput7);
 
         }
     }
@@ -608,7 +598,49 @@ $("#submit").on('click', function() {
         recheckButton();
         return false;
     }
-    // console.log('button state: ' + buttonOn);
+
+    //enable incorrect value inputs after check function
+    function inputEnable() {
+        console.log('function run?');
+
+        if (totalTest === true) {
+            $("#totResIn").prop("disabled", false);
+        } else {
+            $("#totResIn").prop("disabled", true);
+        }
+        if (splitMtest === true) {
+            $("#splitMin").prop("disabled", false);
+        } else {
+            $("#splitMin").prop("disabled", true);
+        }
+        if (splitFtest === true) {
+            $("#splitFin").prop("disabled", false);
+        } else {
+            $("#splitFin").prop("disabled", true);
+        }
+        if (canHtest === true) {
+            $("#canHvIn").prop("disabled", false);
+        } else {
+            $("#canHvIn").prop("disabled", true);
+        }
+        if (canLtest === true) {
+            $("#canLvIn").prop("disabled", false);
+        } else {
+            $("#canLvIn").prop("disabled", true);
+        }
+        if (groundHtest === true) {
+            $("#canGroundH").prop("disabled", false);
+        } else {
+            $("#canGroundH").prop("disabled", true);
+        }
+        if (groundLtest === true) {
+            $("#canGroundH").prop("disabled", false);
+        } else {
+            $("#canGroundL").prop("disabled", true);
+        }
+    }
+
+
 
     // populate "correct input" button function
     function recheckButton() {
@@ -619,12 +651,13 @@ $("#submit").on('click', function() {
 
         $("#recheck").on('click', function() {
             $("#results").empty();
-            $("#inputForm :input").prop("disabled", false);
+            inputEnable();
+            // $("#inputForm :input").prop("disabled", false);
             $(".knownVal").prop("disabled", true);
             $("#recheck").attr("style", "display: none;");
             $("#reload").attr("style", "display: none;");
-            $('#results').attr('style', 'display: none;')
-            $("#inputForm :input").attr('style', 'none');
+            $('#results').attr('style', 'display: none;');
+            // $("#inputForm :input").attr('style', 'none');
             $("#submit").attr('style', 'display: block;');
             var imageShow = $("#modelImg");
             imageShow.attr('style', 'display:block; width: 100%; border-radius: 5px;');
