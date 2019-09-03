@@ -98,13 +98,13 @@ module.exports = function(app) {
     });
 
 
-    // app.get("/api/genvehlists", function(req, res) {
-    //     db.genvehlist.findAll({}).then(function(dbgenvehlist) {
-    //         res.json(dbgenvehlist);
-    //         console.log("%o", dbgenvehlist);
+    app.get("/api/users", function(req, res) {
+        db.users.findAll({}).then(function(dbusers) {
+            res.json(dbusers);
+            // console.log("%o", dbusers);
 
-    //     });
-    // });
+        });
+    });
 
     // // Create a new example
     // app.post("/api/examples", function(req, res) {

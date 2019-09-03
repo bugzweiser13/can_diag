@@ -3,8 +3,17 @@ var db = require("../models");
 module.exports = function(app) {
     // Load index page
     app.get("/", function(req, res) {
-        db.genvehlist.findAll({}).then(function(dbgenvehlist) {
+        db.users.findAll({}).then(function(dbusers) {
             res.render("index", {
+                msg: "Welcome!",
+                examples: dbusers
+            });
+        });
+    });
+
+    app.get("/genesis", function(req, res) {
+        db.genvehlist.findAll({}).then(function(dbgenvehlist) {
+            res.render("genesis", {
                 msg: "Welcome!",
                 examples: dbgenvehlist
             });

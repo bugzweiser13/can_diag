@@ -29,6 +29,41 @@ $('.input').on('click focusin', function() {
     this.value = '';
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+});
+
+// $("#submitButton").click(function(e) {
+//     if ($("#userNameTextBox").val() == "")
+//         $("#userNamSpan").text("Enter Username");
+//     else
+//         $("#userNamSpan").text("");
+//     if ($("#passwordTextBox").val() == "")
+//         $("#passwordSpan").text("Enter Password");
+//     else
+//         $("#passwordSpan").text("");
+//     if (($("#userNameTextBox").val() != "") && ($("#passwordTextBox").val() != ""))
+//         $.ajax({
+//             type: "POST",
+//             url: "index.aspx/login",
+//             contentType: "application/json; charset=utf-8",
+//             data: '{"username":"' + $("#userNameTextBox").val() + '","password":"' + $("#passwordTextBox").val() + '"}',
+//             dataType: "json",
+//             success: function(result, status, xhr) {
+//                 if (result.d == "Success") {
+//                     $("#messageSpan").text("Login Successful, Redireting to your profile page.");
+//                     setTimeout(function() { window.location = "profile.aspx"; }, 2000);
+//                 } else $("#messageSpan").text("Login failed, Please try again.");
+//             },
+//             error: function(xhr, status, error) { $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText) }
+//         });
+// });
+// $(document).ajaxStart(function() { $("#loadingImg").show(); });
+// $(document).ajaxStop(function() { $("#loadingImg").hide(); });
+
+
+
 //adding decimals to needed inputs
 $("#can_h_v").blur(function() {
     this.value = parseFloat(this.value) * .01.toFixed(2);

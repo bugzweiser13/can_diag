@@ -1,0 +1,85 @@
+body {
+    background-color: lightgrey;
+}
+
+label {
+    font-size: 14px;
+}
+
+#modelImg {
+    margin-top: 120px;
+}
+
+#btn {
+    margin-right: 15px;
+    float: right;
+}
+
+#inp {
+    width: 98%;
+    margin-left: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#model_title {
+    margin-left: 330px;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+#model {
+    color: red;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.canInput,
+.knownVal {
+    border-radius: 5px;
+    text-align: center;
+    /* width: 190px; */
+}
+
+#testSwap {
+    border: solid 1px black;
+    text-align: center;
+    width: 600px;
+    /* height: 400px; */
+    background: white;
+    border-radius: 5px;
+}
+
+#totResIn,
+#splitMin,
+#splitFin,
+#canHvIn,
+#canLvIn,
+#canGroundH,
+#canGroundL,
+.knownVal {
+    width: 150px;
+}
+
+.bad {
+    color: red;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.good {
+    color: green;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.calcOutput {
+    font-weight: bolder;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
