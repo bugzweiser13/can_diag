@@ -36,8 +36,8 @@ $(document).ready(function() {
 
     function userLogin(dataOut) {
 
-        console.log('users: ' + dataOut[0].user);
-        console.log('password: ' + dataOut[0].password);
+        // console.log('users: ' + dataOut[0].user);
+        // console.log('password: ' + dataOut[0].password);
 
         var name = dataOut[0].user;
         var pw = dataOut[0].password;
