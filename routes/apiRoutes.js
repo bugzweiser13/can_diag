@@ -22,6 +22,14 @@ module.exports = function(app) {
     //     });
     // });
 
+    app.get("/api/users", function(req, res) {
+        db.users.findAll({}).then(function(dbusers) {
+            res.json(dbusers);
+            // console.log("%o", dbusers);
+
+        });
+    });
+
 
     app.get('/api/genvehlists', (req, res) => {
 
@@ -98,13 +106,7 @@ module.exports = function(app) {
     });
 
 
-    app.get("/api/users", function(req, res) {
-        db.users.findAll({}).then(function(dbusers) {
-            res.json(dbusers);
-            // console.log("%o", dbusers);
 
-        });
-    });
 
     // // Create a new example
     // app.post("/api/examples", function(req, res) {
