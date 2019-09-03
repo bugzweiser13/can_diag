@@ -58,8 +58,8 @@ $(document).ready(function() {
             var uname = $("#userName").val().trim();
             var pword = $("#passWord").val().trim();
 
-            console.log('user: ' + uname);
-            console.log('password: ' + pword);
+            // console.log('user: ' + uname);
+            // console.log('password: ' + pword);
 
             if (uname === name && pword === pw) {
 
