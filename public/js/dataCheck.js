@@ -165,13 +165,13 @@ $(document).ready(function() {
         var groundInDiffL = canGroundInL - canGroundRange;
 
         // debugging
-        console.log('total res test: ' + totalTest);
-        console.log('split m diff: ' + splitMtest);
-        console.log('split f diff: ' + splitFtest);
-        console.log('can h diff: ' + canHtest);
-        console.log('can l diff: ' + canLtest);
-        console.log('ground h: ' + groundHtest);
-        console.log('ground l: ' + groundLtest);
+        // console.log('total res test: ' + totalTest);
+        // console.log('split m diff: ' + splitMtest);
+        // console.log('split f diff: ' + splitFtest);
+        // console.log('can h diff: ' + canHtest);
+        // console.log('can l diff: ' + canLtest);
+        // console.log('ground h: ' + groundHtest);
+        // console.log('ground l: ' + groundLtest);
 
         // console.log('total res diff: ' + totResInDiff);
         // console.log('split m diff: ' + splitMInDiff);
@@ -261,19 +261,21 @@ $(document).ready(function() {
 
         // difference range between calculated 
         // total resistance and user inputed
-        var goNoGo = 1;
-        var goNoGoRangeMin = -5;
-        var goNoGoRangeMax = 5;
-
-        //debugging
-        // console.log('Inputed: ' + totResCorrected);
-        // console.log('Calculation: ' + result);
+        // var goNoGo = 1;
+        var goNoGoRangeMin = -2;
+        var goNoGoRangeMax = 2;
 
         // differential calculation
         var calcDiff = totResCorrected - result;
 
         //debugging
-        // console.log('value: ' + calcDiff);
+        console.log('Total Res Inputed: ' + totResCorrected);
+        console.log('Split Calculation: ' + result);
+        console.log('Total Res Calculated Diff: ' + calcDiff.toFixed(2));
+        console.log('can H: ' + canHvInCorrected);
+        console.log('can L: ' + canLvInCorrected);
+        console.log('voltDiff: ' + voltDiff);
+
 
         //
         // data comparison logic
@@ -289,60 +291,65 @@ $(document).ready(function() {
                 console.log('calculated difference too high');
                 return false;
             } else {
-                if (totResCorrected < 30 && voltDiff >= .3) {
+                if (totResCorrected < 30 && voltDiff >= .3 || totResCorrected < 30 && voltDiff >= .3) {
                     error();
                     console.log('impossible input');
                     return false;
                 } else {
-                    if (calcDiff <= goNoGoRangeMin && totResCorrected > 30 && voltDiff >= .3 || calcDiff >= goNoGoRangeMax && totResCorrected > 30 && voltDiff >= .3) {
-                        calDiffHigh();
-                        console.log('impossible input');
+                    if (totResCorrected < 30 && voltDiff >= .3 && canHvInCorrected >= 5.0 || totResCorrected < 30 && voltDiff <= .3 && canLvInCorrected >= 5.0) {
+                        error();
+                        console.log('impossible input2');
                         return false;
                     } else {
-
-                        //can resistance logic
-                        if (totResCorrected > totalCanRangeMax) {
-                            // totResAnswer = "Value is more"
-                            $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
-                            totResClass = "bad";
-                            totResAnswer = "Tested value is high, inspect split";
-                            // console.log('high, inspect split');
-                            recheckButton();
-                            // console.log("value is more");
-                        }
-                        if (totResCorrected < totalCanRangeMin) {
-                            totResClass = "bad";
-                            totResAnswer = "Check For Short Between CAN High / Low";
-                            // console.log('short between h / l');
-                        }
-                        if (totResCorrected > 100) {
-                            $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
-                            totResClass = "bad";
-                            totResAnswer = "Inspect Spilt for Open Terminating Resistor";
-                            // console.log('split open');
-                        }
-                        if (totResCorrected < 100 && voltDiff <= .2) {
-                            $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
-                            totResClass = "bad";
-                            totResAnswer = "Possible CAN Short Together";
-                        }
-                        if (totResCorrected > 35 && voltDiff <= .2) {
-                            $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
-                            totResClass = "bad";
-                            totResAnswer = "Lower Value Expected";
-                            recheckButton();
+                        if (calcDiff <= goNoGoRangeMin && totResCorrected > 30 && voltDiff >= .3 || calcDiff >= goNoGoRangeMax && totResCorrected > 30 && voltDiff >= .3) {
+                            calDiffHigh();
+                            console.log('calculated diff high');
+                            return false;
                         } else {
 
-                            if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
-                                $('#totResIn').attr('style', 'none');
-                                totResClass = "good";
-                                totResAnswer = "Good Value";
-                                // console.log("totRes Good");
+                            //can resistance logic
+                            if (totResCorrected > totalCanRangeMax) {
+                                // totResAnswer = "Value is more"
+                                $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                                totResClass = "bad";
+                                totResAnswer = "Tested value is high, inspect split";
+                                // console.log('high, inspect split');
+                                recheckButton();
+                                // console.log("value is more");
+                            }
+                            if (totResCorrected < totalCanRangeMin) {
+                                totResClass = "bad";
+                                totResAnswer = "Check For Short Between CAN High / Low";
+                                // console.log('short between h / l');
+                            }
+                            if (totResCorrected > 100) {
+                                $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                                totResClass = "bad";
+                                totResAnswer = "Inspect Spilt for Open Terminating Resistor";
+                                // console.log('split open');
+                            }
+                            if (totResCorrected < 100 && voltDiff <= .2) {
+                                $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                                totResClass = "bad";
+                                totResAnswer = "Possible CAN Short Together";
+                            }
+                            if (totResCorrected > 35 && voltDiff <= .2) {
+                                $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                                totResClass = "bad";
+                                totResAnswer = "Lower Value Expected";
+                                recheckButton();
+                            } else {
+
+                                if (totResCorrected >= totalCanRangeMin && totResCorrected <= totalCanRangeMax) {
+                                    $('#totResIn').attr('style', 'none');
+                                    totResClass = "good";
+                                    totResAnswer = "Good Value";
+                                    // console.log("totRes Good");
+                                }
                             }
                         }
                     }
                 }
-
                 if (splitMinCorrected < splitCanRangeMin) {
                     $('#splitMin').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     splitMclass = "bad";
@@ -355,13 +362,14 @@ $(document).ready(function() {
                     splitMclass = "bad";
                     splitMAnswer = "High Resistance between " + testLoc + " and " + trMale;
                     // console.log("split M High");
-                }
-                if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
-                    $('#splitMin').attr('style', 'none');
-                    splitMclass = "good";
-                    splitMAnswer = "Good Value";
-                    // console.log("split M good");
-                    // alert("Good Value")
+                } else {
+                    if (splitMinCorrected >= splitCanRangeMin && splitMinCorrected <= splitCanRangeMax) {
+                        $('#splitMin').attr('style', 'none');
+                        splitMclass = "good";
+                        splitMAnswer = "Good Value";
+                        // console.log("split M good");
+                        // alert("Good Value")
+                    }
                 }
                 if (splitFinCorrected < splitCanRangeMin) {
                     $('#splitFin').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
@@ -375,14 +383,16 @@ $(document).ready(function() {
                     splitFclass = "bad";
                     splitFAnswer = "High Resistance between " + testLoc + " and " + trFemale;
                     // console.log("split F high");
+                } else {
+                    if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
+                        $('#splitFin').attr('style', 'none');
+                        splitFclass = "good";
+                        splitFAnswer = "Good Value";
+                        // console.log("split M good value");
+                        // alert("Good Value")
+                    }
                 }
-                if (splitFinCorrected >= splitCanRangeMin && splitFinCorrected <= splitCanRangeMax) {
-                    $('#splitFin').attr('style', 'none');
-                    splitFclass = "good";
-                    splitFAnswer = "Good Value";
-                    // console.log("split M good value");
-                    // alert("Good Value")
-                }
+
 
                 // can voltage check logic
                 if (canHvInCorrected < canVoltHighRangeMin) {
@@ -415,40 +425,42 @@ $(document).ready(function() {
                     canLowClass = "bad";
                     canLowAnswer = "Check for Short To Ground High";
                     // console.log("can L low");
+                } else {
+                    if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
+                        $('#canLvIn').attr('style', 'none');
+                        canLowClass = "good";
+                        canLowAnswer = "Good Value";
+                        // console.log("can L good value");
+                    }
                 }
-                if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
-                    $('#canLvIn').attr('style', 'none');
-                    canLowClass = "good";
-                    canLowAnswer = "Good Value";
-                    // console.log("can L good value");
-                }
+
 
                 if (canGroundCorrectedH < canGroundRange) {
                     $('#canGroundH').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canGroundClassH = "bad";
                     canGroundAnswerH = "Inspect for a short to Ground";
                     // console.log("can H short to ground");
+                } else {
+                    if (canGroundCorrectedH >= canGroundRange) {
+                        $('#canGroundH').attr('style', 'none');
+                        canGroundClassH = "good";
+                        canGroundAnswerH = "Good Value";
+                        // console.log("can H good ground");
+                    }
                 }
-                if (canGroundCorrectedH >= canGroundRange) {
-                    $('#canGroundH').attr('style', 'none');
-                    canGroundClassH = "good";
-                    canGroundAnswerH = "Good Value";
-                    // console.log("can H good ground");
-                }
-
                 if (canGroundCorrectedL < canGroundRange) {
                     $('#canGroundL').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canGroundClassL = "bad";
                     canGroundAnswerL = "Inspect for a short to Ground";
                     // console.log("can L short to ground");
+                } else {
+                    if (canGroundCorrectedL >= canGroundRange) {
+                        $('#canGroundL').attr('style', 'none');
+                        canGroundClassL = "good";
+                        canGroundAnswerL = "Good Value";
+                        // console.log("can L good ground");
+                    }
                 }
-                if (canGroundCorrectedL >= canGroundRange) {
-                    $('#canGroundL').attr('style', 'none');
-                    canGroundClassL = "good";
-                    canGroundAnswerL = "Good Value";
-                    // console.log("can L good ground");
-                }
-
 
                 // can circuit shorted together logic
                 if (canHvInCorrected - .5 <= canLvInCorrected && canLvInCorrected <= canHvInCorrected + .5 &&
@@ -565,7 +577,7 @@ $(document).ready(function() {
             // heading.attr('class', 'mb-4');
             var error = $("<h3>");
             error.attr('style', 'color:red; font-style: italic;');
-            error.html('Error in Input<br>Inputed Total Resistance Invalid<hr>');
+            error.html('Error in Inputs<br>Values are not Plausible<hr>');
             var space = $('<p>');
             var value = $("<h3>");
             value.attr('style', 'color:red; font-style: italic;');
@@ -607,36 +619,43 @@ $(document).ready(function() {
                 $("#totResIn").prop("disabled", false);
             } else {
                 $("#totResIn").prop("disabled", true);
+                $('#totResIn').attr('style', 'color: green;');
             }
             if (splitMtest === true) {
                 $("#splitMin").prop("disabled", false);
             } else {
                 $("#splitMin").prop("disabled", true);
+                $('#splitMin').attr('style', 'color: green;');
             }
             if (splitFtest === true) {
                 $("#splitFin").prop("disabled", false);
             } else {
                 $("#splitFin").prop("disabled", true);
+                $('#splitFin').attr('style', 'color: green;');
             }
             if (canHtest === true) {
                 $("#canHvIn").prop("disabled", false);
             } else {
                 $("#canHvIn").prop("disabled", true);
+                $('#canHvIn').attr('style', 'color: green;');
             }
             if (canLtest === true) {
                 $("#canLvIn").prop("disabled", false);
             } else {
                 $("#canLvIn").prop("disabled", true);
+                $('#canLvIn').attr('style', 'color: green;');
             }
             if (groundHtest === true) {
                 $("#canGroundH").prop("disabled", false);
             } else {
                 $("#canGroundH").prop("disabled", true);
+                $('#canGroundH').attr('style', 'color: green;');
             }
             if (groundLtest === true) {
-                $("#canGroundH").prop("disabled", false);
+                $("#canGroundL").prop("disabled", false);
             } else {
                 $("#canGroundL").prop("disabled", true);
+                $('#canGroundL').attr('style', 'color: green;');
             }
         }
 
