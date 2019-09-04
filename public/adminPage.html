@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>New Model Input</title>
+    <link rel="icon" href="favicon.ico" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!---Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="styles/adminPage.css">
+</head>
+
+<body>
+    <div class="container-fluid mt-1">
+        <h2 style="text-align: center;">
+            <image src="images/hyun_logo1.jpg" alt="image.jpg" style="width: 25%;"></image>
+            Admin Panel
+            <image src="images/gen_logo1.jpg" alt="image.jpg" style="width: 25%;"></image>
+        </h2>
+        <div class="row">
+            <div class="mt-1" id="inp">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card card-default">
+                            <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                <h4 id="veh">New Vehicle Input Portal</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-row">
+                                    <form id="vehData" action="/data.html">
+                                        <!-- <image class="mt-1" src="images/js_n.jpg" alt="image.jpg" style="width: 55%; float:right;border-radius: 5px;"></image> -->
+                                        <div class="col-12">
+                                            <label for="Brand_name">Brand: </label>
+                                            <input class="input" name="brand" id="brand" autocomplete="off" style="width: 128px;" placeholder="brand name" required>
+                                            <label for="mod_name" class="ml-3">Model Name: </label>
+                                            <input class="input ml-3" type="text" name="mod_name" id="mod_name" placeholder="model name" autocomplete="off" required>
+                                            <label for="model">Model: </label>
+                                            <input class="input" type="text" name="model" id="mod_code" maxlength="3" placeholder="xxx" autocomplete="off" style="width: 45px;" required>
+                                            <!-- <label for="mod_num">Model Number: </label><input class="input" type="text" name="mod_num" id="mod_num" placeholder="xxx"><br> -->
+                                            <label for="start_year" class="ml-1">Start Year: </label>
+                                            <input class="input" type="text" name="start_year" id="start_year" placeholder="2xxx" autocomplete="off" required style="width: 45px;">
+                                            <label for="network" class="ml-2">Network Type: </label>
+                                            <select class="inputd" name="network" id="net_id" required>
+                                            <option style="display:none;" selected>Network Select</option>
+                                            <option value="C-CAN">C-CAN</option>
+                                            <option value="P-CAN">P-CAN</option>
+                                            <option value="H-CAN">H-CAN</option>
+                                            <option value="F-CAN">F-CAN</option>
+                                        </select>
+                                        </div>
+                                        <hr>
+                                        <!-- <div class="col-12">
+                                            <p style="text-align: center;">Enter Know Good Measurements</p>
+                                        </div>
+                                        <hr> -->
+                                        <div class="col-12">
+                                            <p>CAN Voltages: </p>
+                                            <label for="can_h_v" class="ml-5">CAN High: </label>
+                                            <input class="input" type="text" name="can_h_v" id="can_h_v" placeholder="x.xx" maxlength="3" autocomplete="off" style="width: 80px;" required>
+                                            <label for="can_h_v">v</label>
+                                            <label for="can_l_v" class="ml-4">CAN Low: </label>
+                                            <input class="input" type="text" name="can_l_v" id="can_l_v" placeholder="x.xx" maxlength="3" autocomplete="off" style="width: 80px;" required>
+                                            <label for="can_l_v">v</label>
+                                        </div>
+                                        <hr>
+                                        <div class="col-12">
+                                            <p>CAN Resistance: </p>
+                                            <label for="split_res_m" class="ml-5">Split (Male): </label>
+                                            <input class="input" type="text" name="split_res_m" id="split_res_m" placeholder="xxx.x" maxlength="4" autocomplete="off" style="width: 65px;" required>
+                                            <label for="split_res_m">&Omega;</label>
+                                            <label for="split_res_f" class="ml-4">Split (Female): </label>
+                                            <input class="input" type="text" name="split_res_f" id="split_res_f" placeholder="xxx.x" maxlength="4" autocomplete="off" style="width: 65px;" required>
+                                            <label for="split_res_f">&Omega;</label><br>
+                                            <div class="row">
+                                                <div class="col-12" style="text-align: center;">
+                                                    <label for="tot_res" class="mr-1">Total Resistance: </label>
+                                                    <input class="input" type="text" name="tot_res" id="tot_res" placeholder="xx.x" maxlength="3" autocomplete="off" style="width: 65px;" required>
+                                                    <label for="tot_res">&Omega;</label><br>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12" style="text-align: center;">
+                                                    <label for="term_m">TR (Male): </label>
+                                                    <input class="input" type="text" name="term_m" id="term_m" placeholder="module's acronym" autocomplete="off" style="width: 125px;" required>*
+                                                    <label for="term_f" class="ml-1">TR (Female): </label>
+                                                    <input class="input" type="text" name="term_f" id="term_f" placeholder="module's acronym" autocomplete="off" style="width: 125px;" required>*
+                                                    <p class="ml-2" style="float: right; font-size: 11px; font-style: italic;">*Male and Female Signify from Split Location</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end">
+                                            <input class="btn btn-info btn-sm mr-3" type="submit" id="vehSubmit">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-default mt-3">
+                            <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                <h4 id="veh">New User Input Portal</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center;">
+                                        <form id="userData" action="/data.html">
+                                            <label for="user_name">User Name: </label>
+                                            <input class="input" type="text" name="user_name" id="user_name" placeholder="add user" autocomplete="off" required>
+                                            <label for="pass_word" class="ml-1">Password: </label>
+                                            <input class="input" type="text" name="pass_word" id="pass_word" maxlength="6" placeholder="password" autocomplete="off" required>
+                                            <!-- <label for="mod_num">Model Number: </label><input class="input" type="text" name="mod_num" id="mod_num" placeholder="xxx"><br> -->
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-end mt-1">
+                                    <input class="btn btn-info btn-sm mr-2" type="submit" id="userSubmit">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="row d-flex justify-content-center">
+                            <image src="images/js_n.jpg" alt="image.jpg" id="modelImg"></image>
+                        </div>
+                        <div class="card card-default mt-1">
+                            <div class="card-header" style="font-weight: bolder; text-align: center;">
+                                <h4 id="veh">Media Input</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <p>Media: (enter as needed) </p>
+                                    <hr>
+                                    <div class="col-12">
+                                        <label for="c_can_img1">C-CAN Image (one): </label>
+                                        <input class="input" type="text" name="c_can_img1" id="c_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="c_can_img2">C-CAN Image (two): </label>
+                                        <input class="input" type="text" name="c_can_img2" id="c_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="p_can_img1">P-CAN Image (one): </label>
+                                        <input class="input" type="text" name="p_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="p_can_img2">P-CAN Image (two): </label>
+                                        <input class="input" type="text" name="p_can_img2" id="p_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="h_can_img1">H-CAN Image (one): </label>
+                                        <input class="input" type="text" name="h_can_img2" id="h_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="h_can_img2">H-CAN Image (two): </label>
+                                        <input class="input" type="text" name="h_can_img2" id="h_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="f_can_img1">F-CAN Image (one): </label>
+                                        <input class="input" type="text" name="f_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="f_can_img2">F-CAN Image (two): </label>
+                                        <input class="input" type="text" name="f_can_img2" id="f_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="model_img">Model Image: </label>
+                                        <input class="input ml-4" type="text" name="model_img" id="model_img" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="test_loc_img" class="ml-2">Test Location Image: </label>
+                                        <input class="input" type="text" name="test_loc_img" id="test_loc_img" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="conn_view_img1">Test Connector Image (one): </label>
+                                        <input class="input" type="text" name="conn_view_img1" id="conn_view_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="conn_view_img2">Test Connector Image (two): </label>
+                                        <input class="input" type="text" name="conn_view_img2" id="conn_view_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="trM_img">Male TR Connector: </label>
+                                        <input class="input" type="text" name="trM-img" id="trM_img" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="trF_img1">Female TR Connector (one): </label>
+                                        <input class="input" type="text" name="trF_img1" id="trF_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <label for="trF_img2">Female TR Connector (two): </label>
+                                        <input class="input" type="text" name="trF_img2" id="trF_view_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <div class="row d-flex justify-content-end mt-1">
+                                            <input class="btn btn-info btn-sm mr-2" type="submit" id="mediaSubmit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3" id="btn">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
+                <!-- <input class="btn btn-info btn-sm ml-2" type="submit" id="submit"> -->
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+<script src="js/adminPage.js"></script>
+
+</html>

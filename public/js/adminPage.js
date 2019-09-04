@@ -22,17 +22,12 @@ console.log("param push: " + brand);
 $("#brand").attr('value', brand);
 
 //input length set and clear when clicked
-$("input[placeholder]").each(function() {
-    $(this).attr('size', $(this).attr('placeholder').length);
-});
-$('.input').on('click focusin', function() {
-    this.value = '';
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, options);
-});
+// $("input[placeholder]").each(function() {
+//     $(this).attr('size', $(this).attr('placeholder').length);
+// });
+// $('.input').on('click focusin', function() {
+//     this.value = '';
+// });
 
 // $("#submitButton").click(function(e) {
 //     if ($("#userNameTextBox").val() == "")

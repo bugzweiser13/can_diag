@@ -6,14 +6,34 @@
         font-size: 14px;
     }
     
+    .card {
+        border: solid 1px black;
+    }
+    
+    .card-header {
+        color: white;
+        text-shadow: 0px 5px 10px black;
+        background-color: rgba(0, 81, 128, 0.507);
+    }
+    
+    #inp {
+        width: 99%;
+        /* height: 500px; */
+        margin-left: 10px;
+        border: 1px solid black;
+        box-shadow: 0px 5px 5px black;
+        background-image: linear-gradient(lightblue, white, rgba(170, 170, 170, 0.938), white);
+        border-radius: 5px;
+        padding: 5px;
+    }
+    
     .input,
     .inputd {
         border-radius: 5px;
         text-align: center;
         /* text-transform: uppercase; */
-        font-size: 15px;
+        font-size: 14px;
         font-style: italic;
-        color: blue;
         padding: 2px;
     }
     
@@ -26,12 +46,14 @@
     }
     
     #modelImg {
-        margin-top: 120px;
+        width: 65%;
+        border-radius: 5px;
+        ;
+        border: solid 1px black;
     }
     
     #btn {
-        margin-right: 15px;
-        float: right;
+        margin-right: 2px;
     }
     
     option {
@@ -118,6 +140,10 @@
     
     .calcOutput {
         font-weight: bolder;
+    }
+    
+    #close {
+        box-shadow: 0px 5px 5px black;
     }
     
     input[type="number"]::-webkit-outer-spin-button,

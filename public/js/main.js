@@ -64,8 +64,8 @@ $(document).ready(function() {
             if (uname === name && pword === pw) {
 
                 // console.log("model input clicked");
-                window.open('model_input.html', '_blank',
-                    'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500');
+                window.open('adminPage.html', '_blank',
+                    'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=200px, left=375px,width=1175 height=875');
                 $("#userName").val('');
                 $("#passWord").val('');
                 return false;

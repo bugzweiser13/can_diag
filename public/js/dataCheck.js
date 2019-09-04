@@ -275,13 +275,13 @@ $(document).ready(function() {
         var calcDiff = totResCorrected - result;
 
         //debugging
-        console.log('Total Res Inputed: ' + totResCorrected);
-        console.log('Split Calculation: ' + result);
-        console.log('Total Res Calculated Diff: ' + calcDiff.toFixed(2));
-        console.log('can H: ' + canHvInCorrected);
-        console.log('can L: ' + canLvInCorrected);
-        console.log('voltDiff: ' + voltDiff);
-        console.log("Ground: " + groundDiff);
+        // console.log('Total Res Inputed: ' + totResCorrected);
+        // console.log('Split Calculation: ' + result);
+        // console.log('Total Res Calculated Diff: ' + calcDiff.toFixed(2));
+        // console.log('can H: ' + canHvInCorrected);
+        // console.log('can L: ' + canLvInCorrected);
+        // console.log('voltDiff: ' + voltDiff);
+        // console.log("Ground: " + groundDiff);
 
         var check1 = totResCorrected >= minRes && totResCorrected <= maxRes && groundDiff < 1400;
         var check2 = totResCorrected > minRes && voltDiff <= minVoltDiff || totResCorrected >= minRes && totResCorrected <= maxRes && voltDiff <= minVoltDiff;
@@ -289,11 +289,12 @@ $(document).ready(function() {
         var check4 = totResCorrected < minRes && voltDiff >= minVoltDiff && canHvInCorrected >= canVoltHighRangeMax || totResCorrected < minRes && voltDiff <= minVoltDiff && canLvInCorrected >= canVoltLowRangeMax;
         var check5 = calcDiff <= goNoGoRangeMin && totResCorrected > minRes && voltDiff >= minVoltDiff || calcDiff >= goNoGoRangeMax && totResCorrected > minRes && voltDiff >= minVoltDiff;
 
-        console.log('check1: ' + check1);
-        console.log('check2: ' + check2);
-        console.log('check3: ' + check3);
-        console.log('check4: ' + check4);
-        console.log('check5: ' + check5);
+        //debugging
+        // console.log('check1: ' + check1);
+        // console.log('check2: ' + check2);
+        // console.log('check3: ' + check3);
+        // console.log('check4: ' + check4);
+        // console.log('check5: ' + check5);
 
 
         //

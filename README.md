@@ -78,7 +78,7 @@ Operated as follows:
 **Items that need to be added on future releases**
 
     - Addition of admin page to perform the following:
-        1. Make changes to models / database as needed without entering a mySql Workbench
+        1. Make changes to models / database as needed without entering a mySql Workbench (login test / start1)
         2. Add addition models and their related information as they are released
     - Navbar with a resource page as needed
     - Compition of the "Hyundai" branded page (currently on "Genesis" operational)
