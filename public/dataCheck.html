@@ -28,12 +28,12 @@
         </h2>
         <div class="row" id="inp">
 
-            <div class="row d-flex justify-content-center">
+            <div class="row">
                 <label for="model" id="model_title">Model Selected: <span id="model"> </span></label>
             </div>
 
             <div class="row">
-                <div class="col-sm-3" id="inputForm" style="text-align: center;">
+                <div class="col-lg-3" id="inputForm" style="text-align: center;">
                     <form>
                         <h5>User Inputed<br>Values:</h5>
                         <!-- <image class="mt-1 ml-6" id="modelImg" style="width: 70%; float:right;border-radius: 5px;"></image> -->
@@ -61,15 +61,15 @@
                         <!-- <input type="text" class="knownVal ml-1" id="knownGroundH">&nbsp;&Omega;<br> -->
                         <input type="text" class="canInput mt-1" name="canGround" id="canGroundL" maxlength="4" autocomplete="off" placeholder="xxxxx" title="Enter CAN Low To Ground Measument Here" required>&nbsp;&Omega;<br>
                         <!-- <input type="text" class="knownVal ml-1" id="knownGroundL">&nbsp;&Omega;<br> -->
-                        <p class="ml-2" style="font-size: 11px; float: right; font-style: italic;">**Enter 9999 for OL.</p>
+                        <p class="ml-2" style="font-size: 11px; font-style: italic;">**Enter 9999 for OL.</p>
                         <!-- <span class="known" id="canL"></span> </label> -->
                     </form>
                 </div>
-                <div class="col-sm-6" id="testSwap">
+                <div class="col-lg-6" id="testSwap">
                     <image id="modelImg" style="width: 100%; border-radius: 5px;"></image>
                     <div id=results class="mt-3"></div>
                 </div>
-                <div class="col-sm-3" style="text-align: center;">
+                <div class="col-lg-3" style="text-align: center;">
                     <h5>Known Good<br>& Differential:</h5>
                     <label for="totResIn" id="test1234">Total Resistance:  </label><br>
                     <input type="number" class="knownVal" id="knownTot">&nbsp;&Omega;<br>
@@ -84,12 +84,13 @@
                     <label for="canGroundH">Resistance to Ground<br>(High / Low):  </label><br>
                     <input type="text" class="knownVal" id="knownGroundH">&nbsp;&Omega;<br>
                     <input type="text" class="knownVal mt-1" id="knownGroundL">&nbsp;&Omega;<br>
+                    <p class="ml-2" style="font-size: 11px; font-style: italic;">**All Values are approx.</p>
                 </div>
 
             </div>
         </div>
         <!-- <p class="ml-2" style="font-size: 12px; float: left; font-style: italic;">*Enter Whole Numbers, Decimals will self populate.</p> -->
-        <div class="row mt-2" id="btn">
+        <div class="row mt-3" id="btn">
             <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit</button>
             <button class="btn btn-info btn-sm ml-2" id="recheck" style="display:none;">Correct Inputs</button>
             <input class="btn btn-info btn-sm ml-2" type="submit" id="submit">

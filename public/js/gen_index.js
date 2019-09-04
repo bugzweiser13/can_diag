@@ -467,7 +467,7 @@ $(document).ready(function() {
                 testLocXfer;
 
             window.open(myUrl, '_blank',
-                'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,status=no,top=250px, left=500px,width=910,height=675')
+                'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,status=no,top=250px, left=500px,width=1100,height=725')
             return false;
         });
 
