@@ -1,25 +1,36 @@
-//get brand from prev page
-function getUrlParams() {
+$('#userSubmit').on('click', function() {
+    event.preventDefault();
+    console.log('this ran');
 
-    var paramMap = {};
-    if (location.search.length == 1) {
-        return paramMap;
-    }
-    var parts = location.search.substring(1).split("&");
+    var newUser = {
+        user: $('#user_name').val().trim(),
+        password: $('#pass_word').val().trim()
+    };
 
-    for (var i = 0; i < parts.length; i++) {
-        var component = parts[i].split("=");
-        paramMap[decodeURIComponent(component[0])] = decodeURIComponent(component[1]);
+    if (!(newUser.user && newUser.password)) {
+        alert("You must enter an username and password to add a new user!");
+        return;
     }
-    return paramMap;
+    console.log(newUser);
+
+    addUser(newUser);
+    alert('New User Added');
+
+    $('#user_name').val("");
+    $('#pass_word').val("");
+});
+
+function addUser(newUser) {
+    return $.ajax({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: "api/users",
+        data: JSON.stringify(newUser)
+    });
 }
 
-//url variables
-var params = getUrlParams();
-var brand = params['brand'];
-console.log("param push: " + brand);
-
-$("#brand").attr('value', brand);
 
 //input length set and clear when clicked
 // $("input[placeholder]").each(function() {

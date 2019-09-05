@@ -1,80 +1,73 @@
-$(document).ready(function() {
+$("#hyundai-btn").on('click', function() {
+    // console.log("hyundai clicked");
+    window.location.href = "hyundai.html";
+    return false;
+});
+
+$("#genesis-btn").on('click', function() {
+    // console.log("genesis clicked");
+    window.location.href = "genesis.html";
+    return false;
+});
+
+
+// password show button
+$(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
+
+$("#admin").on('click', function() {
+    userLogin();
+});
+
+function userLogin() {
+
+
+
+    var uname = $("#userName").val().trim();
+    var pword = $("#passWord").val().trim();
 
     $.ajax({
         url: "api/users",
         type: 'GET',
+        // where: {
+        //     user: uname,
+        //     password: pword
+        // },
 
-        success: function(users) {
+        success: function(data) {
+            // console.log(data);
 
-            var arrayLength = users.length;
-            var dataOut = [];
+            var loginId = data.find(function(userId) {
+                return userId.user === uname;
+            })
 
-            users.forEach((elem, index) => {
-                    dataOut.push(elem);
-                    if (dataOut.length === arrayLength)
-                        users.length = 0
-                })
-                // debugging
-                // console.log(dataIn);
-                // dataOut.push(dataIn); 
-                // console.log("%o", dataOut);
-            userLogin(dataOut);
-        }
-    });
-
-
-    $("#hyundai-btn").on('click', function() {
-        // console.log("hyundai clicked");
-        window.location.href = "hyundai.html";
-        return false;
-    });
-    $("#genesis-btn").on('click', function() {
-        // console.log("genesis clicked");
-        window.location.href = "genesis.html";
-        return false;
-    });
-
-    function userLogin(dataOut) {
-
-        // console.log('users: ' + dataOut[0].user);
-        // console.log('password: ' + dataOut[0].password);
-
-        var name = dataOut[0].user;
-        var pw = dataOut[0].password;
-
-        $(".toggle-password").click(function() {
-
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-
-        $("#admin").on('click', function() {
-
-            var uname = $("#userName").val().trim();
-            var pword = $("#passWord").val().trim();
-
-            // console.log('user: ' + uname);
-            // console.log('password: ' + pword);
-
-            if (uname === name && pword === pw) {
-
-                // console.log("model input clicked");
-                window.open('adminPage.html', '_blank',
-                    'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=200px, left=375px,width=1175 height=875');
+            if (pword === loginId.password) {
                 $("#userName").val('');
                 $("#passWord").val('');
-                return false;
+                adminOpen();
             } else {
                 alert('Wrong Login Info Provided');
                 $("#userName").val('');
                 $("#passWord").val('');
             }
+        }
+    });
+}
 
-        });
-    };
-});
+// admin page open
+function adminOpen() {
+    // console.log("model input clicked");
+    window.open('adminPage.html', '_blank',
+        'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=100px, left=375px,width=1175 height=890');
+    $("#userName").val('');
+    $("#passWord").val('');
+    return false;
+}

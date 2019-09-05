@@ -15,9 +15,9 @@ module.exports = function(sequelize, DataTypes) {
                     args: 6,
                     msg: "Name must be atleast 6 characters in length"
                 },
-                fn: function(val) {
-                    if (val !== "mustbethis") throw new Error("Custom validation failed");
-                }
+                // fn: function(val) {
+                //     if (val !== "mustbethis") throw new Error("Custom validation failed");
+                // }
             }
         },
         password: {
@@ -29,9 +29,9 @@ module.exports = function(sequelize, DataTypes) {
                     args: 6,
                     msg: "Name must be atleast 6 characters in length"
                 },
-                fn: function(val) {
-                    if (val !== "mustbethis") throw new Error("Custom validation failed");
-                }
+                // fn: function(val) {
+                //     if (val !== "mustbethis") throw new Error("Custom validation failed");
+                // }
             }
         },
         DateUpdated: {

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+
     // globals
     var vehInput;
     var vehShow;
@@ -13,7 +15,7 @@ $(document).ready(function() {
                     "Content-Type": "application/json"
                 },
                 type: "POST",
-                url: "api/examples",
+                url: "api/genvehlists",
                 data: JSON.stringify(example)
             });
         },

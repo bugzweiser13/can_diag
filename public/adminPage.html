@@ -40,9 +40,13 @@
                                         <!-- <image class="mt-1" src="images/js_n.jpg" alt="image.jpg" style="width: 55%; float:right;border-radius: 5px;"></image> -->
                                         <div class="col-12">
                                             <label for="Brand_name">Brand: </label>
-                                            <input class="input" name="brand" id="brand" autocomplete="off" style="width: 128px;" placeholder="brand name" required>
-                                            <label for="mod_name" class="ml-3">Model Name: </label>
-                                            <input class="input ml-3" type="text" name="mod_name" id="mod_name" placeholder="model name" autocomplete="off" required>
+                                            <select class="inputd" name="brand" id="brand" required>
+                                                <option style='display: none;' selected>Brand Select</option>
+                                                <option value="genesis">Geneisis</option>
+                                                <option value="hyundai">Hyundai</option>
+                                            </select>
+                                            <label for="mod_name" class="ml-5">Model Name: </label>
+                                            <input class="input" type="text" name="mod_name" id="mod_name" placeholder="model name" autocomplete="off" required><br>
                                             <label for="model">Model: </label>
                                             <input class="input" type="text" name="model" id="mod_code" maxlength="3" placeholder="xxx" autocomplete="off" style="width: 45px;" required>
                                             <!-- <label for="mod_num">Model Number: </label><input class="input" type="text" name="mod_num" id="mod_num" placeholder="xxx"><br> -->
@@ -51,10 +55,10 @@
                                             <label for="network" class="ml-2">Network Type: </label>
                                             <select class="inputd" name="network" id="net_id" required>
                                             <option style="display:none;" selected>Network Select</option>
-                                            <option value="C-CAN">C-CAN</option>
-                                            <option value="P-CAN">P-CAN</option>
-                                            <option value="H-CAN">H-CAN</option>
-                                            <option value="F-CAN">F-CAN</option>
+                                            <option value="c-can">C-CAN</option>
+                                            <option value="p-can">P-CAN</option>
+                                            <option value="h-can">H-CAN</option>
+                                            <option value="f-can">F-CAN</option>
                                         </select>
                                         </div>
                                         <hr>
@@ -113,14 +117,15 @@
                                     <div class="col-12" style="text-align: center;">
                                         <form id="userData" action="/data.html">
                                             <label for="user_name">User Name: </label>
-                                            <input class="input" type="text" name="user_name" id="user_name" placeholder="add user" autocomplete="off" required>
+                                            <input class="input" type="text" name="user_name" id="user_name" maxlength="6" placeholder="add user" autocomplete="off" required>*
                                             <label for="pass_word" class="ml-1">Password: </label>
-                                            <input class="input" type="text" name="pass_word" id="pass_word" maxlength="6" placeholder="password" autocomplete="off" required>
+                                            <input class="input" type="text" name="pass_word" id="pass_word" maxlength="6" placeholder="password" autocomplete="off" required>*
+                                            <p class="ml-2" style="float: right; font-size: 11px; font-style: italic;">*Must be six (6) characters in length</p>
                                             <!-- <label for="mod_num">Model Number: </label><input class="input" type="text" name="mod_num" id="mod_num" placeholder="xxx"><br> -->
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-end mt-1">
+                                <div class="row d-flex justify-content-end">
                                     <input class="btn btn-info btn-sm mr-2" type="submit" id="userSubmit">
                                 </div>
                             </div>
@@ -128,34 +133,48 @@
 
                     </div>
                     <div class="col-6">
-                        <div class="row d-flex justify-content-center">
+                        <!-- <div class="row d-flex justify-content-center">
                             <image src="images/js_n.jpg" alt="image.jpg" id="modelImg"></image>
-                        </div>
-                        <div class="card card-default mt-1">
+                        </div> -->
+                        <div class="card card-default">
                             <div class="card-header" style="font-weight: bolder; text-align: center;">
                                 <h4 id="veh">Media Input</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <p>Media: (enter as needed) </p>
-                                    <hr>
                                     <div class="col-12">
-                                        <label for="c_can_img1">C-CAN Image (one): </label>
-                                        <input class="input" type="text" name="c_can_img1" id="c_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="c_can_img2">C-CAN Image (two): </label>
-                                        <input class="input" type="text" name="c_can_img2" id="c_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="p_can_img1">P-CAN Image (one): </label>
-                                        <input class="input" type="text" name="p_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="p_can_img2">P-CAN Image (two): </label>
-                                        <input class="input" type="text" name="p_can_img2" id="p_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="h_can_img1">H-CAN Image (one): </label>
-                                        <input class="input" type="text" name="h_can_img2" id="h_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="h_can_img2">H-CAN Image (two): </label>
-                                        <input class="input" type="text" name="h_can_img2" id="h_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="f_can_img1">F-CAN Image (one): </label>
-                                        <input class="input" type="text" name="f_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
-                                        <label for="f_can_img2">F-CAN Image (two): </label>
-                                        <input class="input" type="text" name="f_can_img2" id="f_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                        <p>Media: (enter as needed) </p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-12" style="text-align: center;">
+                                                <label for="Brand_name">Brand: </label>
+                                                <input class="input" name="brand" id="brand" autocomplete="off" style="width: 128px;" placeholder="brand name" required>
+                                                <label for="mod_name" class="ml-3">Model Name: </label>
+                                                <input class="input ml-3" type="text" name="mod_name" id="mod_name" placeholder="model name" autocomplete="off" required>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-12" style="text-align: center;">
+                                                <label for="c_can_img1">C-CAN Image (one): </label>
+                                                <input class="input" type="text" name="c_can_img1" id="c_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="c_can_img2">C-CAN Image (two): </label>
+                                                <input class="input" type="text" name="c_can_img2" id="c_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="p_can_img1">P-CAN Image (one): </label>
+                                                <input class="input" type="text" name="p_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="p_can_img2">P-CAN Image (two): </label>
+                                                <input class="input" type="text" name="p_can_img2" id="p_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="h_can_img1">H-CAN Image (one): </label>
+                                                <input class="input" type="text" name="h_can_img2" id="h_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="h_can_img2">H-CAN Image (two): </label>
+                                                <input class="input" type="text" name="h_can_img2" id="h_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="f_can_img1">F-CAN Image (one): </label>
+                                                <input class="input" type="text" name="f_can_img1" id="p_can_img1" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                                <label for="f_can_img2">F-CAN Image (two): </label>
+                                                <input class="input" type="text" name="f_can_img2" id="f_can_img2" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
+                                            </div>
+                                        </div>
+                                        <hr>
                                         <label for="model_img">Model Image: </label>
                                         <input class="input ml-4" type="text" name="model_img" id="model_img" placeholder="enter file location" autocomplete="off" style="width: 115px;" required>
                                         <label for="test_loc_img" class="ml-2">Test Location Image: </label>
