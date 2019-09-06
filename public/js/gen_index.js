@@ -578,30 +578,6 @@ $(document).ready(function() {
 
     }
 
-    // console.log("vehicle is " + vehInput);
-    // console.log("network is: " + netID);
-    // $("#dataCheck").on('click', function() {
-
-    //     var totResXfer = dataOut[vehInput].canData[netID].total_res
-    //     var splitMXfer = dataOut[vehInput].canData[netID].res_val_m
-    //     var splitFXfer = dataOut[vehInput].canData[netID].res_val_f
-    //     var canVhighXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_h
-    //     var canVlowXfer = dataOut[vehInput].canData[netID].canVolts[netSub].volt_l
-    //     var model = dataOut[vehInput].model
-
-
-    //     var myUrl = "dataCheck.html?totRes=" +
-    //         totResXfer + "&splitM=" +
-    //         splitMXfer + "&splitF=" +
-    //         splitFXfer + "&canVh=" +
-    //         canVhighXfer + "&canVl=" +
-    //         canVlowXfer + "&model=" +
-    //         model;
-    //     window.open(myUrl, '_blank',
-    //         'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=250px, left=500px,width=800,height=500')
-    //     return false;
-    // });
-
 
     // new model input page open
     // inputBtn value loads genesis / hyundai

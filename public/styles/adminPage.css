@@ -6,6 +6,16 @@
         font-size: 14px;
     }
     
+    #inp {
+        max-width: 90%;
+        /* height: 500px; */
+        border: 1px solid black;
+        box-shadow: 0px 5px 5px black;
+        background-image: linear-gradient(rgb(245, 247, 248), white, rgba(170, 170, 170, 0.938), white);
+        border-radius: 5px;
+        padding: 5px;
+    }
+    
     .card {
         border: solid 1px black;
     }
@@ -16,15 +26,20 @@
         background-color: rgba(0, 81, 128, 0.507);
     }
     
-    #inp {
-        width: 99%;
-        /* height: 500px; */
-        margin-left: 10px;
-        border: 1px solid black;
-        box-shadow: 0px 5px 5px black;
-        background-image: linear-gradient(lightblue, white, rgba(170, 170, 170, 0.938), white);
-        border-radius: 5px;
-        padding: 5px;
+    #vehInput,
+    #userInput,
+    #mediaInput,
+    #adminList {
+        background-image: linear-gradient(lightblue, white, rgba(224, 224, 224, 0.938), white);
+    }
+    
+    #adminList {
+        height: 165px;
+    }
+    
+    .inputd {
+        border: 2px inset;
+        color: grey;
     }
     
     .input,
@@ -46,15 +61,30 @@
     }
     
     #modelImg {
-        width: 50%;
+        width: 100%;
         border-radius: 5px;
-        ;
         border: solid 1px black;
     }
     
-    #btn {
-        margin-right: 2px;
+    #userTable {
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background: white;
+        overflow: auto;
     }
+    
+    #userTableHead,
+    #userTableBody {
+        text-align: center;
+    }
+    
+    #userTableBody {
+        font-size: 13px;
+    }
+    /* #btn {
+        margin-right: 2px;
+    } */
     
     option {
         border-radius: 5px;
@@ -122,9 +152,10 @@
     .knownVal {
         width: 150px;
     }
-    /* #canGroundH {
-        float: left;
-    } */
+    
+    #del_user {
+        width: 175px;
+    }
     
     .bad {
         color: red;

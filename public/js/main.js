@@ -29,8 +29,6 @@ $("#admin").on('click', function() {
 
 function userLogin() {
 
-
-
     var uname = $("#userName").val().trim();
     var pword = $("#passWord").val().trim();
 
