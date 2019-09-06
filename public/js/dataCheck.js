@@ -295,6 +295,9 @@ $(document).ready(function() {
         // console.log('check3: ' + check3);
         // console.log('check4: ' + check4);
         // console.log('check5: ' + check5);
+        console.log('volt diff: ' + voltDiff);
+
+
 
 
         //
@@ -312,7 +315,7 @@ $(document).ready(function() {
                 console.log('impossible ground');
                 return false;
             } else {
-                if (totResCorrected > minRes && voltDiff <= minVoltDiff || totResCorrected >= minRes && totResCorrected <= maxRes && voltDiff <= minVoltDiff) {
+                if (totResCorrected > minRes && voltDiff <= minVoltDiff && voltDiff >= 0 || totResCorrected >= minRes && totResCorrected <= maxRes && voltDiff <= minVoltDiff) {
                     errorMsg = 'Total Resistance not plausible with user inputted CAN Voltages, lower Ω expected'
                     error(errorMsg);
                     console.log('impossible input');
@@ -362,7 +365,7 @@ $(document).ready(function() {
                                     totResClass = "bad";
                                     totResAnswer = "Possible CAN Short Together";
                                 }
-                                if (totResCorrected > 35 && voltDiff <= .2) {
+                                if (totResCorrected > 35 && voltDiff <= .2 && voltDiff >= 0) {
                                     $('#totResIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                                     totResClass = "bad";
                                     totResAnswer = "Lower Value Expected";
@@ -423,18 +426,48 @@ $(document).ready(function() {
                     }
                 }
 
+                // console.log('ground: ' + canGroundCorrectedH);
+                // console.log(canHvInCorrected <= canVoltHighRangeMin);
+                // console.log(canGroundCorrectedH <= 10);
+                // console.log(voltDiff <= .2);
+
+
+                console.log('--------H--------');
+                console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH <= 10);
+                console.log(canHvInCorrected <= canVoltHighRangeMin);
+                console.log(canGroundCorrectedH <= 10);
+                console.log('--------L--------');
+                console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL <= 10);
+                console.log(canLvInCorrected <= canVoltLowRangeMin);
+                console.log(canGroundCorrectedL <= 10);
+                console.log('--------H2--------');
+                console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedL > 10);
+                console.log(canHvInCorrected <= canVoltHighRangeMin);
+                console.log(canGroundCorrectedL > 10);
+                console.log('--------L2--------');
+                console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedH > 10);
+                console.log(canLvInCorrected <= canVoltLowRangeMin);
+                console.log(canGroundCorrectedH > 10);
+                console.log('----------------');
+
+
 
                 // can voltage check logic
-                if (canHvInCorrected < canVoltHighRangeMin) {
+                if (canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH <= 10) {
                     $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canHighClass = "bad";
-                    canHighAnswer = "Check for Short To Ground High";
+                    canHighAnswer = "Check for Short To Ground CAN High";
                     // console.log("can H v low");
                 }
-                if (canHvInCorrected > canVoltHighRangeMax) {
+                if (canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL > 10) {
+                    $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                    canLowClass = "bad";
+                    canLowAnswer = "Check for Short To Ground CAN High";
+                }
+                if (canHvInCorrected >= canVoltHighRangeMax && canGroundCorrectedL >= 10) {
                     $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canHighClass = "bad";
-                    canHighAnswer = "Check for Short To Ground Low";
+                    canHighAnswer = "Check for Short To Ground CAN Low";
                     // console.log("can H v high");
                 } else {
                     if (canHvInCorrected >= canVoltHighRangeMin && canHvInCorrected <= canVoltHighRangeMax) {
@@ -445,16 +478,23 @@ $(document).ready(function() {
                         // alert("Good Value")
                     }
                 }
-                if (canLvInCorrected < canVoltLowRangeMin) {
+
+                if (canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL <= 10) {
                     $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canLowClass = "bad";
-                    canLowAnswer = "Check for Short To Ground Low";
+                    canLowAnswer = "Check for Short To Ground CAN Low";
                     // console.log("can L v low");
                 }
-                if (canLvInCorrected > canVoltLowRangeMax) {
+                if (canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH > 10) {
+                    $('#canHvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
+                    canHighClass = "bad";
+                    canHighAnswer = "Check for Short To Ground CAN Low";
+                    // console.log("can L v low");
+                }
+                if (canLvInCorrected >= canVoltLowRangeMax && canGroundCorrectedH >= 10) {
                     $('#canLvIn').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canLowClass = "bad";
-                    canLowAnswer = "Check for Short To Ground High";
+                    canLowAnswer = "Check for Short To Ground CAN High";
                     // console.log("can L low");
                 } else {
                     if (canLvInCorrected >= canVoltLowRangeMin && canLvInCorrected <= canVoltLowRangeMax) {
@@ -464,6 +504,41 @@ $(document).ready(function() {
                         // console.log("can L good value");
                     }
                 }
+
+                // console.log('can high: ' + canHvInCorrected);
+                // console.log('can high min: ' + canVoltHighRangeMin);
+                // console.log('can high max: ' + canVoltHighRangeMax);
+                // console.log('ground h: ' + canGroundCorrectedH);
+                // console.log('can low: ' + canLvInCorrected);
+                // console.log('can low min: ' + canVoltLowRangeMin);
+                // console.log('can low max: ' + canVoltLowRangeMax);
+                // console.log('ground l: ' + canGroundCorrectedL);
+
+                // console.log('--------H--------');
+                // console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH <= 10);
+                // console.log(canHvInCorrected <= canVoltHighRangeMin);
+                // console.log(canGroundCorrectedH <= 10);
+                // console.log('--------L--------');
+                // console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL <= 10);
+                // console.log(canLvInCorrected <= canVoltLowRangeMin);
+                // console.log(canGroundCorrectedL <= 10);
+                // console.log('--------H2--------');
+                // console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedL > 10);
+                // console.log(canHvInCorrected <= canVoltHighRangeMin);
+                // console.log(canGroundCorrectedL > 10);
+                // console.log('--------L2--------');
+                // console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedH > 10);
+                // console.log(canLvInCorrected <= canVoltLowRangeMin);
+                // console.log(canGroundCorrectedH > 10);
+                // console.log('----------------');
+
+
+                // console.log('alt test1: ' + canHvInCorrected >= canVoltHighRangeMax && canGroundCorrectedL >= 10);
+                // console.log('alt test2: ' + canLvInCorrected >= canVoltLowRangeMax && canGroundCorrectedH >= 10);
+
+
+
+
 
 
                 if (canGroundCorrectedH < canGroundRange) {
@@ -479,6 +554,8 @@ $(document).ready(function() {
                         // console.log("can H good ground");
                     }
                 }
+
+
                 if (canGroundCorrectedL < canGroundRange) {
                     $('#canGroundL').attr('style', 'font-weight: bolder; color:red; font-style: italic;');
                     canGroundClassL = "bad";

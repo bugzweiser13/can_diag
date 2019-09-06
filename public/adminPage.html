@@ -110,19 +110,32 @@
                         </div>
                         <div class="card card-default mt-3">
                             <div class="card-header" style="font-weight: bolder; text-align: center;">
-                                <h4 id="veh">New User Input Portal</h4>
+                                <h4 id="veh">User Administration</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-12" style="text-align: center;">
-                                        <form id="userData" action="/data.html">
-                                            <label for="user_name">User Name: </label>
-                                            <input class="input" type="text" name="user_name" id="user_name" maxlength="6" placeholder="add user" autocomplete="off" required>*
-                                            <label for="pass_word" class="ml-1">Password: </label>
-                                            <input class="input" type="text" name="pass_word" id="pass_word" maxlength="6" placeholder="password" autocomplete="off" required>*
-                                            <p class="ml-2" style="float: right; font-size: 11px; font-style: italic;">*Must be six (6) characters in length</p>
-                                            <!-- <label for="mod_num">Model Number: </label><input class="input" type="text" name="mod_num" id="mod_num" placeholder="xxx"><br> -->
-                                        </form>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <form id="addUser">
+                                                    <p>Add User:
+                                                        <label for="user_name" class="ml-3">User Name: </label>
+                                                        <input class="input" type="text" name="user_name" id="user_name" maxlength="6" placeholder="add user" autocomplete="off" required>*
+                                                        <label for="pass_word" class="ml-3">Password: </label>
+                                                        <input class="input" type="text" name="pass_word" id="pass_word" maxlength="6" placeholder="password" autocomplete="off" required>*
+                                                        <p style="line-height: .1;  float: right; font-size: 11px; font-style: italic;">*Must be six (6) characters in length</p>
+                                                    </p>
+
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <form id="removeUser">
+                                                    <p>Remove User:</p>
+                                                    <label for="user_name" class="ml-3">User Name: </label>
+                                                    <input class="input" type="text" name="user_name" id="user_name" maxlength="6" placeholder="remove user" autocomplete="off" required>*
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-end">
@@ -202,7 +215,7 @@
         </div>
         <div class="row mt-3" id="btn">
             <div class="col-12 d-flex justify-content-end">
-                <button class="btn btn-info btn-sm" id="close" onclick="self.close()">Exit Page</button>
+                <button class="btn btn-info btn-sm" id="close" onclick="window.location.href = 'index.html';">Exit Page</button>
                 <!-- <input class="btn btn-info btn-sm ml-2" type="submit" id="submit"> -->
             </div>
         </div>

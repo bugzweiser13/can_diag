@@ -50,8 +50,6 @@ function userLogin() {
             })
 
             if (pword === loginId.password) {
-                $("#userName").val('');
-                $("#passWord").val('');
                 adminOpen();
             } else {
                 alert('Wrong Login Info Provided');
@@ -65,8 +63,10 @@ function userLogin() {
 // admin page open
 function adminOpen() {
     // console.log("model input clicked");
-    window.open('adminPage.html', '_blank',
-        'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=100px, left=375px,width=1175 height=890');
+    window.location.href = 'adminPage.html';
+
+    // window.open('adminPage.html', '_blank',
+    //     'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,top=100px, left=375px,width=1175 height=890');
     $("#userName").val('');
     $("#passWord").val('');
     return false;
