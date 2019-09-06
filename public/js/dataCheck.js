@@ -282,22 +282,7 @@ $(document).ready(function() {
         // console.log('can L: ' + canLvInCorrected);
         // console.log('voltDiff: ' + voltDiff);
         // console.log("Ground: " + groundDiff);
-
-        var check1 = totResCorrected >= minRes && totResCorrected <= maxRes && groundDiff < 1400;
-        var check2 = totResCorrected > minRes && voltDiff <= minVoltDiff || totResCorrected >= minRes && totResCorrected <= maxRes && voltDiff <= minVoltDiff;
-        var check3 = calcDiff <= goNoGoRangeMin && totResCorrected > minRes && totResCorrected <= maxRes || calcDiff >= goNoGoRangeMax && totResCorrected < minRes && totResCorrected <= maxRes;
-        var check4 = totResCorrected < minRes && voltDiff >= minVoltDiff && canHvInCorrected >= canVoltHighRangeMax || totResCorrected < minRes && voltDiff <= minVoltDiff && canLvInCorrected >= canVoltLowRangeMax;
-        var check5 = calcDiff <= goNoGoRangeMin && totResCorrected > minRes && voltDiff >= minVoltDiff || calcDiff >= goNoGoRangeMax && totResCorrected > minRes && voltDiff >= minVoltDiff;
-
-        //debugging
-        // console.log('check1: ' + check1);
-        // console.log('check2: ' + check2);
-        // console.log('check3: ' + check3);
-        // console.log('check4: ' + check4);
-        // console.log('check5: ' + check5);
-        console.log('volt diff: ' + voltDiff);
-
-
+        // console.log('volt diff: ' + voltDiff);
 
 
         //
@@ -426,30 +411,6 @@ $(document).ready(function() {
                     }
                 }
 
-                // console.log('ground: ' + canGroundCorrectedH);
-                // console.log(canHvInCorrected <= canVoltHighRangeMin);
-                // console.log(canGroundCorrectedH <= 10);
-                // console.log(voltDiff <= .2);
-
-
-                console.log('--------H--------');
-                console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH <= 10);
-                console.log(canHvInCorrected <= canVoltHighRangeMin);
-                console.log(canGroundCorrectedH <= 10);
-                console.log('--------L--------');
-                console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL <= 10);
-                console.log(canLvInCorrected <= canVoltLowRangeMin);
-                console.log(canGroundCorrectedL <= 10);
-                console.log('--------H2--------');
-                console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedL > 10);
-                console.log(canHvInCorrected <= canVoltHighRangeMin);
-                console.log(canGroundCorrectedL > 10);
-                console.log('--------L2--------');
-                console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedH > 10);
-                console.log(canLvInCorrected <= canVoltLowRangeMin);
-                console.log(canGroundCorrectedH > 10);
-                console.log('----------------');
-
 
 
                 // can voltage check logic
@@ -504,41 +465,6 @@ $(document).ready(function() {
                         // console.log("can L good value");
                     }
                 }
-
-                // console.log('can high: ' + canHvInCorrected);
-                // console.log('can high min: ' + canVoltHighRangeMin);
-                // console.log('can high max: ' + canVoltHighRangeMax);
-                // console.log('ground h: ' + canGroundCorrectedH);
-                // console.log('can low: ' + canLvInCorrected);
-                // console.log('can low min: ' + canVoltLowRangeMin);
-                // console.log('can low max: ' + canVoltLowRangeMax);
-                // console.log('ground l: ' + canGroundCorrectedL);
-
-                // console.log('--------H--------');
-                // console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedH <= 10);
-                // console.log(canHvInCorrected <= canVoltHighRangeMin);
-                // console.log(canGroundCorrectedH <= 10);
-                // console.log('--------L--------');
-                // console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedL <= 10);
-                // console.log(canLvInCorrected <= canVoltLowRangeMin);
-                // console.log(canGroundCorrectedL <= 10);
-                // console.log('--------H2--------');
-                // console.log(canHvInCorrected <= canVoltHighRangeMin && canGroundCorrectedL > 10);
-                // console.log(canHvInCorrected <= canVoltHighRangeMin);
-                // console.log(canGroundCorrectedL > 10);
-                // console.log('--------L2--------');
-                // console.log(canLvInCorrected <= canVoltLowRangeMin && canGroundCorrectedH > 10);
-                // console.log(canLvInCorrected <= canVoltLowRangeMin);
-                // console.log(canGroundCorrectedH > 10);
-                // console.log('----------------');
-
-
-                // console.log('alt test1: ' + canHvInCorrected >= canVoltHighRangeMax && canGroundCorrectedL >= 10);
-                // console.log('alt test2: ' + canLvInCorrected >= canVoltLowRangeMax && canGroundCorrectedH >= 10);
-
-
-
-
 
 
                 if (canGroundCorrectedH < canGroundRange) {
