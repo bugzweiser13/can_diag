@@ -41,14 +41,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
         },
-        createdAt: {
-            type: DataTypes.STRING(100),
-            allowNull: true
-        },
-        updatedAt: {
-            type: DataTypes.STRING(100),
-            allowNull: true
-        },
+        // createdAt: {
+        //     type: DataTypes.STRING(100),
+        //     allowNull: true
+        // },
+        // updatedAt: {
+        //     type: DataTypes.STRING(100),
+        //     allowNull: true
+        // },
         genvehlistId: {
             type: DataTypes.STRING(100),
             allowNull: true

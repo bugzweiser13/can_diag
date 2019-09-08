@@ -50,6 +50,12 @@ module.exports = function(app) {
             res.json(dbgencanvolts);
         });
     });
+    app.post("/api/genmedia", function(req, res) {
+        console.log(req.body);
+        db.genmedia.create(req.body).then(function(dbgenmedia) {
+            res.json(dbgenmedia);
+        });
+    });
 
     app.get('/api/genvehlists', (req, res) => {
 

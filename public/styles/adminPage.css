@@ -58,12 +58,15 @@
     }
     
     #mod_name,
-    #mod_code {
+    #mod_code,
+    #term_m,
+    #term_f,
+    #test_loc {
         text-transform: uppercase;
     }
     
     #modelImg {
-        width: 100%;
+        width: 70%;
         border-radius: 5px;
         border: solid 1px black;
     }

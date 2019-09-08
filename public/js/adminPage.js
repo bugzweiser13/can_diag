@@ -1,6 +1,6 @@
 tablePopulate();
 
-// vehicle input
+// vehicle input command
 $('#vehSubmit').on('click', function() {
     event.preventDefault();
 
@@ -14,13 +14,13 @@ $('#vehSubmit').on('click', function() {
             datatype: 'json',
             success: function(rows) {
                 rows.forEach(function(row) {
-                    if (search.indexOf(row.id) == -1) {
-                        search.push(row.id);
-                    }
-                })
-                console.log(search);
+                        if (search.indexOf(row.id) == -1) {
+                            search.push(row.id);
+                        }
+                    })
+                    // console.log(search);
                 var lastId = search.pop();
-                console.log(lastId);
+                // console.log(lastId);
                 genVehInput(lastId);
                 // console.log(data.id)
             }
@@ -36,13 +36,10 @@ $('#vehSubmit').on('click', function() {
 
 function genVehInput(lastId) {
 
-    console.log(lastId);
+    // console.log(lastId);
 
     var genId = parseInt(lastId) + 1;
-
-    // var genId = Math.floor(Math.random() * 20);
     var modId = Math.floor(Math.random() * 500);
-
     var modelIn = $("#mod_code").val().trim();
     var modelCodeUp = modelIn.toUpperCase();
     var nameIn = $("#mod_name").val().trim();
@@ -68,7 +65,7 @@ function genVehInput(lastId) {
 
     var genVolt = {
         // id: genId,
-        model: nameUp,
+        model: modelCodeUp,
         model_num: modId,
         start_year: $("#start_year").val().trim(),
         net_id: netIdUp,
@@ -93,12 +90,33 @@ function genVehInput(lastId) {
         test_loc: testLocUp,
         pin_h: $("#pin_h").val().trim(),
         pin_l: $("#pin_l").val().trim(),
+        trM_view1: $("#trM_img1").val().trim(),
+        trM_view2: $("#trM_img2").val().trim(),
+        trF_view1: $("#trF_img1").val().trim(),
+        trF_view2: $("#trF_img2").val().trim(),
+    }
+
+    var genMedia = {
+        model_num: modId,
+        model_name: nameUp,
+        model: modelCodeUp,
+        model_img: $("#model_img").val().trim(),
+        c_can_img: $("#c_can_img1").val().trim(),
+        // c_can_img2: $("#c_can_img2").val().trim(),
+        p_can_img1: $("#p_can_img1").val().trim(),
+        p_can_img2: $("#p_can_img1").val().trim(),
+        test_loc_img: $("#test_loc_img").val().trim(),
+        conn_view1: $("#conn_view_img1").val().trim(),
+        conn_view2: $("#conn_view_img1").val().trim(),
     }
 
     addGen(newGen);
     addGenRes(genRes);
     addGenVolt(genVolt);
+    addGenMedia(genMedia)
 
+    $('#brand').val("Brand Select");
+    $("#net_id").val("Network Select");
     $("#mod_name").val("");
     $("#mod_code").val("");
     $("#start_year").val("");
@@ -115,7 +133,7 @@ function genVehInput(lastId) {
     $("#pin_l").val("");
 }
 
-
+// add vehicle
 function addGen(newGen) {
 
     return $.ajax({
@@ -132,6 +150,7 @@ function addGen(newGen) {
     })
 }
 
+// add network resitance info
 function addGenRes(genRes) {
 
     return $.ajax({
@@ -148,6 +167,7 @@ function addGenRes(genRes) {
     })
 }
 
+// add network votage info
 function addGenVolt(genVolt) {
 
     return $.ajax({
@@ -159,11 +179,29 @@ function addGenVolt(genVolt) {
         data: JSON.stringify(genVolt),
 
         success: function() {
-            alert(genVolt.model + ' has been added!');
+            // alert(genVolt.model + ' has been added!');
         }
     })
 }
 
+// add media info
+function addGenMedia(genMedia) {
+
+    return $.ajax({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: "api/genmedia",
+        data: JSON.stringify(genMedia),
+
+        success: function() {
+            alert(genMedia.model_name + ' has been added!');
+        }
+    })
+}
+
+// user data population
 function tablePopulate() {
 
     //reset table
