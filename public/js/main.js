@@ -32,6 +32,11 @@ function userLogin() {
     var uname = $("#userName").val().trim();
     var pword = $("#passWord").val().trim();
 
+    if (!(uname && pword)) {
+        alert("Please enter login credentials!");
+        return;
+    }
+
     $.ajax({
         url: "api/users",
         type: 'GET',

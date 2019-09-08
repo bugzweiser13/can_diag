@@ -9,7 +9,10 @@ module.exports = function(sequelize, DataTypes) {
         user: {
             type: DataTypes.STRING(30),
             allowNull: false,
-            unique: true,
+            unique: {
+                args: true,
+                msg: 'Oops. Looks like you already have an account with this username. Please try to again.'
+            },
             validate: {
                 len: {
                     args: 6,
@@ -23,7 +26,10 @@ module.exports = function(sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING(30),
             allowNull: false,
-            unique: true,
+            unique: {
+                args: true,
+                msg: 'Oops. Looks like you already have an account with this password. Please try to again.'
+            },
             validate: {
                 len: {
                     args: 6,

@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
         id: {
             type: DataTypes.INTEGER(11),
             allowNull: false,
-            // autoIncrement: true
+            autoIncrement: false
         },
         model: {
             type: DataTypes.STRING(30),
@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         model_num: {
             type: DataTypes.INTEGER(3),
+            autoIncrement: true,
             allowNull: false,
             primaryKey: true,
         },

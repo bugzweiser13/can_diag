@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
     // globals
     var vehInput;
     var vehShow;

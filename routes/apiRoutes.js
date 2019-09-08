@@ -32,6 +32,25 @@ module.exports = function(app) {
 
     });
 
+    app.post("/api/genvehlists", function(req, res) {
+        console.log(req.body);
+        db.genvehlist.create(req.body).then(function(dbgenvehlist) {
+            res.json(dbgenvehlist);
+        });
+    });
+    app.post("/api/gencanress", function(req, res) {
+        console.log(req.body);
+        db.gencanres.create(req.body).then(function(dbgencanres) {
+            res.json(dbgencanres);
+        });
+    });
+    app.post("/api/gencanvolts", function(req, res) {
+        console.log(req.body);
+        db.gencanvolts.create(req.body).then(function(dbgencanvolts) {
+            res.json(dbgencanvolts);
+        });
+    });
+
     app.get('/api/genvehlists', (req, res) => {
 
         db.genvehlist.findAll({

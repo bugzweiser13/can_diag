@@ -34,7 +34,12 @@
     }
     
     #adminList {
-        height: 165px;
+        max-height: 275px;
+    }
+    
+    input,
+    textarea {
+        background-color: white;
     }
     
     .inputd {
@@ -52,12 +57,9 @@
         padding: 2px;
     }
     
+    #mod_name,
     #mod_code {
         text-transform: uppercase;
-    }
-    
-    #mod_name {
-        text-transform: capitalize;
     }
     
     #modelImg {
@@ -67,7 +69,7 @@
     }
     
     #userTable {
-        height: 140px;
+        max-height: 250px;
         border: 1px solid black;
         border-radius: 5px;
         background: white;
@@ -81,6 +83,10 @@
     
     #userTableBody {
         font-size: 13px;
+    }
+    
+    #loading {
+        display: none;
     }
     /* #btn {
         margin-right: 2px;
@@ -181,4 +187,13 @@
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }
+    
+    @media only screen and (min-width: 1006px) and (max-width: 1800px) {
+        #adminList {
+            height: 250px;
+        }
+        #userTable {
+            height: 220px;
+        }
     }
